@@ -1,5 +1,4 @@
-﻿using BusinessLogic.Managers.Skeleton;
-using BusinessLogic.Models;
+﻿using BusinessLogic;
 using DataBase;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace BusinessLogic.Managers.Implementations
+namespace BusinessLogic
 {
     public class UserManager : IUserManager
     {

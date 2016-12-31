@@ -1,10 +1,10 @@
-﻿using BusinessLogic.Models;
+﻿using BusinessLogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BusinessLogic.Managers.Skeleton
+namespace BusinessLogic
 {
     public interface IUserManager
     {

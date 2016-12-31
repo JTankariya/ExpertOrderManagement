@@ -1,14 +1,15 @@
-﻿using DataBase;
+﻿using BusinessLogic.App_Start;
+using DataBase;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace BusinessLogic.Models
+namespace BusinessLogic
 {
     [Serializable]
-    public class Client
+    public static class Client
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -65,6 +66,8 @@ namespace BusinessLogic.Models
             }
         }
 
-        
+        public IUserManager Manager {
+            
+        }
     }
 }
