@@ -10,12 +10,12 @@ namespace BusinessLogic
 {
     public class UserManager : IUserManager
     {
-        private Client _context;
-        public UserManager(Client client)
+        private User _context;
+        public UserManager(User context)
         {
-            _context = client;
+            _context = context;
         }
-        public ResponseMsg Update()
+        public ResponseMsg Save()
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@ID", _context.ID);

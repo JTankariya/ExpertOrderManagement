@@ -113,9 +113,9 @@ namespace DataBase
             }
         }
 
-        public static List<T> ConvertToList<T>(DataTable dt)
+        public static List<T> ConvertToList<T>(string Query)
         {
-
+            var dt = GetDataTable(Query);
             var columnNames = dt.Columns.Cast<DataColumn>()
                 .Select(c => c.ColumnName.ToLower())
                 .ToList();
@@ -161,9 +161,9 @@ namespace DataBase
             return dataTable;
         }
 
-        public static IEnumerable<T> ConvertToEnumerable<T>(DataTable dt)
+        public static IEnumerable<T> ConvertToEnumerable<T>(string Query)
         {
-
+            var dt = GetDataTable(Query);
             var columnNames = dt.Columns.Cast<DataColumn>()
                 .Select(c => c.ColumnName.ToLower())
                 .ToList();
@@ -195,7 +195,7 @@ namespace DataBase
                 }
 
                 return objT;
-            }).AsEnumerable();
+            });
 
         }
 

@@ -8,6 +8,6 @@ namespace BusinessLogic
 {
     public interface IUserManager
     {
-        ResponseMsg Update();
+        ResponseMsg Save();
     }
 }

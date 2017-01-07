@@ -1,26 +1,31 @@
 ﻿
 using BusinessLogic;
+using BusinessLogic.App_Start;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ninject;
+using Ninject.Parameters;
+using CommonLibraries;
 
 
 namespace ExpertOrderManagement.Controllers
 {
     public class BaseController : Controller
     {
+        private IUserHelper _userHelper;
         //
         // GET: /BaseController/
-        protected Client currUser
+        protected User currUser
         {
             get
             {
                 if (Session["User"] != null)
                 {
-                    return (Client)Session["User"];
+                    return (User)Session["User"];
                 }
                 else
                 {
@@ -35,5 +40,16 @@ namespace ExpertOrderManagement.Controllers
             base.OnException(filterContext);
         }
 
+        protected IUserHelper UserHelper
+        {
+            get
+            {
+                if (_userHelper == null)
+                {
+                    _userHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, IUserHelper>>(new ConstructorArgument("tName", TableNames.USER)).Create(TableNames.USER.ToString());
+                }
+                return _userHelper;
+            }
+        }
     }
 }
