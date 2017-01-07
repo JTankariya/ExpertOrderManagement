@@ -8,8 +8,8 @@ namespace BusinessLogic
 {
     public class UserHelper : Helper<User>, IUserHelper
     {
-        public UserHelper(string tName)
-            : base(tName)
+        public UserHelper(string tName,int copmanyId)
+            : base(tName, copmanyId)
         { 
         
         }

@@ -1,4 +1,4 @@
-﻿using BusinessLogic.App_Start;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +16,14 @@ namespace BusinessLogic
         }
     }
 
-    public class HelperFactory<C, H> : IManagerFactory<C, H>
+    public class HelperFactory<C1, C2, H> : IHelperFactory<C1, C2, H>
     {
-        public H Create(C tName)
+        public H Create(C1 tName, C2 companyId)
         {
-            return ExpertOrderBusinessInit.kernel.Get<H>(new ConstructorArgument("tName", tName));
+            return ExpertOrderBusinessInit.kernel.Get<H>(new[] { 
+                            new ConstructorArgument("tName", tName), 
+                            new ConstructorArgument("companyId", companyId) 
+                        });
         }
     }
 }

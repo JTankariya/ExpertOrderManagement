@@ -1,6 +1,4 @@
-﻿
-using BusinessLogic;
-using BusinessLogic.App_Start;
+﻿using BusinessLogic;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -17,6 +15,8 @@ namespace ExpertOrderManagement.Controllers
     public class BaseController : Controller
     {
         private IUserHelper _userHelper;
+        private int _currCompany = 15;
+        private IProductGroupHelper _productGroupHelper;
         //
         // GET: /BaseController/
         protected User currUser
@@ -40,15 +40,37 @@ namespace ExpertOrderManagement.Controllers
             base.OnException(filterContext);
         }
 
+        protected int CompanyId
+        {
+            get
+            {
+                return _currCompany;
+            }
+        }
+
         protected IUserHelper UserHelper
         {
             get
             {
                 if (_userHelper == null)
                 {
-                    _userHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, IUserHelper>>(new ConstructorArgument("tName", TableNames.USER)).Create(TableNames.USER.ToString());
+                    _userHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, int, IUserHelper>>()
+                        .Create(TableNames.USER.ToString(), CompanyId);
                 }
                 return _userHelper;
+            }
+        }
+
+        protected IProductGroupHelper ProductGroupHelper
+        {
+            get
+            {
+                if (_productGroupHelper == null)
+                {
+                    _productGroupHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, int, IProductGroupHelper>>()
+                        .Create(TableNames.PRODUCTGROUP.ToString(), CompanyId);
+                }
+                return _productGroupHelper;
             }
         }
     }

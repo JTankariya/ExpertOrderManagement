@@ -9,5 +9,6 @@ namespace CommonLibraries
     {
         public static readonly string USER = "OrderUser";
         public static readonly string USERTYPES = "OrderUserType";
+        public static readonly string PRODUCTGROUP = "OSPGroup";
     }
 }

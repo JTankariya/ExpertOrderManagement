@@ -1,4 +1,4 @@
-namespace BusinessLogic.App_Start
+namespace BusinessLogic
 {
     using System;
     using System.Web;
@@ -33,7 +33,10 @@ namespace BusinessLogic.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IUserManager>().To<UserManager>();
-            kernel.Bind<IManagerFactory<User,IUserManager>>().To<ManagerFactory<User,IUserManager>>();
+            kernel.Bind<IManagerFactory<User, IUserManager>>().To<ManagerFactory<User, IUserManager>>();
+
+            kernel.Bind<IProductGroupHelper>().To<ProductGroupHelper>();
+            kernel.Bind<IHelperFactory<string, int, IProductGroupHelper>>().To<HelperFactory<string, int, IProductGroupHelper>>();
         }
     }
 }
