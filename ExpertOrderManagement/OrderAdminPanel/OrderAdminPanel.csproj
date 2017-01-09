@@ -214,6 +214,8 @@
     <Content Include="Views\Distributor\DoRecharge.cshtml" />
     <Content Include="Views\Client\Edit.cshtml" />
     <Content Include="Views\Client\GetList.cshtml" />
+    <Content Include="Views\Client\Remove.cshtml" />
+    <Content Include="Views\Distributor\RechargeInformationReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
