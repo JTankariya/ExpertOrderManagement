@@ -1,7 +1,15 @@
 ExpertOrderManagement/ExpertOrderManagement/bin/
+ExpertOrderManagement/ExpertOrderManagement/obj/
 ExpertOrderManagement/BusinessLogic/obj/
 ExpertOrderManagement/BusinessLogic/bin/
 ExpertOrderManagement/DataBase/obj/
-ExpertOrderManagement/ExpertOrderManagement/obj/
+ExpertOrderManagement/DataBase/bin/
 ExpertOrderManagement/CommonLibraries/bin/
 ExpertOrderManagement/CommonLibraries/obj/
+ExpertOrderManagement/OrderAdminPanel/obj/
+ExpertOrderManagement/OrderAdminPanel/bin/
+ExpertOrderManagement/Admin.DAL/obj/
+ExpertOrderManagement/OrderAdminPanel/Content/PdfReports/
+ExpertOrderManagement/Admin.DAL/bin/
+ExpertOrderManagement/Admin.BusinessLogic/bin/
+ExpertOrderManagement/Admin.BusinessLogic/obj/

@@ -1,0 +1,483 @@
+﻿@model Admin.BusinessLogic.ClientMaster
+@{
+    ViewBag.Title = "Add Client";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    var currUser = (Admin.BusinessLogic.User)Session["User"];
+}
+<input type="hidden" id="txtUserType" value="@currUser.UserType" />
+<input type="hidden" id="txtUserPrice" value="@System.Configuration.ConfigurationManager.AppSettings["UserPrice"]" />
+<input type="hidden" id="txtCompanyPrice" value="@System.Configuration.ConfigurationManager.AppSettings["CompanyPrice"]" />
+<div class="row-fluid">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="tabcontrol2" id="tab-control">
+            <ul class="tabs">
+                <li><a href="#form">Company Details</a></li>
+                <li><a href="#menuallocation">Menu Allocation</a></li>
+            </ul>
+            <div class="frames">
+                <div class="frame" id="form">
+                    @using (Html.BeginForm("test", "Dashboard", FormMethod.Post, new { @id = "frmClient", @class = "form-horizontal" }))
+                    {
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Company Name :</label>
+                            <div class="col-md-10">
+                                <div class="input-control select" style="width:100%">
+                                    @Html.HiddenFor(x => x.ClientID)
+                                    @Html.TextBoxFor(x => x.CompanyName, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Address :</label>
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(x => x.CompanyAddress, new { @row = "3", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Mobile No :</label>
+                            <div class="col-md-10">
+                                <div class="input-control select" style="width:100%">
+                                    @Html.TextBoxFor(x => x.MobileNo, new { @class = "form-control", @type = "number" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Email :</label>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(x => x.EmailId, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">First Name :</label>
+                                    <div class="col-md-9">
+                                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Last Name :</label>
+                                    <div class="col-md-9">
+                                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Username :</label>
+                                    <div class="col-md-9">
+                                        @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Expiry Date :</label>
+                                    <div class="col-md-9 input-control text" id="datepickerDiv">
+                                        @Html.TextBoxFor(x => x.AccountExpiredOn, new { @class = "form-control" })
+                                        <button class="button"><span class="mif-calendar"></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Password :</label>
+                                    <div class="col-md-9">
+                                        @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @type = "password" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Reenter Password :</label>
+                                    <div class="col-md-9">
+                                        <input type="password" name="ReenterPassword" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">No. of Users :</label>
+                                    <div class="col-md-9">
+                                        @Html.TextBoxFor(x => x.NoOfAccessUsers, new { @class = "form-control", @type = "number", @min = "1", @data_totalcreateduser = Model.TotalCreatedUser })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">No Of Company :</label>
+                                    <div class="col-md-9">
+                                        @Html.TextBoxFor(x => x.NoOfCompanyPerUser, new { @class = "form-control", @type = "number", @min = "1", @data_totalcreatedcompany = Model.TotalCreatedCompany })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12 text-center">
+                                <div class="checkbox">
+                                    <label class="input-control checkbox small-check">
+                                        <input type="checkbox" name="RightsForWritingQuery" id="QueryRights">
+                                        <span class="check"></span>
+                                        <span class="caption">Rights for writing query?</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <button type="button" id="btnAdd" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Add</button>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <button type="submit" id="btnSubmit" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Save</button>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <button type="button" id="btnDelete" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Delete</button>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <button type="button" id="btnView" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;View</button>
+                            </div>
+                        </div>
+                        <div id="validations">
+                            @Html.ValidationSummary()
+                        </div>
+                    }
+                </div>
+                <div class="frame" id="menuallocation">
+                    @{
+                        var Menus = ((IEnumerable<Admin.BusinessLogic.ClientMenuMaster>)ViewBag.ClientMenuList);
+                    }
+                    @if (Menus != null)
+                    {
+                        <table id="clientMenuMaster" class="table striped hovered cell-hovered border bordered">
+                            <thead>
+                                <tr style="text-align: center">
+                                    <td>
+                                        Is Selected?
+                                    </td>
+                                    <td>
+                                        Menu Name
+                                    </td>
+                                    <td>
+                                        Has ChildData?
+                                    </td>
+                                    <td>
+                                        Has Dashboard?
+                                    </td>
+                                    <td>
+                                        Has Graph?
+                                    </td>
+                                    <td>
+                                        Has Submenu?
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var menu in Menus)
+                                {
+                                    <tr style="text-align: center" data-menuid="@menu.MenuId">
+                                        <td>
+                                            @Html.CheckBoxFor(x => menu.IsSelected, new { @data_selected = "selected" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(x => menu.MenuName)
+                                        </td>
+                                        <td>
+                                            @Html.CheckBoxFor(x => menu.HasChildData)
+                                        </td>
+                                        <td>
+                                            @Html.CheckBoxFor(x => menu.IsDashboard)
+                                        </td>
+                                        <td>
+                                            @Html.CheckBoxFor(x => menu.HasGraph)
+                                        </td>
+                                        <td>
+                                            @Html.CheckBoxFor(x => menu.HasChildMenu)
+                                        </td>
+                                        <td style="display:none">
+                                            @Html.TextBoxFor(x => menu.ClientMenuID)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div data-role="dialog" data-overlay="true" data-overlay-color=".dialog-overlay" data-close-button="true" data-width="500px" id="dialog">
+    <h1>Confirm Delete</h1>
+    <p>
+        Are you sure want to delete this record?
+    </p>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <a href="@Url.Action("DeleteClient", "Dashboard", new { ID = Model.ClientID})" class="btn btn-danger face"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Yes</a>
+        </div>
+        <div class="col-md-6 text-center">
+            <button type="button" id="btnSubmit" onclick="toggleMetroDialog('#dialog')" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;No</button>
+        </div>
+    </div>
+</div>
+
+
+<div data-role="dialog" data-overlay="true" data-overlay-color=".dialog-overlay" data-close-button="true" data-width="80%" id="viewDialog">
+    <h1>Select Client</h1>
+    <div class="row">
+        <div class="col-md-12" id="viewData" style="max-height:500px;overflow:auto">
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        if ($('#txtUserType').val().trim() == "DISTRIBUTOR" && $('.navbar-right li:last a').text().trim().toUpperCase() == "BALANCE : 0") {
+            $.Notify({ keepOpen: false, type: 'alert', caption: 'Alert', content: "You don't have sufficiant balance to add any user." });
+            $('[type="submit"]').attr('readonly', 'readonly');
+        }
+
+        $('#clientMenuMaster input[data-selected!="selected"]').attr('disabled', 'disabled');
+        $("#tab-control").tabcontrol();
+        $("#datepickerDiv").datepicker({
+            position: 'top',
+            format: 'dd/mm/yyyy',
+            minDate: new Date()
+        });
+        $('#btnDelete').on('click', function () {
+            if ($('#ClientID').val() == "0") {
+                $.Notify({ keepOpen: false, type: 'alert', caption: 'Alert', content: "Please select any record first." });
+            }
+            else {
+                toggleMetroDialog('#dialog');
+            }
+        });
+        $('#btnAdd').on('click', function () {
+            window.location.href = '@Url.Action("AddClient", "Dashboard", new { ID = "0" })';
+        });
+        var isSubmitted = false;
+
+        $('#btnView').on('click', function () {
+            $.ajax({
+                url: '@Url.Action("GetClientList", "Dashboard")',
+                success: function (result) {
+                    if (result) {
+                        $('#viewData').empty();
+                        $('#viewData').append(result);
+                        toggleMetroDialog('#viewDialog');
+                        $('#viewData tr').unbind('click').bind('click', function () {
+                            window.location.href = '@Url.Action("AddClient", "Dashboard", new { ID = "clientID" })'.replace('clientID', $(this).data('clientid'));
+                        });
+                    }
+                }
+            });
+        });
+
+
+        $('#frmClient').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                CompanyName: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Company Name'
+                        }
+                    }
+                },
+                CompanyAddress: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Company Address'
+                        }
+                    }
+                },
+                MobileNo: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Mobile No'
+                        }
+                    }
+                },
+                EmailId: {
+                    verbose: false,
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Email Id'
+                        },
+                        emailAddress: {
+                            message: 'Please enter proper Email Address'
+                        },
+                        remote: {
+                            url: '@Url.Action("CheckEmailId","Account")',
+                            data: { EmailId: $('#EmailId').val(), ExcludeId: $('#ClientID').val() },
+                            type: 'POST',
+                            delay: 2000,
+                            message: 'EmailId is already registered with this system, Please enter another email.'
+                        }
+                    }
+                },
+                Password: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Password'
+                        },
+                        identical: {
+                            field: 'ReenterPassword',
+                            message: 'The password and reenter password are not the same'
+                        }
+                    }
+                },
+                ReenterPassword: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Reenter Password'
+                        },
+                        identical: {
+                            field: 'Password',
+                            message: 'The password and reenter password are not the same'
+                        }
+                    }
+                },
+                UserName: {
+                    verbose: false,
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter User Name'
+                        },
+                        remote: {
+                            url: '@Url.Action("CheckUserName","Account")',
+                            data: { EmailId: $('#UserName').val(), ExcludeId: $('#ClientID').val() },
+                            type: 'POST',
+                            delay: 2000,
+                            message: 'Username is already registered with this system, Please enter another Username.'
+                        }
+                    }
+                },
+                FirstName: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter First Name'
+                        }
+                    }
+                },
+                LastName: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Last Name'
+                        }
+                    }
+                },
+                NoOfAccessUsers: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter No Of Users'
+                        }
+                    }
+                },
+                NoOfCompanyPerUser: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter No Of Company'
+                        }
+                    }
+                }
+            }
+        });
+        $('#frmClient').on('success.form.bv', function (e) {
+            // Prevent form submission
+            e.preventDefault();
+            if ($('#txtUserType').val() == "ADMIN" || $('.navbar-right li:last a').text().trim().toUpperCase() != "BALANCE : 0") {
+
+
+                if ($('#NoOfAccessUsers').val() < $('#NoOfAccessUsers').data('totalcreateduser')) {
+                    $.Notify({ keepOpen: false, type: 'alert', caption: 'Alert', content: "Total User can not be less then " + $('#NoOfAccessUsers').data('totalcreateduser') + "." });
+                    $('#NoOfAccessUsers').focus();
+                    return false;
+                }
+                if ($('#NoOfCompanyPerUser').val() < $('#NoOfCompanyPerUser').data('totalcreatedcompany')) {
+                    $.Notify({ keepOpen: false, type: 'alert', caption: 'Alert', content: "Total Company can not be less then " + $('#NoOfCompanyPerUser').data('totalcreatedcompany') + "." });
+                    $('#NoOfCompanyPerUser').focus();
+                    return false;
+                }
+
+                var totalBalance = $('.navbar-right li:last a').text().trim().toUpperCase().replace("BALANCE : ", "");
+                if ($('#txtUserType').val().trim() == "DISTRIBUTOR" && (($('#txtUserPrice').val() * $('#NoOfAccessUsers').val()) + ($('#txtCompanyPrice').val() * $('#NoOfCompanyPerUser').val())) > totalBalance) {
+                    $.Notify({ keepOpen: false, type: 'alert', caption: 'Alert', content: "You dont have sufficiant balance to make this much of user and company, Please contact administrator." });
+                    return false;
+                }
+
+                var clientData = {
+                    ClientID: $('#ClientID').val(),
+                    UserName: $('#UserName').val(),
+                    Password: $('#Password').val(),
+                    MobileNo: $('#MobileNo').val(),
+                    FirstName: $('#FirstName').val(),
+                    LastName: $('#LastName').val(),
+                    CompanyName: $('#CompanyName').val(),
+                    CompanyAddress: $('#CompanyAddress').val(),
+                    EmailId: $('#EmailId').val(),
+                    NoOfCompanyPerUser: $('#NoOfCompanyPerUser').val(),
+                    NoOfAccessUsers: $('#NoOfAccessUsers').val(),
+                    AccountExpiredOn: $('#AccountExpiredOn').val(),
+                    QueryRights: ($('#QueryRights').is(':checked') ? "1" : "0")
+                }
+                var clientMenus = new Array();
+
+                $.each($('#clientMenuMaster input[data-selected="selected"]'), function (index, element) {
+                    clientMenus.push({
+                        MenuId: $(this).parent().parent().data('menuid'),
+                        IsSelected: $(this).is(':checked'),
+                        IsDashboard: $(this).parent().parent().find('td:eq(3)').find('input[type="checkbox"]').is(':checked'),
+                        HasChildMenu: $(this).parent().parent().find('td:eq(5)').find('input[type="checkbox"]').is(':checked'),
+                        ClientMenuID: $(this).parent().parent().find('td:eq(6)').find('input[type="text"]').val()
+                    });
+                });
+
+
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ clientData: clientData, clientMenus: clientMenus }),
+                    url: '@Url.Action("AddClient", "Dashboard")',
+                    success: function (result) {
+                        if (result.IsSuccess) {
+                            $.Notify({ keepOpen: false, type: 'success', caption: 'Information', content: "Client Saved Successfully." });
+                            setTimeout(function () { window.location.reload(true); }, 3000);
+                        }
+                        else {
+                            $('#validations').empty();
+                            if (result.ResponseMsg.length > 0) {
+                                var strValidations = '<ul style="color:red">';
+                                $.each(result.ResponseMsg, function (index, element) {
+                                    strValidations += "<li>" + element.Error + "</li>";
+                                });
+                                strValidations += "</ul>";
+                                $('#validations').append(strValidations);
+                            }
+                        }
+                    }
+                });
+                return false;
+            }
+            // Do custom handler
+            // such as sending data to server using Ajax ...
+        });
+    });
+</script>
