@@ -9,152 +9,152 @@
 <input type="hidden" id="txtCompanyPrice" value="@System.Configuration.ConfigurationManager.AppSettings["CompanyPrice"]" />
 <div class="row-fluid">
     <div class="col-md-10 col-md-offset-1">
-        <div class="tabcontrol2" id="tab-control">
-            <ul class="tabs">
-                <li><a href="#form">Company Details</a></li>
-                <li><a href="#menuallocation">Menu Allocation</a></li>
-            </ul>
-            <div class="frames">
-                <div class="frame" id="form">
-                    @using (Html.BeginForm("Edit", "Client", FormMethod.Post, new { @id = "frmClient", @class = "form-horizontal" }))
-                    {
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">Company Name :</label>
-                            <div class="col-md-10">
-                                <div class="input-control select" style="width:100%">
-                                    @Html.HiddenFor(x => x.ClientID)
-                                    @Html.TextBoxFor(x => x.CompanyName, new { @class = "form-control" })
-                                </div>
-                            </div>
+
+        <div class="frame" id="form">
+            @using (Html.BeginForm("Edit", "Client", FormMethod.Post, new { @id = "frmClient", @class = "form-horizontal" }))
+            {
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Company Name :</label>
+                    <div class="col-md-10">
+                        <div class="input-control select" style="width:100%">
+                            @Html.HiddenFor(x => x.ClientID)
+                            @Html.TextBoxFor(x => x.CompanyName, new { @class = "form-control" })
                         </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Address :</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(x => x.CompanyAddress, new { @row = "3", @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-2 control-label">Address :</label>
-                            <div class="col-md-10">
-                                @Html.TextAreaFor(x => x.CompanyAddress, new { @row = "3", @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">Mobile No :</label>
-                            <div class="col-md-10">
+                            <label class="col-md-3 control-label">Mobile No :</label>
+                            <div class="col-md-9">
                                 <div class="input-control select" style="width:100%">
                                     @Html.TextBoxFor(x => x.MobileNo, new { @class = "form-control", @type = "number" })
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-2 control-label">Email :</label>
-                            <div class="col-md-10">
+                            <label class="col-md-3 control-label">Email :</label>
+                            <div class="col-md-9">
                                 @Html.TextBoxFor(x => x.EmailId, new { @class = "form-control" })
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">First Name :</label>
-                                    <div class="col-md-9">
-                                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Last Name :</label>
-                                    <div class="col-md-9">
-                                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Username :</label>
-                                    <div class="col-md-9">
-                                        @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Expiry Date :</label>
-                                    <div class="col-md-9 input-control text" id="datepickerDiv">
-                                        @Html.TextBoxFor(x => x.AccountExpiredOn, new { @class = "form-control" })
-                                        <button class="button"><span class="mif-calendar"></span></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Password :</label>
-                                    <div class="col-md-9">
-                                        @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @type = "password" })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Reenter Password :</label>
-                                    <div class="col-md-9">
-                                        <input type="password" name="ReenterPassword" class="form-control" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">No. of Users :</label>
-                                    <div class="col-md-9">
-                                        @Html.TextBoxFor(x => x.NoOfAccessUsers, new { @class = "form-control", @type = "number", @min = "1", @data_totalcreateduser = Model.TotalCreatedUser })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">No Of Company :</label>
-                                    <div class="col-md-9">
-                                        @Html.TextBoxFor(x => x.NoOfCompanyPerUser, new { @class = "form-control", @type = "number", @min = "1", @data_totalcreatedcompany = Model.TotalCreatedCompany })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-12 text-center">
-                                <div class="checkbox">
-                                    <label class="input-control checkbox small-check">
-                                        <input type="checkbox" name="RightsForWritingQuery" id="QueryRights">
-                                        <span class="check"></span>
-                                        <span class="caption">Rights for writing query?</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3 text-center">
-                                <button type="button" id="btnAdd" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Add</button>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <button type="submit" id="btnSubmit" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Save</button>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <button type="button" id="btnDelete" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Delete</button>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <button type="button" id="btnView" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;View</button>
-                            </div>
-                        </div>
-                        <div id="validations">
-                            @Html.ValidationSummary()
-                        </div>
-                    }
+                    </div>
                 </div>
                 
-            </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">First Name :</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Last Name :</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Username :</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Expiry Date :</label>
+                            <div class="col-md-9 input-control text" id="datepickerDiv">
+                                @Html.TextBoxFor(x => x.AccountExpiredOn, new { @class = "form-control" })
+                                <button class="button"><span class="mif-calendar"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Password :</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @type = "password" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Reenter Password :</label>
+                            <div class="col-md-9">
+                                <input type="password" name="ReenterPassword" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">No. of Users :</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(x => x.NoOfAccessUsers, new { @class = "form-control", @type = "number", @min = "1", @data_totalcreateduser = Model.TotalCreatedUser })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">No Of Company :</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(x => x.NoOfCompanyPerUser, new { @class = "form-control", @type = "number", @min = "1", @data_totalcreatedcompany = Model.TotalCreatedCompany })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12 text-center">
+                        <div class="checkbox">
+                            <label class="input-control checkbox small-check">
+                                <input type="checkbox" name="RightsForWritingQuery" id="QueryRights">
+                                <span class="check"></span>
+                                <span class="caption">Rights for writing query?</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        <button type="button" id="btnAdd" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Add</button>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <button type="submit" id="btnSubmit" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Save</button>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <button type="button" id="btnDelete" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Delete</button>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <button type="button" id="btnView" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;View</button>
+                    </div>
+                </div>
+                <div id="validations">
+                    @Html.ValidationSummary()
+                </div>
+            }
         </div>
     </div>
 </div>
@@ -378,11 +378,11 @@
                     AccountExpiredOn: $('#AccountExpiredOn').val(),
                     QueryRights: ($('#QueryRights').is(':checked') ? "1" : "0")
                 }
-               
+
                 $.ajax({
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ clientData: clientData, clientMenus: clientMenus }),
+                    data: JSON.stringify({ clientData: clientData}),
                     url: '@Url.Action("Edit", "Client")',
                     success: function (result) {
                         if (result.IsSuccess) {

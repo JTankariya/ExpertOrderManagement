@@ -66,10 +66,14 @@ namespace OrderAdminPanel.Controllers
             return RedirectToAction("AdminMaster");
         }
 
-        public ActionResult GetAdminList()
+        public ActionResult GetList()
         {
             var currUser = (User)Session["User"];
-            var admins = AdminMaster.GetAllAdminMaster().Where(x => x.ID != currUser.Id);
+            var admins = AdminMaster.GetAllAdminMaster();
+            if (admins != null)
+            {
+                admins = admins.Where(x => x.ID != currUser.Id);
+            }
             return View(admins);
         }
 

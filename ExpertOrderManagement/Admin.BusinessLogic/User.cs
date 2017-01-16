@@ -46,7 +46,7 @@ namespace Admin.BusinessLogic
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@UName", this.UserName);
             param.Add("@Pword", StringCipher.Encrypt(this.Password));
-            DataTable dt = DBHelper.GetDataTable("CheckUserByUserNameAndPassword", param, true);
+            DataTable dt = DBHelper.GetDataTable("CheckOrderUserByUserNameAndPassword", param, true);
 
             if (dt != null && dt.Rows.Count > 0)
                 return DBHelper.ConvertToList<User>(dt).FirstOrDefault();
@@ -57,7 +57,7 @@ namespace Admin.BusinessLogic
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@UName", this.UserName);
-            DataTable dt = DBHelper.GetDataTable("CheckUserName", param, true);
+            DataTable dt = DBHelper.GetDataTable("CheckOrderUserName", param, true);
 
             if (dt != null && dt.Rows.Count > 0)
                 return DBHelper.ConvertToList<User>(dt);
@@ -69,7 +69,7 @@ namespace Admin.BusinessLogic
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@Email", this.EmailId);
-            DataTable dt = DBHelper.GetDataTable("CheckEmailId", param, true);
+            DataTable dt = DBHelper.GetDataTable("CheckOrderEmailId", param, true);
 
             if (dt != null && dt.Rows.Count > 0)
                 return DBHelper.ConvertToEnumerable<User>(dt);
@@ -97,7 +97,7 @@ namespace Admin.BusinessLogic
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@ID", ID);
-            DataTable dt = DBHelper.GetDataTable("GetDistributorByID", param, true);
+            DataTable dt = DBHelper.GetDataTable("GetOrderDistributorByID", param, true);
             if (dt != null && dt.Rows.Count > 0)
             {
                 var user = DBHelper.ConvertToEnumerable<User>(dt).FirstOrDefault();
@@ -147,7 +147,7 @@ namespace Admin.BusinessLogic
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@DId", DistributorId);
-            DataTable dt = DBHelper.GetDataTable("GetDistributorBalance", param, true, 2);
+            DataTable dt = DBHelper.GetDataTable("GetOrderDistributorBalance", param, true, 2);
 
             if (dt != null && dt.Rows.Count > 0)
                 return Convert.ToString(dt.Rows[0][0]);
@@ -165,7 +165,7 @@ namespace Admin.BusinessLogic
 
         public static IEnumerable<User> GetAllDistributors()
         {
-            DataTable dt = DBHelper.GetDataTable("GetAllDistributors", null, true);
+            DataTable dt = DBHelper.GetDataTable("GetAllOrderDistributors", null, true);
 
             if (dt != null && dt.Rows.Count > 0)
                 return DBHelper.ConvertToEnumerable<User>(dt);
@@ -177,7 +177,7 @@ namespace Admin.BusinessLogic
 
         public static string GenerateDistributorBalanceReport(User user)
         {
-            DataTable dt = DBHelper.GetDataTable("GetDistributorBalanceForReport", null, true);
+            DataTable dt = DBHelper.GetDataTable("GetOrderDistributorBalanceForReport", null, true);
 
             if (dt != null && dt.Rows.Count > 0)
                 return ReportManager.GetDistributorBalanceReport(user, DBHelper.ConvertToEnumerable<User>(dt));
@@ -205,7 +205,7 @@ namespace Admin.BusinessLogic
             {
                 param.Add("@ToDate", DBNull.Value);
             }
-            DataTable dt = DBHelper.GetDataTable("DistributorRechargeInformationReport", param, true);
+            DataTable dt = DBHelper.GetDataTable("OrderDistributorRechargeInformationReport", param, true);
 
             if (dt != null && dt.Rows.Count > 0)
                 return DBHelper.ConvertToEnumerable<User>(dt);

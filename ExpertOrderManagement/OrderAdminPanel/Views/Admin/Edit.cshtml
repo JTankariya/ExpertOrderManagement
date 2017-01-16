@@ -208,7 +208,7 @@
         });
         $('#btnView').on('click', function () {
             $.ajax({
-                url: '@Url.Action("GetAdminList","Admin")',
+                url: '@Url.Action("GetList","Admin")',
                 success: function (result) {
                     if (result) {
                         $('#viewData').empty();

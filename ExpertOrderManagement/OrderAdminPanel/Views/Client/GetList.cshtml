@@ -1,6 +1,28 @@
-﻿@{
-    ViewBag.Title = "GetList";
-    Layout = "~/Views/Shared/_UserLayout.cshtml";
+﻿@model IEnumerable<Admin.BusinessLogic.ClientMaster>
+@if (Model != null)
+{
+    <table class="table striped hovered cell-hovered border bordered">
+        <thead>
+            <tr>
+                <th class="sortable-column">First Name</th>
+                <th class="sortable-column">Last Name</th>
+                <th class="sortable-column">Company Name</th>
+                <th class="sortable-column">Company Address</th>
+                <th class="sortable-column">City</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var client in Model)
+            {
+                <tr data-clientid="@client.ClientID">
+                    <td>@client.FirstName</td>
+                    <td>@client.LastName</td>
+                    <td>@client.CompanyName</td>
+                    <td>@client.CompanyAddress</td>
+                    <td>@client.City</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
-<h2>GetList</h2>

@@ -240,7 +240,7 @@
     <Content Include="Views\Dashboard\ClientDataUploadReport.cshtml" />
     <Content Include="Views\Dashboard\DistributorRecharge.cshtml" />
     <Content Include="Views\Dashboard\DistributorRechargeInformationReport.cshtml" />
-    <Content Include="Views\Admin\GetAdminList.cshtml" />
+    <Content Include="Views\Admin\GetList.cshtml" />
     <Content Include="Views\Dashboard\GetClientList.cshtml" />
     <Content Include="Views\Dashboard\GetDistributorList.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />

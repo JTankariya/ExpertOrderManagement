@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -10,9 +11,7 @@ namespace Admin.DAL
 {
     public class DBHelper
     {
-        //public static string cs = @"server=204.11.58.166;user id=shahsrag_dhruvin;password=dms@1001_;database=shahsrag_expertmobile";
-        //public static string cs = @"server=204.11.58.166;user id=shahsrag_dhruvin;password=dms@1001_;database=shahsrag_tempmobile";
-        public static string cs = @"data source=208.91.198.59;initial catalog=TestExpertMobile;persist security info=True;user id=mehul;password=mitesh@8277_;MultipleActiveResultSets=True;";
+        public static string cs = Convert.ToString(ConfigurationManager.AppSettings["DBPath"]);
 
         public static int ExecuteNonQuery(string Query, Dictionary<string, object> parameters = null, bool IsStoredProcedure = false)
         {
