@@ -81,11 +81,11 @@ namespace OrderAdminPanel.Controllers
         {
             if (ClientMaster.DeleteClient(ID) == 1)
             {
-                return RedirectToAction("Edit", "Dashboard", new { ID = 0 });
+                return RedirectToAction("Edit", "Client", new { ID = 0 });
             }
             else
             {
-                return RedirectToAction("Edit", "Dashboard", new { ID = ID });
+                return RedirectToAction("Edit", "Client", new { ID = ID });
             }
         }
 
@@ -97,7 +97,7 @@ namespace OrderAdminPanel.Controllers
         public ActionResult DeleteEntireClient(int ClientId)
         {
             ClientMaster.DeleteEntireClient(ClientId);
-            return RedirectToAction("RemoveClient");
+            return RedirectToAction("Edit");
         }
 
     }

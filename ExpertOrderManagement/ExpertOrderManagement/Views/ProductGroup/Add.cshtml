@@ -18,8 +18,9 @@
                     <div class="form-group">
                         <label for="hori-pass1" class="col-sm-4 control-label">Name</label>
                         <div class="col-sm-7">
-                            @Html.HiddenFor(x => x.ClientCompanyId, new { @class = "form-control" })
-                            @Html.HiddenFor(x => x.RefId, new { @class = "form-control" })
+                            @Html.HiddenFor(x => x.ClientCompanyId)
+                            @Html.HiddenFor(x => x.RefId)
+                            @Html.HiddenFor(x => x.OperationFlag)
                             @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @placeholder = "Name" })
                         </div>
                     </div>

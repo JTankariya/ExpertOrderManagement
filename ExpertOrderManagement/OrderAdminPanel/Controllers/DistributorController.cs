@@ -99,7 +99,7 @@ namespace OrderAdminPanel.Controllers
 
             }
 
-            return RedirectToAction("AddDistributor");
+            return RedirectToAction("Edit");
         }
 
         [ValidateOnlyIncomingValues]
@@ -135,8 +135,17 @@ namespace OrderAdminPanel.Controllers
             }
             else
             {
+                var distributor = new User();
+                distributor.UserType = "Distributor";
                 return View(new User());
             }
+        }
+
+        public ActionResult RechargeHistory()
+        {
+            var CurrentUser = (User)Session["User"];
+            var histories = RechargeTransaction.RechargeHistory(CurrentUser.Id).OrderBy(x => x.CreatedDate);
+            return View(histories);
         }
     }
 }

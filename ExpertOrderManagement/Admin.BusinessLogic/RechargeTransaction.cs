@@ -39,7 +39,7 @@ namespace Admin.BusinessLogic
             param.Add("@Remark", this.Remarks);
             param.Add("@CBy", this.CreatedBy);
             param.Add("@CId", this.ClientId);
-            int result = DBHelper.ExecuteNonQuery("AddRecharge", param, true);
+            int result = DBHelper.ExecuteNonQuery("AddOrderRecharge", param, true);
 
             return 1;
         }
@@ -47,7 +47,7 @@ namespace Admin.BusinessLogic
         public static IEnumerable<RechargeTransaction> GetAllRechargeTransaction(int DistributorId=0) {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@Distributor", DistributorId);
-            DataTable dt = DBHelper.GetDataTable("GetAllRechargeTransaction", param, true);
+            DataTable dt = DBHelper.GetDataTable("GetAllOrderRechargeTransaction", param, true);
 
             if (dt != null && dt.Rows.Count > 0)
                 return DBHelper.ConvertToEnumerable<RechargeTransaction>(dt);
@@ -59,7 +59,7 @@ namespace Admin.BusinessLogic
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@DID", DistributorId);
-            DataTable dt = DBHelper.GetDataTable("RechargeHistory", param, true);
+            DataTable dt = DBHelper.GetDataTable("OrderRechargeHistory", param, true);
 
             if (dt != null && dt.Rows.Count > 0)
                 return DBHelper.ConvertToEnumerable<RechargeTransaction>(dt);
@@ -78,7 +78,7 @@ namespace Admin.BusinessLogic
             param.Add("@CId", ClientID);
             param.Add("@CBy", 0);
             param.Add("@Remark", "");
-            int result = DBHelper.ExecuteNonQuery("AddRecharge", param, true);
+            int result = DBHelper.ExecuteNonQuery("AddOrderRecharge", param, true);
 
             if (result > 0)
                 return result;

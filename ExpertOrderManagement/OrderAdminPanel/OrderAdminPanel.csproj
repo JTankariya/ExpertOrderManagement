@@ -244,7 +244,7 @@
     <Content Include="Views\Dashboard\GetClientList.cshtml" />
     <Content Include="Views\Dashboard\GetDistributorList.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
-    <Content Include="Views\Dashboard\RechargeHistory.cshtml" />
+    <Content Include="Views\Distributor\RechargeHistory.cshtml" />
     <Content Include="Views\Dashboard\RemoveClient.cshtml" />
     <Content Include="Views\Dashboard\UpdateProfile.cshtml" />
     <Content Include="Views\Shared\DistributorRechargeRow.cshtml" />

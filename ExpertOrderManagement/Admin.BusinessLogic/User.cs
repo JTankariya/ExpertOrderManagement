@@ -135,7 +135,7 @@ namespace Admin.BusinessLogic
             param.Add("@Email", this.EmailId);
             param.Add("@AId", this.AdminID);
             param.Add("@UType", this.UserType);
-            int result = DBHelper.ExecuteNonQuery("SaveUser", param, true);
+            int result = DBHelper.ExecuteNonQuery("SaveOrderUser", param, true);
 
             if (result > 0)
                 return result;
@@ -147,10 +147,10 @@ namespace Admin.BusinessLogic
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@DId", DistributorId);
-            DataTable dt = DBHelper.GetDataTable("GetOrderDistributorBalance", param, true, 2);
+            DataTable dt = DBHelper.GetDataTable("GetOrderDistributorBalance", param, true);
 
             if (dt != null && dt.Rows.Count > 0)
-                return Convert.ToString(dt.Rows[0][0]);
+                return Convert.ToString(dt.Rows[0][1]);
             else
                 return "";
         }

@@ -109,13 +109,6 @@ namespace OrderAdminPanel.Controllers
             return View(users);
         }
 
-        public ActionResult RechargeHistory()
-        {
-            var CurrentUser = (User)Session["User"];
-            var histories = RechargeTransaction.RechargeHistory(CurrentUser.Id).OrderBy(x => x.CreatedDate);
-            return View(histories);
-        }
-
         #endregion
 
         

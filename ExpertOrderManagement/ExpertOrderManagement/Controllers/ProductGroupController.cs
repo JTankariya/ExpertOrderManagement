@@ -22,7 +22,7 @@ namespace ExpertOrderManagement.Controllers
         {
             ViewBag.ProductGroups = ProductGroupHelper.GetProductGroupsForParentDropDown();
             if (Id > 0)
-            {                
+            {
                 var group = ProductGroupHelper.GetById(Id);
                 return View(group);
             }
@@ -31,7 +31,12 @@ namespace ExpertOrderManagement.Controllers
                 var group = new ProductGroup();
                 return View(group);
             }
-            
+
+        }
+        [HttpPost]
+        public JsonResult Save(ProductGroup group)
+        {
+            return Json(group.Manager.Save(), JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace OrderAdminPanel.Controllers
 
         [ValidateOnlyIncomingValues]
         [HttpPost]
-        public ActionResult Save(AdminMaster model)
+        public ActionResult Edit(AdminMaster model)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +63,7 @@ namespace OrderAdminPanel.Controllers
 
             }
 
-            return RedirectToAction("AdminMaster");
+            return RedirectToAction("Edit");
         }
 
         public ActionResult GetList()
