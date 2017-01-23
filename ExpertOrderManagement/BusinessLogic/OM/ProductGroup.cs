@@ -20,8 +20,8 @@ namespace BusinessLogic
         public string VatName { get; set; }
         public int P_Type { get; set; }
         public string Tag { get; set; }
-        public string RefId { get; set; }
-        public char OperationFlag { get; set; }
+        public Guid RefId { get; set; }
+        public string OperationFlag { get; set; }
 
         private IProductGroupManager _manager;
 

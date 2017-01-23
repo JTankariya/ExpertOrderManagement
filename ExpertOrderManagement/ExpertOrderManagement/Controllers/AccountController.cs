@@ -108,7 +108,6 @@ namespace ExpertOrderManagement.Controllers
         {
             
             ResponseMsg response = new ResponseMsg();
-            employee.CreatedBy = employee.UpdatedBy = currUser.ID;
             employee.Password = StringCipher.Decrypt(currUser.Password);
             employee.Type = currUser.Type;
             employee.Manager.Save();
@@ -129,7 +128,6 @@ namespace ExpertOrderManagement.Controllers
         {
             ResponseMsg response = new ResponseMsg();
             currUser.Password = Password;
-            currUser.CreatedBy = currUser.UpdatedBy = currUser.ID;
             currUser.Manager.Save();
             Session["User"] = UserHelper.GetById(currUser.ID);
             response.IsSuccess = true;

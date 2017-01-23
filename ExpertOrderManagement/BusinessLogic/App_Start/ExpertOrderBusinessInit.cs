@@ -33,7 +33,9 @@ namespace BusinessLogic
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IUserManager>().To<UserManager>();
+            kernel.Bind<IProductGroupManager>().To<ProductGroupManager>();
             kernel.Bind<IManagerFactory<User, IUserManager>>().To<ManagerFactory<User, IUserManager>>();
+            kernel.Bind<IManagerFactory<ProductGroup, IProductGroupManager>>().To<ManagerFactory<ProductGroup, IProductGroupManager>>();
 
             kernel.Bind<IProductGroupHelper>().To<ProductGroupHelper>();
             kernel.Bind<IHelperFactory<string, int, IProductGroupHelper>>().To<HelperFactory<string, int, IProductGroupHelper>>();

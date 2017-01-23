@@ -27,12 +27,12 @@ namespace BusinessLogic
 
         public T GetById(int Id)
         {
-            return DBHelper.ConvertToEnumerable<T>("select * from " + _tableName + " where Id=" + Id + " and ClientCompanyId = " + _companyId).FirstOrDefault();
+            return DBHelper.ConvertToEnumerable<T>("select * from " + _tableName + " where Code='" + Id + "' and ClientCompanyId = " + _companyId).FirstOrDefault();
         }
 
         public T GetByRefId(string refId)
         {
-            return DBHelper.ConvertToEnumerable<T>("select * from " + _tableName + " where RefId=" + refId + " and ClientCompanyId = " + _companyId).FirstOrDefault();
+            return DBHelper.ConvertToEnumerable<T>("select * from " + _tableName + " where RefId='" + refId + "' and ClientCompanyId = " + _companyId).FirstOrDefault();
         }
     }
 }

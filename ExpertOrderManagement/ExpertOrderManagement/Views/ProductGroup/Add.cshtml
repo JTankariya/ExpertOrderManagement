@@ -12,7 +12,7 @@
             <p class="text-muted font-13 m-b-30">
                 Add/Edit Product Group here
             </p>
-            @using (Html.BeginForm("Add", "ProductGroup", FormMethod.Post, new { @class = "form-horizontal m-t-20", @id = "frmProductGroup" }))
+            @using (Html.BeginForm("Save", "ProductGroup", FormMethod.Post, new { @class = "form-horizontal m-t-20", @id = "frmProductGroup" }))
             {
                 <form class="form-horizontal" role="form" data-parsley-validate novalidate>
                     <div class="form-group">
@@ -21,6 +21,7 @@
                             @Html.HiddenFor(x => x.ClientCompanyId)
                             @Html.HiddenFor(x => x.RefId)
                             @Html.HiddenFor(x => x.OperationFlag)
+                            @Html.HiddenFor(x => x.Code)
                             @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @placeholder = "Name" })
                         </div>
                     </div>
@@ -105,7 +106,7 @@
                     required: true,
                     remote: {
                         url: '@Url.Action("CheckDuplicateName","ProductGroup")',
-                        data: { ID: $('#ID').val() },
+                        data: { Code: $('#Code').val() },
                         type: "POST"
                     }
                 }
@@ -119,7 +120,7 @@
             submitHandler: function (form) {
                 $.ajax({
                     type: "POST",
-                    url: "@Url.Action("Add","ProductGroup")",
+                    url: "@Url.Action("Save","ProductGroup")",
                     data: $('#frmProductGroup').serialize(),
                     success: function (response) {
                         ProductGroupAdded();

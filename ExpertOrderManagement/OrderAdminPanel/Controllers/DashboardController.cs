@@ -97,9 +97,7 @@ namespace OrderAdminPanel.Controllers
             }
         }
 
-        #endregion
-
-        
+        #endregion        
 
         #region REPORTS
 
@@ -110,8 +108,5 @@ namespace OrderAdminPanel.Controllers
         }
 
         #endregion
-
-        
-
-    }
+     }
 }

@@ -8,5 +8,7 @@ namespace BusinessLogic
     public interface IProductGroupHelper : IHelper<ProductGroup>
     {
         IEnumerable<ProductGroup> GetProductGroupsForParentDropDown();
+
+        IEnumerable<ProductGroup> CheckDuplicateName(string GroupName, string Code);
     }
 }

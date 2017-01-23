@@ -18,17 +18,21 @@ namespace ExpertOrderManagement.Controllers
         {
             return View();
         }
-        public ActionResult Add(int Id)
+        public ActionResult Add(string Id)
         {
-            ViewBag.ProductGroups = ProductGroupHelper.GetProductGroupsForParentDropDown();
-            if (Id > 0)
+            var groups = ProductGroupHelper.GetProductGroupsForParentDropDown();
+            if (!string.IsNullOrEmpty(Id) && Id != "0")
             {
-                var group = ProductGroupHelper.GetById(Id);
+                groups = groups.Where(x => x.RefId.ToString() != Id);
+                var group = ProductGroupHelper.GetByRefId(Id);
+                ViewBag.ProductGroups = groups;
                 return View(group);
             }
             else
             {
                 var group = new ProductGroup();
+                group.ClientCompanyId = CompanyId;
+                ViewBag.ProductGroups = groups;
                 return View(group);
             }
 
@@ -37,6 +41,25 @@ namespace ExpertOrderManagement.Controllers
         public JsonResult Save(ProductGroup group)
         {
             return Json(group.Manager.Save(), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public string CheckDuplicateName(string Name, string Code)
+        {
+            var groups = ProductGroupHelper.CheckDuplicateName(Name, Code);
+            if (groups != null && groups.Count() > 0)
+            {
+                return "false";
+            }
+            else
+            {
+                return "true";
+            }
+        }
+
+        public ActionResult GetAll()
+        {
+            return View(ProductGroupHelper.GetAll());
         }
     }
 }

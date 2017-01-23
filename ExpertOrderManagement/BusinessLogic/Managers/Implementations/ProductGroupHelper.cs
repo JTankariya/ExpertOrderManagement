@@ -15,11 +15,23 @@ namespace BusinessLogic
         }
         public IEnumerable<ProductGroup> GetProductGroupsForParentDropDown()
         {
-            return DBHelper.ConvertToEnumerable<ProductGroup>("select Code,Name from " + base._tableName + " where ClientCompanyId = " + base._companyId);
+            return DBHelper.ConvertToEnumerable<ProductGroup>("select Code,Name,RefId from " + base._tableName + " where ClientCompanyId = " + base._companyId);
         }
         public IEnumerable<ProductGroup> GetAll()
         {
             return DBHelper.ConvertToEnumerable<ProductGroup>("select * from " + base._tableName + " where ClientCompanyId = " + base._companyId);
+        }
+        public IEnumerable<ProductGroup> CheckDuplicateName(string GroupName, string Code)
+        {
+            if (string.IsNullOrEmpty(Code))
+            {
+                return DBHelper.ConvertToEnumerable<ProductGroup>("select * from " + base._tableName + " where ClientCompanyId = " + base._companyId + " and Name='" + GroupName + "'");
+            }
+            else
+            {
+                return DBHelper.ConvertToEnumerable<ProductGroup>("select * from " + base._tableName + " where ClientCompanyId = " + base._companyId + " and Name='" + GroupName + "' and Code!='" + Code + "'");
+            }
+
         }
     }
 }

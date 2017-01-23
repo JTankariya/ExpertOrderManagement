@@ -28,9 +28,10 @@ namespace BusinessLogic
             param.Add("@VatName", _context.VatName);
             param.Add("@P_Type", _context.P_Type);
             param.Add("@Tag", _context.Tag);
-            param.Add("@OperationFlag", _context.OperationFlag);
             DBHelper.ExecuteNonQuery("SaveProductGroup", param, true);
             return new ResponseMsg() { IsSuccess = true };
         }
+
+
     }
 }
