@@ -29,11 +29,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin.BusinessLogic", "Admi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin.DAL", "Admin.DAL\Admin.DAL.csproj", "{E041429C-3240-499D-BE99-461E615C8A70}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OrderAdminPanelSolution", "OrderAdminPanelSolution", "{B3C1605E-823F-41B2-B3E0-14A19E30F7FE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OrderAdminPanel", "OrderAdminPanel", "{B3C1605E-823F-41B2-B3E0-14A19E30F7FE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OrderManagement", "OrderManagement", "{BE8ED852-37BB-4B72-914C-7CCB7A65E4D5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MobileSyncDistributorPanel", "MobileSyncDistributorPanel", "{54B114B4-341D-46B3-90C4-373A561C17B5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MobileDistributorPanel", "MobileDistributorPanel", "{54B114B4-341D-46B3-90C4-373A561C17B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distributor.BusinessLogic", "Distributor.BusinessLogic\Distributor.BusinessLogic.csproj", "{F2B059D6-9E27-4580-8486-F19DBAAA8EBA}"
 EndProject
