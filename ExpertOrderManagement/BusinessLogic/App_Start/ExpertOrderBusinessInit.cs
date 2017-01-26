@@ -34,11 +34,15 @@ namespace BusinessLogic
         {
             kernel.Bind<IUserManager>().To<UserManager>();
             kernel.Bind<IProductGroupManager>().To<ProductGroupManager>();
+            kernel.Bind<IProductManager>().To<ProductManager>();
             kernel.Bind<IManagerFactory<User, IUserManager>>().To<ManagerFactory<User, IUserManager>>();
             kernel.Bind<IManagerFactory<ProductGroup, IProductGroupManager>>().To<ManagerFactory<ProductGroup, IProductGroupManager>>();
+            kernel.Bind<IManagerFactory<Product, IProductManager>>().To<ManagerFactory<Product, IProductManager>>();
 
             kernel.Bind<IProductGroupHelper>().To<ProductGroupHelper>();
+            kernel.Bind<IProductHelper>().To<ProductHelper>();
             kernel.Bind<IHelperFactory<string, int, IProductGroupHelper>>().To<HelperFactory<string, int, IProductGroupHelper>>();
+            kernel.Bind<IHelperFactory<string, int, IProductHelper>>().To<HelperFactory<string, int, IProductHelper>>();
         }
     }
 }

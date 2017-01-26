@@ -17,6 +17,7 @@ namespace ExpertOrderManagement.Controllers
         private IUserHelper _userHelper;
         private int _currCompany = 15;
         private IProductGroupHelper _productGroupHelper;
+        private IProductHelper _productHelper;
         //
         // GET: /BaseController/
         protected User currUser
@@ -71,6 +72,19 @@ namespace ExpertOrderManagement.Controllers
                         .Create(TableNames.PRODUCTGROUP.ToString(), CompanyId);
                 }
                 return _productGroupHelper;
+            }
+        }
+
+        protected IProductHelper ProductHelper
+        {
+            get
+            {
+                if (_productHelper == null)
+                {
+                    _productHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, int, IProductHelper>>()
+                        .Create(TableNames.PRODUCT.ToString(), CompanyId);
+                }
+                return _productHelper;
             }
         }
     }

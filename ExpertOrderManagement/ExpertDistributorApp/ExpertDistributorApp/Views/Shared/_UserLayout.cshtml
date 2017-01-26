@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+@{
+    var CurrentUser = (BAL.User)Session["User"];
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/metro-bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/metro.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/metro-ui/css/metro.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/metro-ui/css/metro-icons.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/metro-ui/css/metro-responsive.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/metro-ui/css/metro-schemes.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/metro-ui/css/docs.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/site.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrapValidator.min.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/jquery-1.10.2.js")"></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index","Dashboard")">@(CurrentUser != null && CurrentUser.UserType == BAL.UserTypes.ADMIN ? "Admin" : (CurrentUser.UserType == BAL.UserTypes.CLIENT ? "User" : "Distributor"))</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master </a>
+                        <ul class="dropdown-menu">
+                            @if (CurrentUser.UserType == BAL.UserTypes.ADMIN)
+                            {
+                                <li><a href="@Url.Action("AdminMaster","Dashboard")">Admin User Master</a></li>
+                                <li><a href="@Url.Action("GetMenuMaster", "Dashboard", new { ID = 0 })">Menu Master</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="@Url.Action("AddClient", "Dashboard", new { ID=0})">Client Master with Menu Allocation</a></li>
+                                <li><a href="@Url.Action("GetSubMenuMaster", "Dashboard")">Client Submenu Master</a></li>
+                                <li><a href="@Url.Action("GetDashboard", "Dashboard")">Client Dashboard Master</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="@Url.Action("AddDistributor","Dashboard")">Distributor Master</a></li>
+                                <li><a href="@Url.Action("DistributorRecharge","Dashboard")">Distributor Recharge Master</a></li>
+                                <li><a href="@Url.Action("RemoveClient", "Dashboard")">Remove Client</a></li>
+                            }
+                            @if (CurrentUser.UserType == BAL.UserTypes.CLIENT)
+                            {
+                                <li><a href="#">Company Setup Master</a></li>
+                                <li><a href="#">User Creation Master</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Userwise Company Allocation Master</a></li>
+                                <li><a href="#">User-Company-Menu Allocation Master</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">User-Submenu-Allocation Master</a></li>
+                                <li><a href="#">User-Dashboard-Allocation Master</a></li>
+                            }
+                            @if (CurrentUser.UserType == BAL.UserTypes.DISTRIBUTOR)
+                            {
+                                <li><a href="@Url.Action("AddClient", "Dashboard", new { ID=0})">Client Master with Menu Allocation</a></li>
+                                <li><a href="@Url.Action("GetSubMenuMaster", "Dashboard")">Client Submenu Master</a></li>
+                                <li><a href="@Url.Action("GetDashboard", "Dashboard")">Client Dashboard Master</a></li>
+                                <li><a href="@Url.Action("RemoveClient", "Dashboard")">Remove Client</a></li>
+                            }
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports </a>
+                        <ul class="dropdown-menu">
+                            @if (CurrentUser.UserType == BAL.UserTypes.ADMIN)
+                            {
+                                <li><a href="#" onclick="DistributorBalance()">Distributor Balance Report</a></li>
+                                <li><a href="@Url.Action("DistributorRechargeInformationReport", "Dashboard")">Distributor Recharge Information Report</a></li>
+                                <li><a href="@Url.Action("ClientDataUploadReport", "Dashboard")">Client Data Upload Report</a></li>
+                            }
+                            @if (CurrentUser.UserType == BAL.UserTypes.DISTRIBUTOR)
+                            {
+                                <li><a href="@Url.Action("RechargeHistory", "Dashboard")">Recharge History</a></li>
+                            }
+                        </ul>
+                    </li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Welcome @(CurrentUser != null ? (CurrentUser.FirstName + " " + CurrentUser.LastName).ToUpper() : "")
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("ChangePassword","Dashboard")">Change Password</a></li>
+                            <li><a href="@Url.Action("UpdateProfile","Dashboard")">Update Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="@Url.Action("LogOut","Account")">LogOut</a></li>
+                        </ul>
+                    </li>
+                    @if (CurrentUser.UserType == BAL.UserTypes.DISTRIBUTOR)
+                    {
+                        <li><a href="#" style="font-style: italic; font-weight: bold; font-size: 1.5em;">Balance : @(BAL.User.GetDistributorBalance(CurrentUser.Id))</a></li>
+                    }
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    @RenderBody()
+
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">Place sticky footer content here.</p>
+        </div>
+    </footer>
+    <div id="loader-wrapper" style="display:none">
+        <div id="loader"></div>
+    </div>
+    @*<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>*@
+    <script src="@Url.Content("~/Scripts/bootstrapValidator.min.js")"></script>
+    <script src="@Url.Content("~/Content/metro-ui/js/metro.js")"></script>
+    <script src="@Url.Content("~/Content/metro-ui/js/dialog.js")"></script>
+    @*<script src="@Url.Content("~/Content/metro-ui/js/docs.js")"></script>*@
+    @*<script src="@Url.Content("~/Content/metro-ui/js/prettify/run_prettify.js")"></script>*@
+    @*for reference of validation you can visit http://formvalidation.io/*@
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/site.js")"></script>
+
+    <script>
+        function DistributorBalance() {
+            $.ajax({
+                url: '@Url.Action("DistributorBalanceReport", "Dashboard")',
+                success: function (result) {
+                    if (result.IsSuccess) {
+                        window.open('@Convert.ToString(System.Configuration.ConfigurationManager.AppSettings["PdfReportLocation"]).Replace("~","")'  + "/"+ result.ResponseValue + ".PDF", "_blank");
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

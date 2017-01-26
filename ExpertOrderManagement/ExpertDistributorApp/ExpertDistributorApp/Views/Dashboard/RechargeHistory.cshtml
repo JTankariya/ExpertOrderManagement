@@ -1,0 +1,55 @@
+﻿@model IEnumerable<BAL.RechargeTransaction>
+@{
+    ViewBag.Title = "RechargeHistory";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<table class="table striped hovered cell-hovered border bordered" id="tblReport">
+    <thead>
+        <tr>
+            <td>Date</td>
+            <td>Client</td>
+            <td>Total Company</td>
+            <td>Total User</td>
+            <td>Amount</td>
+            <td>Balance</td>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            var i=0;
+            var Bal=0;
+
+            foreach (var recharge in Model)
+            {
+                if (recharge.ClientName == "C")
+                {
+                    Bal += Convert.ToInt32(recharge.Amount);
+                }
+                else
+                {
+                    Bal -= Convert.ToInt32(recharge.Amount);
+                }
+                <tr>
+                    <td>@recharge.CreatedDate.ToShortDateString()</td>
+                    <td>
+                        @(recharge.ClientName=="C" || recharge.ClientName=="D"?(recharge.ClientName=="C"?"Admin Credit":"Admin Debit"):recharge.ClientName)
+                    </td>
+                    <td>
+                        @recharge.TotalCompany
+                    </td>
+                    <td>
+                        @recharge.TotalUser
+                    </td>
+                    <td>
+                        @recharge.Amount
+                    </td>
+                    <td>
+                        @Bal
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

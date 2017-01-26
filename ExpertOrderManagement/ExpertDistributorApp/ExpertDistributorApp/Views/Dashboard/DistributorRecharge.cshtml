@@ -1,0 +1,102 @@
+﻿@model BAL.RechargeTransaction
+@{
+    ViewBag.Title = "Distributor Recharge";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+
+}
+
+<div class="row-fluid">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Make Distributor Recharge</h3>
+            </div>
+
+            <div class="panel-body">
+                @using (Html.BeginForm("DistributorRecharge", "Dashboard", FormMethod.Post, new { @id = "frmDistributorRecharge", @class = "form-horizontal" }))
+                {
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Distributor :</label>
+                        <div class="col-md-9">
+                            <div class="input-control select" style="width:100%">
+                                @Html.DropDownListFor(x => x.DistributorId, ((List<SelectListItem>)ViewBag.DistributorList), "-- Select Distributor --")
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Amount :</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(x => x.Amount, new { @class = "form-control", @type = "number",@min="1" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Type :</label>
+                        <div class="col-md-9">
+                            <div class="input-control select" style="width:100%">
+                                @{
+                    var TypeList = new List<SelectListItem>();
+                    TypeList.Add(new SelectListItem() { Text = "Credit", Value = "C" });
+                    TypeList.Add(new SelectListItem() { Text = "Debit", Value = "D" });
+                                }
+                                @Html.DropDownListFor(x => x.Type, TypeList, "-- Select Type --")
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Remarks :</label>
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(x => x.Remarks, new { @rows="3", @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <button type="submit" id="btnSubmit" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Do Recharge</button>
+                        </div>
+                    </div>
+                    <div>
+                        @Html.ValidationSummary()
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#frmDistributorRecharge').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                DistributorId: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please Select Distributor'
+                        }
+                    }
+                },
+                Type: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please Select Transaction Type'
+                        }
+                    }
+                },
+                Amount: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Amount'
+                        },
+                        greaterThan: {
+                            value: 0,
+                            message: 'The value must be greater than 0'
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>

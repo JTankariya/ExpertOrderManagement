@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BAL.User>
+@{
+    ViewBag.Title = "ClientDataUploadReport";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+        <input type="text" id="txtSearch" placeholder="Search Anything here" class="form-control" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table striped hovered cell-hovered border bordered" id="tblReport">
+            <thead>
+                <tr>
+                    <td>Distributor</td>
+                    <td>Client</td>
+                    <td>Company</td>
+                    <td>Last Upload On</td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var row in Model)
+                    {
+                        <tr>
+                            <td>@(row.FirstName + " " + row.LastName)</td>
+                            <td>@row.ClientName</td>
+                            <td>@row.CompanyName</td>
+                            <td>@row.DataUploadedOn</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

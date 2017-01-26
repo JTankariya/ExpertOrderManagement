@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    var CurrentUser = (BAL.User)Session["User"];
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile-container bg-darkCobalt">
+            @if (CurrentUser.UserType == BAL.UserTypes.ADMIN)
+            {
+                <div class="tile-wide bg-lighterBlue" data-role="tile">
+                    <h2>
+                        <a href="@Url.Action("AdminMaster","Dashboard")">Admin User Master</a>
+                    </h2>
+                </div>
+                <div class="tile-wide bg-cobalt" data-role="tile">
+                    <h2>
+                        <a href="@Url.Action("GetMenuMaster", "Dashboard", new { ID = 0 })">Menu Master</a>
+                    </h2>
+                </div>
+                <div class="tile-wide bg-red" data-role="tile">
+                    <h2>
+                        <a href="@Url.Action("AddClient", "Dashboard", new { ID=0})">Client Master with Menu Allocation</a>
+                    </h2>
+                </div>
+                <div class="tile-wide bg-orange" data-role="tile">
+                    <h2>
+                        <a href="@Url.Action("GetSubMenuMaster", "Dashboard")">Client Submenu Master</a>
+                    </h2>
+                </div>
+                <div class="tile-wide bg-green" data-role="tile">
+                    <h2>
+                        <a href="@Url.Action("GetDashboard", "Dashboard")">Client Dashboard Master</a>
+                    </h2>
+                </div>
+                <div class="tile-wide bg-pink" data-role="tile">
+                    <h2>
+                        <a href="@Url.Action("AdminMaster","Dashboard")">Admin User Master</a>
+                    </h2>
+                </div>
+                <div class="tile-wide bg-pink" data-role="tile">
+                    <h2>
+                        <a href="@Url.Action("AddDistributor","Dashboard")">Distributor Master</a>
+                    </h2>
+                </div>
+                <div class="tile-wide bg-pink" data-role="tile">
+                    <h2>
+                        <a href="@Url.Action("DistributorRecharge","Dashboard")">Distributor Recharge Master</a>
+                    </h2>
+                </div>
+            }
+            @if (CurrentUser.UserType == BAL.UserTypes.CLIENT)
+            {
+                <div class="tile-wide bg-lighterBlue" data-role="tile">
+                    <h2>
+                        <a href="@Url.Action("AdminMaster","Dashboard")">Company Setup Master</a>
+                    </h2>
+                </div>
+                <div class="tile-wide bg-cobalt" data-role="tile">
+                    <h2>
+                        <a href="@Url.Action("AdminMaster","Dashboard")">User Creation Master</a>
+                    </h2>
+                </div>
+                <div class="tile-wide bg-red" data-role="tile">
+                    <h2>
+                        <a href="@Url.Action("AdminMaster","Dashboard")">Userwise Company Allocation Master</a>
+                    </h2>
+                </div>
+                <div class="tile-wide bg-orange" data-role="tile">
+                    <h2>
+                        <a href="@Url.Action("AdminMaster","Dashboard")">User-Company-Menu Allocation Master</a>
+                    </h2>
+                </div>
+                <div class="tile-wide bg-green" data-role="tile">
+                    <h2>
+                        <a href="@Url.Action("AdminMaster","Dashboard")">User-Submenu-Allocation Master</a>
+                    </h2>
+                </div>
+                <div class="tile-wide bg-pink" data-role="tile">
+                    <h2>
+                        <a href="@Url.Action("AdminMaster","Dashboard")">User-Dashboard-Allocation Master</a>
+                    </h2>
+                </div>
+            }
+            @if (CurrentUser.UserType == BAL.UserTypes.DISTRIBUTOR)
+            {
+                <div class="tile-wide bg-red" data-role="tile">
+                    <h2>
+                        <a href="@Url.Action("AdminMaster","Dashboard")">Client Master with Menu Allocation</a>
+                    </h2>
+                </div>
+                <div class="tile-wide bg-orange" data-role="tile">
+                    <h2>
+                        <a href="@Url.Action("AdminMaster","Dashboard")">Client Submenu Master</a>
+                    </h2>
+                </div>
+                <div class="tile-wide bg-green" data-role="tile">
+                    <h2>
+                        <a href="@Url.Action("AdminMaster","Dashboard")">Client Dashboard Master</a>
+                    </h2>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
