@@ -121,7 +121,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\AuthorizeWebFormAttribute.cs" />
     <Compile Include="Helpers\ValidateOnlyIncomingValuesAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -227,6 +226,10 @@
     <ProjectReference Include="..\Admin.BusinessLogic\Admin.BusinessLogic.csproj">
       <Project>{30b32a64-2fad-4a59-aace-8ccccb01ee9a}</Project>
       <Name>Admin.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonLibraries\CommonLibraries.csproj">
+      <Project>{b4022dc5-28ff-4fe3-9da8-8d5a562220b1}</Project>
+      <Name>CommonLibraries</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

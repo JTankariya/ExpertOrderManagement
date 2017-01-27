@@ -65,6 +65,8 @@
     <Compile Include="Managers\Skeleton\IUserHelper.cs" />
     <Compile Include="Managers\Skeleton\IUserManager.cs" />
     <Compile Include="Managers\Skeleton\Repo.cs" />
+    <Compile Include="OM\Client.cs" />
+    <Compile Include="OM\ClientCompany.cs" />
     <Compile Include="OM\Product.cs" />
     <Compile Include="OM\User.cs" />
     <Compile Include="OM\ProductGroup.cs" />

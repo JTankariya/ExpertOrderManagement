@@ -19,13 +19,14 @@ namespace BusinessLogic
         public string Password { get; set; }
         public string Type { get; set; }
         public string PhotoPath { get; set; }
-      
+        public string UserType { get; set; }
 
         public enum FIELDNAMES
         {
             ID = 1,
             USERNAME = 3,
-            PASSWORD = 4
+            PASSWORD = 4,
+            USERTYPE=5
         }
 
         public User()
@@ -37,12 +38,13 @@ namespace BusinessLogic
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@UserName", UserName);
-            DataTable dt = DBHelper.GetDataTable("GetUser", param, true);
+            DataTable dt = DBHelper.GetDataTable("GetOrderUser", param, true);
             if (dt != null && dt.Rows.Count > 0)
             {
                 this.ID = Convert.ToInt32(Convert.ToString(dt.Rows[0][FIELDNAMES.ID.ToString()]));
                 this.UserName = Convert.ToString(dt.Rows[0][FIELDNAMES.USERNAME.ToString()]);
                 this.Password = Convert.ToString(dt.Rows[0][FIELDNAMES.PASSWORD.ToString()]);
+                UserType = Convert.ToString(dt.Rows[0][FIELDNAMES.USERTYPE.ToString()]);
             }
         }
 
@@ -57,6 +59,7 @@ namespace BusinessLogic
                 this.ID = Convert.ToInt32(Convert.ToString(dt.Rows[0][FIELDNAMES.ID.ToString()]));
                 this.UserName = Convert.ToString(dt.Rows[0][FIELDNAMES.USERNAME.ToString()]);
                 this.Password = Convert.ToString(dt.Rows[0][FIELDNAMES.PASSWORD.ToString()]);
+                UserType = Convert.ToString(dt.Rows[0][FIELDNAMES.USERTYPE.ToString()]);
             }
         }
 
@@ -64,12 +67,13 @@ namespace BusinessLogic
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@Id", ID);
-            DataTable dt = DBHelper.GetDataTable("GetUser", param, true);
+            DataTable dt = DBHelper.GetDataTable("GetOrderUser", param, true);
             if (dt != null && dt.Rows.Count > 0)
             {
                 this.ID = Convert.ToInt32(Convert.ToString(dt.Rows[0][FIELDNAMES.ID.ToString()]));
                 this.UserName = Convert.ToString(dt.Rows[0][FIELDNAMES.USERNAME.ToString()]);
                 this.Password = Convert.ToString(dt.Rows[0][FIELDNAMES.PASSWORD.ToString()]);
+                UserType = Convert.ToString(dt.Rows[0][FIELDNAMES.USERTYPE.ToString()]);
             }
         }
 

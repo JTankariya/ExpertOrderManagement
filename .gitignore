@@ -14,3 +14,10 @@ ExpertOrderManagement/Admin.DAL/bin/
 ExpertOrderManagement/Admin.BusinessLogic/bin/
 ExpertOrderManagement/Admin.BusinessLogic/obj/
 ExpertOrderManagement/ExpertOrderManagement/Content/Database Backups/
+ExpertOrderManagement/ExpertDistributorApp/ExpertDistributorApp/bin/
+ExpertOrderManagement/Distributor.DAL/obj/
+ExpertOrderManagement/Distributor.DAL/bin/
+ExpertOrderManagement/Distributor.BusinessLogic/obj/
+ExpertOrderManagement/ExpertDistributorApp/ExpertDistributorApp/obj/
+ExpertOrderManagement/Distributor.BusinessLogic/bin/
+ExpertOrderManagement/ExpertDistributorApp/ExpertDistributorApp/Content/PdfReports/

@@ -1,4 +1,5 @@
-﻿using Distributor.BAL;
+﻿using CommonLibraries;
+using Distributor.BAL;
 using Distributor.DAL;
 using NewExpert.Helpers;
 using System;
@@ -9,7 +10,7 @@ using System.Web.Mvc;
 
 namespace NewExpert.Controllers
 {
-     [AuthorizeWebFormAttribute]
+     [AuthorizeWebForm]
     public class DashboardController : Controller
     {
         //

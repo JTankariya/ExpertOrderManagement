@@ -15,9 +15,9 @@ namespace ExpertOrderManagement.Controllers
     public class BaseController : Controller
     {
         private IUserHelper _userHelper;
-        private int _currCompany = 15;
         private IProductGroupHelper _productGroupHelper;
         private IProductHelper _productHelper;
+        private ClientCompany _company;
         //
         // GET: /BaseController/
         protected User currUser
@@ -45,7 +45,11 @@ namespace ExpertOrderManagement.Controllers
         {
             get
             {
-                return _currCompany;
+                if (_company == null)
+                {
+                    _company = new ClientCompany(currUser.ID);
+                }
+                return _company.ClientCompanyId;
             }
         }
 

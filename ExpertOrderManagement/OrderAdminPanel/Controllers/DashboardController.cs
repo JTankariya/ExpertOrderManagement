@@ -1,4 +1,5 @@
 ﻿using Admin.BusinessLogic;
+using CommonLibraries;
 using OrderAdminPanel.Helpers;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Web.Mvc;
 
 namespace OrderAdminPanel.Controllers
 {
-     [AuthorizeWebFormAttribute]
+     [AuthorizeWebForm]
     public class DashboardController : Controller
     {
         //

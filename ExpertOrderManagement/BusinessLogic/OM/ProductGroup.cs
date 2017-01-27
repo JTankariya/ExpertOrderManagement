@@ -19,7 +19,7 @@ namespace BusinessLogic
         public string Parent { get; set; }
         public string VatName { get; set; }
         public int P_Type { get; set; }
-        public string Tag { get; set; }
+        public int Tag { get; set; }
         public Guid RefId { get; set; }
         public string OperationFlag { get; set; }
 

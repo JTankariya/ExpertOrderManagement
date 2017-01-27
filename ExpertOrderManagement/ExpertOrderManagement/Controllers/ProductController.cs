@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using CommonLibraries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,12 @@ using System.Web.Mvc;
 
 namespace ExpertOrderManagement.Controllers
 {
+    [AuthorizeWebForm]
     public class ProductController : BaseController
     {
         public ActionResult Add(string Id)
         {
+            ViewBag.GroupList = ProductGroupHelper.GetProductGroupsForParentDropDown();
             if (!string.IsNullOrEmpty(Id) && Id != "0")
             {
                 var product = ProductHelper.GetByRefId(Id);

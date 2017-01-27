@@ -33,9 +33,9 @@
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-4 control-label">Product Group</label>
                                     <div class="col-sm-7">
-                                        @if (ViewBag.ProductGroups != null)
+                                        @if (ViewBag.GroupList != null)
                                         {
-                                            @Html.DropDownListFor(x => x.Group, new SelectList(ViewBag.ProductGroups, "Code", "Name"), "-- Select --", new { @class = "form-control", @placeholder = "Product Type" })
+                                            @Html.DropDownListFor(x => x.Group, new SelectList(ViewBag.GroupList, "Code", "Name"), "-- Select --", new { @class = "form-control", @placeholder = "Product Type" })
                                         }
                                         else
                                         {

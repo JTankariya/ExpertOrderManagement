@@ -1,6 +1,5 @@
 ﻿using BusinessLogic;
 using CommonLibraries;
-using ExpertOrderManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +32,7 @@ namespace ExpertOrderManagement.Controllers
         public ActionResult Login(User employee)
         {
             var client = new User(employee.UserName, employee.Password);
-            if (client.ID >0)
+            if (client.ID > 0)
             {
                 if (Request.Form["IsRemember"] != null && Request.Form["IsRemember"].ToUpper() == "ON")
                 {
@@ -66,7 +65,7 @@ namespace ExpertOrderManagement.Controllers
             if (!string.IsNullOrEmpty(EmailId))
             {
                 var existingUser = UserHelper.GetByEmail(EmailId);
-                
+
                 if (existingUser != null)
                 {
                     var body = "DEAR, <b><i>" + existingUser.Name + "</i></b><br><br>Your credentials for Mehul Industries system is as below :<br><br>User Name : <b>" + existingUser.UserName +
@@ -106,7 +105,7 @@ namespace ExpertOrderManagement.Controllers
         [HttpPost]
         public ActionResult UpdateProfile(User employee)
         {
-            
+
             ResponseMsg response = new ResponseMsg();
             employee.Password = StringCipher.Decrypt(currUser.Password);
             employee.Type = currUser.Type;
