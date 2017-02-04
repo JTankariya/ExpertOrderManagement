@@ -14,9 +14,9 @@ namespace BusinessLogic
         public string Group { get; set; }
         public string Name { get; set; }
         public string Desc { get; set; }
-        public int Batch { get; set; }
-        public int Decimals { get; set; }
-        public int DUnit { get; set; }
+        public bool Batch { get; set; }
+        public bool Decimals { get; set; }
+        public bool DUnit { get; set; }
         public string Unit1 { get; set; }
         public string Unit2 { get; set; }
         public string Unit3 { get; set; }
@@ -44,18 +44,18 @@ namespace BusinessLogic
         public string Category2 { get; set; }
         public decimal PackingQty { get; set; }
         public string Flag { get; set; }
-        public int AdvanceOpt { get; set; }
-        public int Service { get; set; }
+        public bool AdvanceOpt { get; set; }
+        public bool Service { get; set; }
         public decimal Op_Package { get; set; }
         public decimal TotPQty { get; set; }
         public decimal TotPVal { get; set; }
-        public int Valuation { get; set; }
+        public bool Valuation { get; set; }
         public decimal Min_Rate { get; set; }
         public string VMethod { get; set; }
         public string I_Vatcode { get; set; }
         public string O_Vatcode { get; set; }
-        public int Blocked { get; set; }
-        public int Tag { get; set; }
+        public bool Blocked { get; set; }
+        public bool Tag { get; set; }
         public string OperationFlag { get; set; }
         public Guid RefId { get; set; }
 

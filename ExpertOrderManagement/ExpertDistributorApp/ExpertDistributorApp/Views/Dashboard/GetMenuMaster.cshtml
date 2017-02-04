@@ -1,4 +1,4 @@
-﻿@model BAL.ClientMenuMaster
+﻿@model Distributor.BusinessLogic.ClientMenuMaster
 @{
     ViewBag.Title = "GetMenuMaster";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
@@ -216,7 +216,7 @@
                                         @if (ViewBag.ChildMenuList != null)
                                         {
                                             int i = 1;
-                                            foreach (BAL.ChildMenuMaster childmenu in ViewBag.ChildMenuList)
+                                            foreach (Distributor.BusinessLogic.ChildMenuMaster childmenu in ViewBag.ChildMenuList)
                                             {
                                                 <tr data-menuid="@childmenu.MenuID" data-childmenuid="@childmenu.ChildMenuID">
                                                     <td>
@@ -323,7 +323,7 @@
                                         @if (ViewBag.DashboardList != null)
                                         {
                                             int i = 1;
-                                            foreach (BAL.DashboardMaster dashboard in ViewBag.DashboardList)
+                                            foreach (Distributor.BusinessLogic.DashboardMaster dashboard in ViewBag.DashboardList)
                                             {
                                                 <tr data-menuid="@dashboard.MenuID" data-dashboardid="@dashboard.DashboardID">
                                                     <td>@i</td>

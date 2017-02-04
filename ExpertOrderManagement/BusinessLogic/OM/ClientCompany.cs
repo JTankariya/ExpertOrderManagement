@@ -24,7 +24,7 @@ namespace BusinessLogic
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@ClientId", clientId);
-            DataTable dt = DBHelper.GetDataTable("GetOrderClientCompany", param, true);
+            DataTable dt = DBHelper.GetDataTable("Order.GetClientCompany", param, true);
             if (dt != null && dt.Rows.Count > 0)
             {
                 ClientCompanyId = Convert.ToInt32(dt.Rows[0][FIELDNAMES.CLIENTCOMPANYID.ToString()]);

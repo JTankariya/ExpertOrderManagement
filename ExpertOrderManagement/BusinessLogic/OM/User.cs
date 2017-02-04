@@ -38,7 +38,7 @@ namespace BusinessLogic
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@UserName", UserName);
-            DataTable dt = DBHelper.GetDataTable("GetOrderUser", param, true);
+            DataTable dt = DBHelper.GetDataTable("Order.GetUser", param, true);
             if (dt != null && dt.Rows.Count > 0)
             {
                 this.ID = Convert.ToInt32(Convert.ToString(dt.Rows[0][FIELDNAMES.ID.ToString()]));
@@ -53,7 +53,7 @@ namespace BusinessLogic
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@UserName", UserName);
             param.Add("@Password", StringCipher.Encrypt(Password));
-            DataTable dt = DBHelper.GetDataTable("GetOrderUser", param, true);
+            DataTable dt = DBHelper.GetDataTable("Order.GetUser", param, true);
             if (dt != null && dt.Rows.Count > 0)
             {
                 this.ID = Convert.ToInt32(Convert.ToString(dt.Rows[0][FIELDNAMES.ID.ToString()]));
@@ -67,7 +67,7 @@ namespace BusinessLogic
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@Id", ID);
-            DataTable dt = DBHelper.GetDataTable("GetOrderUser", param, true);
+            DataTable dt = DBHelper.GetDataTable("Order.GetUser", param, true);
             if (dt != null && dt.Rows.Count > 0)
             {
                 this.ID = Convert.ToInt32(Convert.ToString(dt.Rows[0][FIELDNAMES.ID.ToString()]));

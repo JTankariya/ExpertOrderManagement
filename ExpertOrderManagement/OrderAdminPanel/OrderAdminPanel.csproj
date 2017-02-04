@@ -193,6 +193,7 @@
     <Content Include="Scripts\bootstrapValidator.min.js" />
     <Content Include="Scripts\formValidation.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
+    <None Include="Properties\PublishProfiles\ExpertOrderPublish.pubxml" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.0.js" />
     <Content Include="Scripts\jquery-1.9.0.min.js" />

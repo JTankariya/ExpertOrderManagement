@@ -1,4 +1,4 @@
-﻿using Distributor.BAL;
+﻿using Distributor.BusinessLogic;
 using Distributor.DAL;
 using NewExpert.Helpers;
 using System;

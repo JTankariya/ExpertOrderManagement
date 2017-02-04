@@ -1,8 +1,8 @@
-﻿@model BAL.ClientMaster
+﻿@model Distributor.BusinessLogic.ClientMaster
 @{
     ViewBag.Title = "Add Client";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
-    var currUser = (BAL.User)Session["User"];
+    var currUser = (Distributor.BusinessLogic.User)Session["User"];
 }
 <input type="hidden" id="txtUserType" value="@currUser.UserType" />
 <input type="hidden" id="txtUserPrice" value="@System.Configuration.ConfigurationManager.AppSettings["UserPrice"]" />
@@ -161,7 +161,7 @@
                 </div>
                 <div class="frame" id="menuallocation">
                     @{
-                        var Menus = ((IEnumerable<BAL.ClientMenuMaster>)ViewBag.ClientMenuList);
+                        var Menus = ((IEnumerable<Distributor.BusinessLogic.ClientMenuMaster>)ViewBag.ClientMenuList);
                     }
                     @if (Menus != null)
                     {

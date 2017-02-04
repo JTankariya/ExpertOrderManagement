@@ -61,5 +61,10 @@ namespace ExpertOrderManagement.Controllers
         {
             return View(ProductGroupHelper.GetAll());
         }
+
+        public JsonResult Delete(string ID)
+        {
+            return Json(ProductGroupHelper.GetByRefId(ID).Manager.Delete(), JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Distributor.BAL
+namespace Distributor.BusinessLogic
 {
     public class RechargeTransaction
     {

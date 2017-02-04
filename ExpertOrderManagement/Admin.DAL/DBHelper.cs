@@ -19,7 +19,7 @@ namespace Admin.DAL
             using (SqlConnection conn = new SqlConnection(cs))
             {
 
-                SqlCommand cmd = new SqlCommand(Query, conn);
+                SqlCommand cmd = new SqlCommand(IsStoredProcedure ? "[" + Query + "]" : Query, conn);
 
                 try
                 {
@@ -80,7 +80,7 @@ namespace Admin.DAL
                 DataSet ds = new DataSet();
                 try
                 {
-                    SqlCommand cmd = new SqlCommand(Query, conn);
+                    SqlCommand cmd = new SqlCommand(IsStoredProcedure ? "[" + Query + "]" : Query, conn);
                     if (parameters != null)
                     {
                         foreach (KeyValuePair<string, object> kvp in parameters)

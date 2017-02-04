@@ -43,14 +43,14 @@ namespace Admin.BusinessLogic
             {
                 param.Add("@PWord", DBNull.Value);
             }
-            int result = DBHelper.ExecuteNonQuery("SaveOrderAdminMaster", param, true);
+            int result = DBHelper.ExecuteNonQuery("Order.SaveAdminMaster", param, true);
 
             return 1;
         }
 
         public static IEnumerable<AdminMaster> GetAllAdminMaster()
         {
-            DataTable dt = DBHelper.GetDataTable("GetAllOrderAdminMaster", null, true);
+            DataTable dt = DBHelper.GetDataTable("Order.GetAllAdminMaster", null, true);
 
             if (dt != null && dt.Rows.Count > 0)
                 return DBHelper.ConvertToEnumerable<AdminMaster>(dt);
@@ -62,7 +62,7 @@ namespace Admin.BusinessLogic
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@ID", ID);
-            DataTable dt = DBHelper.GetDataTable("GetOrderAdminByID", param, true);
+            DataTable dt = DBHelper.GetDataTable("Order.GetAdminByID", param, true);
             if (dt != null && dt.Rows.Count > 0)
             {
                 var user = DBHelper.ConvertToEnumerable<AdminMaster>(dt).FirstOrDefault();
@@ -77,7 +77,7 @@ namespace Admin.BusinessLogic
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@ID", ID);
-            return DBHelper.ExecuteNonQuery("DeleteOrderAdminByID", param, true);
+            return DBHelper.ExecuteNonQuery("Order.DeleteAdminByID", param, true);
         }
     }
 }

@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-4 control-label">Product Group Type</label>
+                        <label for="inputEmail3" class="col-sm-4 control-label">Parent</label>
                         <div class="col-sm-7">
                             @if (ViewBag.ProductGroups != null)
                             {
@@ -150,7 +150,7 @@
 
         });
         $('#btnDelete').click(function () {
-            if ($('#ID').val() == "0") {
+            if ($('#RefId').val() == "00000000-0000-0000-0000-000000000000") {
                 swal("Please select any record First!", "In order to delete emplyee, You need to select an ProductGroup first.")
             }
             else {
@@ -169,11 +169,14 @@
                         $.ajax({
                             type: "GET",
                             url: "@Url.Action("Delete","ProductGroup")",
-                            data: { ID: $('#ID').val() },
+                            data: { ID: $('#RefId').val() },
                             success: function (response) {
                                 if (response.IsSuccess == true) {
-                                    swal("Deleted!", "Product Group is deleted Successfully.", "success");
-                                    setTimeout(5000, function () {
+                                    swal({
+                                        title: "Deleted!",
+                                        text: "Product Group is deleted Successfully.",
+                                        type: "success"
+                                    }, function () {
                                         $('#btnAdd')[0].click();
                                     });
                                 }

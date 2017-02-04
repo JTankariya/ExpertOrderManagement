@@ -6,8 +6,7 @@ using System.Text;
 
 namespace BusinessLogic
 {
-    public interface IUserManager
+    public interface IUserManager : IGenericCRUD
     {
-        ResponseMsg Save();
     }
 }

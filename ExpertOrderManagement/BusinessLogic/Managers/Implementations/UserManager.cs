@@ -19,8 +19,14 @@ namespace BusinessLogic
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@ID", _context.ID);
-            DBHelper.ExecuteNonQuery("SaveClient", param, true);
+            DBHelper.ExecuteNonQuery("Order.SaveClient", param, true);
             return new ResponseMsg() { IsSuccess = true };
+        }
+
+
+        public ResponseMsg Delete()
+        {
+            throw new NotImplementedException();
         }
     }
 }

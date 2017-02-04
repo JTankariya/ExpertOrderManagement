@@ -52,7 +52,7 @@
                     <tbody>
                         @if (ViewBag.UserMenus != null)
                         {
-                            foreach (BAL.SubMenuViewModel usermenu in ViewBag.UserMenus)
+                            foreach (Distributor.BusinessLogic.SubMenuViewModel usermenu in ViewBag.UserMenus)
                             {
                                 <tr data-clientmenuid="@usermenu.ClientMenuID">
                                     <td>
@@ -91,7 +91,7 @@
                     <tbody>
                         @if (ViewBag.ChildMenus != null)
                         {
-                            foreach (BAL.ChildMenuMaster childmenu in ViewBag.ChildMenus)
+                            foreach (Distributor.BusinessLogic.ChildMenuMaster childmenu in ViewBag.ChildMenus)
                             {
                                 <tr data-childmenuid="@childmenu.ChildMenuID">
                                     <td><input type="checkbox" name="chkChildMenus" /></td>
@@ -144,7 +144,7 @@
                         @if (ViewBag.SubMenus != null)
                         {
                             int i = 1;
-                            foreach (BAL.SubMenuViewModel submenu in ViewBag.SubMenus)
+                            foreach (Distributor.BusinessLogic.SubMenuViewModel submenu in ViewBag.SubMenus)
                             {
                                 <tr data-detailclientmenuid="@submenu.ClientMenuID" data-detailchildmenuid="@submenu.ChildMenuID">
                                     <td>

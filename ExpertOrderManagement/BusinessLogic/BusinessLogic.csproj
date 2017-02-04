@@ -56,6 +56,7 @@
     <Compile Include="Managers\Implementations\ProductManager.cs" />
     <Compile Include="Managers\Implementations\UserHelper.cs" />
     <Compile Include="Managers\Implementations\UserManager.cs" />
+    <Compile Include="Managers\Skeleton\IGenericCRUD.cs" />
     <Compile Include="Managers\Skeleton\IManagerFactory.cs" />
     <Compile Include="Managers\Skeleton\IHelper.cs" />
     <Compile Include="Managers\Skeleton\IProductGroupHelper.cs" />

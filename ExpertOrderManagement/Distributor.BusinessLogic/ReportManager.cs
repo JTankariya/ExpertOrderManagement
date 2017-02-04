@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Distributor.BAL
+namespace Distributor.BusinessLogic
 {
     public class ReportManager
     {

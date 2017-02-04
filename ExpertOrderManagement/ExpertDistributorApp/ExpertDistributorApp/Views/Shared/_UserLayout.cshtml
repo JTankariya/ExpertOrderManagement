@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 @{
-    var CurrentUser = (BAL.User)Session["User"];
+    var CurrentUser = (Distributor.BusinessLogic.User)Session["User"];
 }
 <html>
 <head>
@@ -28,14 +28,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="@Url.Action("Index","Dashboard")">@(CurrentUser != null && CurrentUser.UserType == BAL.UserTypes.ADMIN ? "Admin" : (CurrentUser.UserType == BAL.UserTypes.CLIENT ? "User" : "Distributor"))</a>
+                <a class="navbar-brand" href="@Url.Action("Index","Dashboard")">@(CurrentUser != null && CurrentUser.UserType == Distributor.BusinessLogic.UserTypes.ADMIN ? "Admin" : (CurrentUser.UserType == Distributor.BusinessLogic.UserTypes.CLIENT ? "User" : "Distributor"))</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master </a>
                         <ul class="dropdown-menu">
-                            @if (CurrentUser.UserType == BAL.UserTypes.ADMIN)
+                            @if (CurrentUser.UserType == Distributor.BusinessLogic.UserTypes.ADMIN)
                             {
                                 <li><a href="@Url.Action("AdminMaster","Dashboard")">Admin User Master</a></li>
                                 <li><a href="@Url.Action("GetMenuMaster", "Dashboard", new { ID = 0 })">Menu Master</a></li>
@@ -48,7 +48,7 @@
                                 <li><a href="@Url.Action("DistributorRecharge","Dashboard")">Distributor Recharge Master</a></li>
                                 <li><a href="@Url.Action("RemoveClient", "Dashboard")">Remove Client</a></li>
                             }
-                            @if (CurrentUser.UserType == BAL.UserTypes.CLIENT)
+                            @if (CurrentUser.UserType == Distributor.BusinessLogic.UserTypes.CLIENT)
                             {
                                 <li><a href="#">Company Setup Master</a></li>
                                 <li><a href="#">User Creation Master</a></li>
@@ -59,7 +59,7 @@
                                 <li><a href="#">User-Submenu-Allocation Master</a></li>
                                 <li><a href="#">User-Dashboard-Allocation Master</a></li>
                             }
-                            @if (CurrentUser.UserType == BAL.UserTypes.DISTRIBUTOR)
+                            @if (CurrentUser.UserType == Distributor.BusinessLogic.UserTypes.DISTRIBUTOR)
                             {
                                 <li><a href="@Url.Action("AddClient", "Dashboard", new { ID=0})">Client Master with Menu Allocation</a></li>
                                 <li><a href="@Url.Action("GetSubMenuMaster", "Dashboard")">Client Submenu Master</a></li>
@@ -72,13 +72,13 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports </a>
                         <ul class="dropdown-menu">
-                            @if (CurrentUser.UserType == BAL.UserTypes.ADMIN)
+                            @if (CurrentUser.UserType == Distributor.BusinessLogic.UserTypes.ADMIN)
                             {
                                 <li><a href="#" onclick="DistributorBalance()">Distributor Balance Report</a></li>
                                 <li><a href="@Url.Action("DistributorRechargeInformationReport", "Dashboard")">Distributor Recharge Information Report</a></li>
                                 <li><a href="@Url.Action("ClientDataUploadReport", "Dashboard")">Client Data Upload Report</a></li>
                             }
-                            @if (CurrentUser.UserType == BAL.UserTypes.DISTRIBUTOR)
+                            @if (CurrentUser.UserType == Distributor.BusinessLogic.UserTypes.DISTRIBUTOR)
                             {
                                 <li><a href="@Url.Action("RechargeHistory", "Dashboard")">Recharge History</a></li>
                             }
@@ -98,9 +98,9 @@
                             <li><a href="@Url.Action("LogOut","Account")">LogOut</a></li>
                         </ul>
                     </li>
-                    @if (CurrentUser.UserType == BAL.UserTypes.DISTRIBUTOR)
+                    @if (CurrentUser.UserType == Distributor.BusinessLogic.UserTypes.DISTRIBUTOR)
                     {
-                        <li><a href="#" style="font-style: italic; font-weight: bold; font-size: 1.5em;">Balance : @(BAL.User.GetDistributorBalance(CurrentUser.Id))</a></li>
+                        <li><a href="#" style="font-style: italic; font-weight: bold; font-size: 1.5em;">Balance : @(Distributor.BusinessLogic.User.GetDistributorBalance(CurrentUser.Id))</a></li>
                     }
                 </ul>
             </div><!--/.nav-collapse -->

@@ -35,11 +35,11 @@
                                     <div class="col-sm-7">
                                         @if (ViewBag.GroupList != null)
                                         {
-                                            @Html.DropDownListFor(x => x.Group, new SelectList(ViewBag.GroupList, "Code", "Name"), "-- Select --", new { @class = "form-control", @placeholder = "Product Type" })
+                                            @Html.DropDownListFor(x => x.Group, new SelectList(ViewBag.GroupList, "Code", "Name"), "-- Select --", new { @class = "form-control" })
                                         }
                                         else
                                         {
-                                            @Html.DropDownListFor(x => x.Group, new List<SelectListItem>(), new { @class = "form-control", @placeholder = "Product Type" })
+                                            @Html.DropDownListFor(x => x.Group, new List<SelectListItem>(), new { @class = "form-control"})
                                         }
                                     </div>
                                 </div>
@@ -49,7 +49,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Description</label>
                                 <div class="col-sm-7">
-                                    @Html.TextAreaFor(x => x.Desc, new { @class = "form-control", @placeholder = "Category 1", @rows = "3" })
+                                    @Html.TextAreaFor(x => x.Desc, new { @class = "form-control", @placeholder = "Description", @rows = "3" })
                                 </div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Unit</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Unit1, new { @class = "form-control", @placeholder = "Category 2" })
+                                    @Html.TextBoxFor(x => x.Unit1, new { @class = "form-control", @placeholder = "Unit" })
                                 </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Opening Qty</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Op_Qty, new { @class = "form-control", @placeholder = "Category 3" })
+                                    @Html.TextBoxFor(x => x.Op_Qty, new { @class = "form-control", @placeholder = "Opening Qty" })
                                 </div>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Opening Rate</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Op_Rate, new { @class = "form-control", @placeholder = "Category 3" })
+                                    @Html.TextBoxFor(x => x.Op_Rate, new { @class = "form-control", @placeholder = "Opening Rate" })
                                 </div>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Opening Value</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Op_Value, new { @class = "form-control", @placeholder = "Category 3" })
+                                    @Html.TextBoxFor(x => x.Op_Value, new { @class = "form-control", @placeholder = "Opening Value" })
                                 </div>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Service Item</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Service, new { @class = "form-control", @placeholder = "Category 3" })
+                                    @Html.TextBoxFor(x => x.Service, new { @class = "form-control", @placeholder = "Service Item" })
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Unit 2</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Unit2, new { @class = "form-control", @placeholder = "Category 3" })
+                                    @Html.TextBoxFor(x => x.Unit2, new { @class = "form-control", @placeholder = "Unit 2" })
                                 </div>
                             </div>
                         </div>
@@ -114,7 +114,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Unit 3</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Unit3, new { @class = "form-control", @placeholder = "Category 3" })
+                                    @Html.TextBoxFor(x => x.Unit3, new { @class = "form-control", @placeholder = "Unit 3" })
                                 </div>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Unit 4</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Unit4, new { @class = "form-control", @placeholder = "Category 3" })
+                                    @Html.TextBoxFor(x => x.Unit4, new { @class = "form-control", @placeholder = "Unit 4" })
                                 </div>
                             </div>
                         </div>
@@ -132,7 +132,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Unit 5</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Unit5, new { @class = "form-control", @placeholder = "Category 3" })
+                                    @Html.TextBoxFor(x => x.Unit5, new { @class = "form-control", @placeholder = "Unit 5" })
                                 </div>
                             </div>
                         </div>
@@ -140,7 +140,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Unit 6</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Unit6, new { @class = "form-control", @placeholder = "Category 3" })
+                                    @Html.TextBoxFor(x => x.Unit6, new { @class = "form-control", @placeholder = "Unit 6" })
                                 </div>
                             </div>
                         </div>
@@ -150,7 +150,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Sales Rate</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Sl_Rate, new { @class = "form-control", @placeholder = "Category 3" })
+                                    @Html.TextBoxFor(x => x.Sl_Rate, new { @class = "form-control", @placeholder = "Sales Rate" })
                                 </div>
                             </div>
                         </div>
@@ -158,7 +158,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Purchase Rate</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Pu_Rate, new { @class = "form-control", @placeholder = "Category 3" })
+                                    @Html.TextBoxFor(x => x.Pu_Rate, new { @class = "form-control", @placeholder = "Purchase Rate" })
                                 </div>
                             </div>
                         </div>
@@ -168,7 +168,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Max Qty</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.MaxLevel, new { @class = "form-control", @placeholder = "Category 3" })
+                                    @Html.TextBoxFor(x => x.MaxLevel, new { @class = "form-control", @placeholder = "Max Qty" })
                                 </div>
                             </div>
                         </div>
@@ -176,7 +176,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Min Qty</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.MinLevel, new { @class = "form-control", @placeholder = "Category 3" })
+                                    @Html.TextBoxFor(x => x.MinLevel, new { @class = "form-control", @placeholder = "Min Qty" })
                                 </div>
                             </div>
                         </div>
@@ -186,7 +186,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Reorder Qty</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.ReOrder, new { @class = "form-control", @placeholder = "Category 3" })
+                                    @Html.TextBoxFor(x => x.ReOrder, new { @class = "form-control", @placeholder = "Reorder Qty" })
                                 </div>
                             </div>
                         </div>
@@ -194,7 +194,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Packing Qty</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.PackingQty, new { @class = "form-control", @placeholder = "Category 3" })
+                                    @Html.TextBoxFor(x => x.PackingQty, new { @class = "form-control", @placeholder = "Packing Qty" })
                                 </div>
                             </div>
                         </div>
@@ -204,7 +204,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Category 1</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Category1, new { @class = "form-control", @placeholder = "Category 3" })
+                                    @Html.TextBoxFor(x => x.Category1, new { @class = "form-control", @placeholder = "Category 1" })
                                 </div>
                             </div>
                         </div>
@@ -212,7 +212,7 @@
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Category 2</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Category2, new { @class = "form-control", @placeholder = "Category 3" })
+                                    @Html.TextBoxFor(x => x.Category2, new { @class = "form-control", @placeholder = "Category 2" })
                                 </div>
                             </div>
                         </div>
@@ -220,7 +220,7 @@
                     <div class="form-group">
                         <label for="hori-pass1" class="col-sm-4 control-label">MRP</label>
                         <div class="col-sm-7">
-                            @Html.TextBoxFor(x => x.Valuation, new { @class = "form-control", @placeholder = "Category 3" })
+                            @Html.TextBoxFor(x => x.Valuation, new { @class = "form-control", @placeholder = "MRP" })
                         </div>
                     </div>
                     <div class="form-group">

@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminMaster.cs" />
-    <Compile Include="ChildMenuMaster.cs" />
     <Compile Include="Cipher.cs" />
     <Compile Include="ClientMaster.cs" />
     <Compile Include="ExceptionLogger.cs" />

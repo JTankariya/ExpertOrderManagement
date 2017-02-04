@@ -17,18 +17,14 @@ namespace BusinessLogic
         /// </returns>
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable)
         {
-            if (enumerable == null)
+            if (enumerable == null || enumerable.Count() == 0)
             {
                 return true;
             }
-            /* If this is a list, use the Count property. 
-             * The Count property is O(1) while IEnumerable.Count() is O(N). */
-            var collection = enumerable as ICollection<T>;
-            if (collection != null)
+            else
             {
-                return collection.Count < 1;
+                return false;
             }
-            return enumerable.Any();
         }
 
         /// <summary>

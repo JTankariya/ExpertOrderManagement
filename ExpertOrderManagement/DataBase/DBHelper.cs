@@ -23,7 +23,7 @@ namespace DataBase
             using (SqlConnection conn = new SqlConnection(cs))
             {
 
-                SqlCommand cmd = new SqlCommand(Query, conn);
+                SqlCommand cmd = new SqlCommand(IsStoredProcedure ? "[" + Query + "]" : Query, conn);
 
                 if (parameters != null)
                 {
@@ -86,7 +86,7 @@ namespace DataBase
                     conn.Open();
                 DataSet ds = new DataSet();
 
-                SqlCommand cmd = new SqlCommand(Query, conn);
+                SqlCommand cmd = new SqlCommand(IsStoredProcedure ? "[" + Query + "]" : Query, conn);
                 if (parameters != null)
                 {
                     foreach (KeyValuePair<string, object> kvp in parameters)
@@ -212,7 +212,7 @@ namespace DataBase
                     conn.Open();
                 DataSet ds = new DataSet();
 
-                SqlCommand cmd = new SqlCommand(Query, conn);
+                SqlCommand cmd = new SqlCommand(IsStoredProcedure ? "[" + Query + "]" : Query, conn);
                 if (parameters != null)
                 {
                     foreach (KeyValuePair<string, object> kvp in parameters)

@@ -28,10 +28,16 @@ namespace BusinessLogic
             param.Add("@VatName", _context.VatName);
             param.Add("@P_Type", _context.P_Type);
             param.Add("@Tag", _context.Tag);
-            DBHelper.ExecuteNonQuery("SaveProductGroup", param, true);
+            param.Add("@OperationFlag", _context.OperationFlag);
+            DBHelper.ExecuteNonQuery("Order.SaveProductGroup", param, true);
             return new ResponseMsg() { IsSuccess = true };
         }
-
-
+        public ResponseMsg Delete()
+        {
+            Dictionary<string, object> param = new Dictionary<string, object>();
+            param.Add("@RefId", _context.RefId);
+            DBHelper.ExecuteNonQuery("Order.DeleteProductGroup", param, true);
+            return new ResponseMsg() { IsSuccess = true };
+        }
     }
 }

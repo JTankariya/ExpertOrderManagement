@@ -1,5 +1,5 @@
 ﻿using CommonLibraries;
-using Distributor.BAL;
+using Distributor.BusinessLogic;
 using Distributor.DAL;
 using NewExpert.Helpers;
 using System;
@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace NewExpert.Controllers
 {
-     [AuthorizeWebForm]
+    [AuthorizeWebForm]
     public class DashboardController : Controller
     {
         //
@@ -25,7 +25,7 @@ namespace NewExpert.Controllers
 
         public ActionResult ChangePassword()
         {
-            var CurrentUser = (Distributor.BAL.User)Session["User"];
+            var CurrentUser = (Distributor.BusinessLogic.User)Session["User"];
             //var user = new User();
             //if (CurrentUser != null)
             //{
@@ -37,9 +37,9 @@ namespace NewExpert.Controllers
 
 
         [HttpPost]
-        public ActionResult ChangePassword(Distributor.BAL.User model)
+        public ActionResult ChangePassword(Distributor.BusinessLogic.User model)
         {
-            var CurrentUser = (Distributor.BAL.User)Session["User"];
+            var CurrentUser = (Distributor.BusinessLogic.User)Session["User"];
             ModelState.Clear();
             if (string.IsNullOrEmpty(model.Password))
             {
@@ -52,7 +52,7 @@ namespace NewExpert.Controllers
                 {
                     ModelState.AddModelError("", "Password has been changed successfully.");
                     model.OldPassword = "";
-                    ((Distributor.BAL.User)Session["User"]).Password = StringCipher.Encrypt(model.Password);
+                    ((Distributor.BusinessLogic.User)Session["User"]).Password = StringCipher.Encrypt(model.Password);
                 }
             }
             else
@@ -71,7 +71,7 @@ namespace NewExpert.Controllers
         {
             if (!string.IsNullOrEmpty(ID) && Convert.ToInt32(ID) > 0)
             {
-                var admin = Distributor.BAL.AdminMaster.GetAdminByID(ID);
+                var admin = Distributor.BusinessLogic.AdminMaster.GetAdminByID(ID);
                 return View(admin);
             }
             else
@@ -83,7 +83,7 @@ namespace NewExpert.Controllers
 
         [ValidateOnlyIncomingValues]
         [HttpPost]
-        public ActionResult AdminMaster(AdminMaster model)
+        public ActionResult AdminMaster(Distributor.BusinessLogic.AdminMaster model)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +108,7 @@ namespace NewExpert.Controllers
         {
             if (ID > 0)
             {
-                if (Distributor.BAL.AdminMaster.Delete(ID) > 0)
+                if (Distributor.BusinessLogic.AdminMaster.Delete(ID) > 0)
                 {
                     ModelState.AddModelError("", "Admin Deleted Successfully.");
                 }
@@ -124,8 +124,8 @@ namespace NewExpert.Controllers
 
         public ActionResult GetAdminList()
         {
-            var currUser = (Distributor.BAL.User)Session["User"];
-            var admins = Distributor.BAL.AdminMaster.GetAllAdminMaster().Where(x => x.ID != currUser.Id);
+            var currUser = (Distributor.BusinessLogic.User)Session["User"];
+            var admins = Distributor.BusinessLogic.AdminMaster.GetAllAdminMaster().Where(x => x.ID != currUser.Id);
             return View(admins);
         }
 
@@ -135,7 +135,7 @@ namespace NewExpert.Controllers
 
         public ActionResult UpdateProfile()
         {
-            var currUser = (Distributor.BAL.User)Session["User"];
+            var currUser = (Distributor.BusinessLogic.User)Session["User"];
             return View(currUser);
         }
 
@@ -143,7 +143,7 @@ namespace NewExpert.Controllers
         [HttpPost]
         public ActionResult UpdateProfile(User model)
         {
-            var currUser = (Distributor.BAL.User)Session["User"];
+            var currUser = (Distributor.BusinessLogic.User)Session["User"];
             if (ModelState.IsValid)
             {
                 model.UserType = currUser.UserType;
@@ -171,8 +171,8 @@ namespace NewExpert.Controllers
 
         public ActionResult GetDistributorList()
         {
-            var currUser = (Distributor.BAL.User)Session["User"];
-            var distributors = Distributor.BAL.User.GetAllDistributors();
+            var currUser = (Distributor.BusinessLogic.User)Session["User"];
+            var distributors = Distributor.BusinessLogic.User.GetAllDistributors();
             return View(distributors);
         }
 
@@ -180,7 +180,7 @@ namespace NewExpert.Controllers
         {
             if (ID > 0)
             {
-                if (Distributor.BAL.User.Delete(ID, "DISTRIBUTOR") > 0)
+                if (Distributor.BusinessLogic.User.Delete(ID, "DISTRIBUTOR") > 0)
                 {
                     ModelState.AddModelError("", "Distributor Deleted Successfully.");
                 }
@@ -200,7 +200,7 @@ namespace NewExpert.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.AdminID = ((Distributor.BAL.User)Session["User"]).Id;
+                model.AdminID = ((Distributor.BusinessLogic.User)Session["User"]).Id;
                 if (model.Save() > 0)
                 {
                     ModelState.AddModelError("", "Distributor is saved successfully.");
@@ -222,7 +222,7 @@ namespace NewExpert.Controllers
         {
             if (!string.IsNullOrEmpty(ID) && Convert.ToInt32(ID) > 0)
             {
-                var user = Distributor.BAL.User.GetDistributorByID(ID);
+                var user = Distributor.BusinessLogic.User.GetDistributorByID(ID);
                 return View(user);
             }
             else
@@ -236,7 +236,7 @@ namespace NewExpert.Controllers
         public ActionResult DistributorRecharge()
         {
             var recharge = new RechargeTransaction();
-            var allUsers = Distributor.BAL.User.GetAllDistributors();
+            var allUsers = Distributor.BusinessLogic.User.GetAllDistributors();
             if (allUsers != null)
             {
                 ViewBag.DistributorList = allUsers.Select(x => new SelectListItem() { Text = x.FirstName + " " + x.LastName, Value = Convert.ToString(x.Id) }).ToList();
@@ -254,10 +254,10 @@ namespace NewExpert.Controllers
         {
             if (ModelState.IsValid)
             {
-                var currUser = (Distributor.BAL.User)Session["User"];
+                var currUser = (Distributor.BusinessLogic.User)Session["User"];
                 model.CreatedBy = currUser.Id;
                 model.ClientId = 0;
-                ViewBag.DistributorList = Distributor.BAL.User.GetAllDistributors().Select(x => new SelectListItem() { Text = x.FirstName + " " + x.LastName, Value = Convert.ToString(x.Id) }).ToList();
+                ViewBag.DistributorList = Distributor.BusinessLogic.User.GetAllDistributors().Select(x => new SelectListItem() { Text = x.FirstName + " " + x.LastName, Value = Convert.ToString(x.Id) }).ToList();
                 if (model.Save() > 0)
                 {
                     ModelState.AddModelError("", "Recharge Transaction has been recorded successfully.");
@@ -299,7 +299,7 @@ namespace NewExpert.Controllers
 
         public ActionResult GetClientList()
         {
-            var currUser = (Distributor.BAL.User)Session["User"];
+            var currUser = (Distributor.BusinessLogic.User)Session["User"];
             if (currUser.UserType == "ADMIN")
             {
                 return View(ClientMaster.GetAllClients());
@@ -316,7 +316,7 @@ namespace NewExpert.Controllers
             JsonResponse response = new JsonResponse();
             if (ModelState.IsValid)
             {
-                var currUser = (Distributor.BAL.User)Session["User"];
+                var currUser = (Distributor.BusinessLogic.User)Session["User"];
                 if (currUser.UserType == "ADMIN")
                 {
                     clientData.CreatedAdminID = currUser.Id;
@@ -510,7 +510,7 @@ namespace NewExpert.Controllers
         #region SUB MENU MASTER
         public ActionResult GetSubMenuMaster()
         {
-            var CurrentUser = (Distributor.BAL.User)Session["User"];
+            var CurrentUser = (Distributor.BusinessLogic.User)Session["User"];
             ViewBag.ChildMenus = ChildMenuMaster.GetChildMenusByMenuId(0);
             ViewBag.UserMenus = SubMenuViewModel.GetClientMenuMaster(CurrentUser.Id);
             ViewBag.SubMenus = SubMenuViewModel.GetSubMenuDetail(CurrentUser.Id);
@@ -527,7 +527,7 @@ namespace NewExpert.Controllers
         [HttpPost]
         public ActionResult DeleteSubMenuOfClient(int DetailClientMenuId, int DetailChildMenuId)
         {
-            var CurrentUser = (Distributor.BAL.User)Session["User"];
+            var CurrentUser = (Distributor.BusinessLogic.User)Session["User"];
             SubMenuViewModel.DeleteSubMenuForClient(DetailChildMenuId, DetailClientMenuId, CurrentUser.Id);
             return Json("SUCCESS");
         }
@@ -536,7 +536,7 @@ namespace NewExpert.Controllers
         #region DASHBOARD MASTER
         public ActionResult GetDashboard()
         {
-            var CurrentUser = (Distributor.BAL.User)Session["User"];
+            var CurrentUser = (Distributor.BusinessLogic.User)Session["User"];
             ViewBag.UserMenus = SubMenuViewModel.GetClientMenuMaster(CurrentUser.Id);
             ViewBag.DashboardMenus = DashboardMaster.GetDashboardMenuMaster();
             ViewBag.DashMenus = DashboardMaster.GetDashboardMenus(CurrentUser.Id);
@@ -553,7 +553,7 @@ namespace NewExpert.Controllers
         [HttpPost]
         public ActionResult DeleteDashboardMenuOfClient(int DetailClientMenuId, int DetailDashboardId)
         {
-            var CurrentUser = (Distributor.BAL.User)Session["User"];
+            var CurrentUser = (Distributor.BusinessLogic.User)Session["User"];
             DashboardMaster.DeleteDashboardMenuOfClient(DetailClientMenuId, DetailDashboardId, CurrentUser.Id);
             return Json("SUCCESS");
         }
@@ -563,8 +563,8 @@ namespace NewExpert.Controllers
 
         public ActionResult DistributorBalanceReport()
         {
-            var CurrentUser = (Distributor.BAL.User)Session["User"];
-            var filename = Distributor.BAL.User.GenerateDistributorBalanceReport(CurrentUser);
+            var CurrentUser = (Distributor.BusinessLogic.User)Session["User"];
+            var filename = Distributor.BusinessLogic.User.GenerateDistributorBalanceReport(CurrentUser);
             return Json(new { IsSuccess = true, ResponseValue = filename }, JsonRequestBehavior.AllowGet);
         }
 
@@ -572,27 +572,31 @@ namespace NewExpert.Controllers
         {
             if (!FromDate.HasValue && !ToDate.HasValue)
             {
-                var users = Distributor.BAL.User.DistributorRechargeInformationReport(FromDate, ToDate);
+                var users = Distributor.BusinessLogic.User.DistributorRechargeInformationReport(FromDate, ToDate);
                 return View(users);
             }
             else
             {
-                var users = Distributor.BAL.User.DistributorRechargeInformationReport(FromDate, ToDate);
+                var users = Distributor.BusinessLogic.User.DistributorRechargeInformationReport(FromDate, ToDate);
                 return PartialView("DistributorRechargeRow", users);
             }
         }
 
         public ActionResult ClientDataUploadReport()
         {
-            var users = Distributor.BAL.User.DistributorRechargeInformationReport(null, null);
+            var users = Distributor.BusinessLogic.User.DistributorRechargeInformationReport(null, null);
             return View(users);
         }
 
         public ActionResult RechargeHistory()
         {
-            var CurrentUser = (Distributor.BAL.User)Session["User"];
-            var histories = RechargeTransaction.RechargeHistory(CurrentUser.Id).OrderBy(x => x.CreatedDate);
-            return View(histories);
+            var CurrentUser = (Distributor.BusinessLogic.User)Session["User"];
+            var history = RechargeTransaction.RechargeHistory(CurrentUser.Id);
+            if (history != null)
+            {
+                history = history.OrderBy(x => x.CreatedDate);
+            }
+            return View(history);
         }
 
         #endregion

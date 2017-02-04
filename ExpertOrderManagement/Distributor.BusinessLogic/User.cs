@@ -11,7 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 
-namespace Distributor.BAL
+namespace Distributor.BusinessLogic
 {
     public class User
     {

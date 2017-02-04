@@ -62,7 +62,7 @@ namespace Admin.BusinessLogic
             param.Add("@DistributorID", this.CreatedDistributorId);
             param.Add("@QueryRight", this.QueryRights);
 
-            DataTable dt = DBHelper.GetDataTable("SaveOrderClient", param, true);
+            DataTable dt = DBHelper.GetDataTable("Order.SaveClient", param, true);
 
             if (dt != null && dt.Rows.Count > 0)
                 return Convert.ToInt32(dt.Rows[0][0]);
@@ -72,7 +72,7 @@ namespace Admin.BusinessLogic
 
         public static IEnumerable<ClientMaster> GetAllClients()
         {
-            DataTable dt = DBHelper.GetDataTable("GetAllOrderClientMaster", null, true);
+            DataTable dt = DBHelper.GetDataTable("Order.GetAllClientMaster", null, true);
 
             if (dt != null && dt.Rows.Count > 0)
                 return DBHelper.ConvertToEnumerable<ClientMaster>(dt);
@@ -84,7 +84,7 @@ namespace Admin.BusinessLogic
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@CID", ID);
-            int result = DBHelper.ExecuteNonQuery("DeleteOrderClient", param, true);
+            int result = DBHelper.ExecuteNonQuery("Order.DeleteClient", param, true);
             return 1;
         }
 
@@ -92,7 +92,7 @@ namespace Admin.BusinessLogic
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@CID", ClientId);
-            int result = DBHelper.ExecuteNonQuery("DeleteEntireOrderClient", param, true);
+            int result = DBHelper.ExecuteNonQuery("Order.DeleteEntireClient", param, true);
         }
     }
 
