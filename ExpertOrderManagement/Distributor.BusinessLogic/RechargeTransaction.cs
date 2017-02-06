@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Distributor.BusinessLogic
 {
+    [Serializable]
     public class RechargeTransaction
     {
         public int Id { get; set; }

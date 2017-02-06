@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Distributor.BusinessLogic
 {
+    [Serializable]
     public class DashboardMaster
     {
         public int DashboardID { get; set; }

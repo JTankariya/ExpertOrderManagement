@@ -8,6 +8,7 @@ using Distributor.DAL;
 
 namespace Distributor.BusinessLogic
 {
+    [Serializable]
     public class ExceptionLogger
     {
         private ExceptionParameters _exceptionParamaters;

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Distributor.BusinessLogic
 {
+    [Serializable]
     public class AdminMaster
     {
         public int ID { get; set; }

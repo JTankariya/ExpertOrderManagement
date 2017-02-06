@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Distributor.BusinessLogic
 {
+    [Serializable]
     public class UserTypes
     {
         public static string ADMIN = "ADMIN";

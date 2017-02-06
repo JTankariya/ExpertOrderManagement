@@ -11,6 +11,7 @@ using System.Web;
 
 namespace Distributor.BusinessLogic
 {
+    [Serializable]
     public class ReportManager
     {
         public static Font fontTitle17 = FontFactory.GetFont(FontFactory.TIMES_ROMAN, 17, Font.BOLD);

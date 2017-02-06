@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Distributor.BusinessLogic
 {
+    [Serializable]
     public class ClientMenuMaster
     {
         public int MenuId { get; set; }

@@ -13,6 +13,7 @@ using System.Web;
 
 namespace Distributor.BusinessLogic
 {
+    [Serializable]
     public class User
     {
 

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Distributor.BusinessLogic
 {
+    [Serializable]
     public class SubMenuViewModel
     {
         public int ClientMenuID { get; set; }

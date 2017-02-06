@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Distributor.BusinessLogic
 {
+    [Serializable]
     public class ClientMaster
     {
         public int ClientID { get; set; }
