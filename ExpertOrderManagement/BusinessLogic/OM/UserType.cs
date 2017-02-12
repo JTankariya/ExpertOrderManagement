@@ -5,8 +5,9 @@ using System.Text;
 
 namespace BusinessLogic
 {
-    public interface IUserHelper : IHelper<ClientUser>
+    public class UserType
     {
-        ClientUser GetByEmail(string Email);
+        public int Id { get; set; }
+        public string Title { get; set; }
     }
 }

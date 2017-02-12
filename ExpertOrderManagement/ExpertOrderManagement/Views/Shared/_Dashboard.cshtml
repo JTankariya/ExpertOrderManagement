@@ -46,10 +46,16 @@
                         <li class="has-submenu">
                             <a href="#"><i class="md md-color-lens"></i>Masters</a>
                             <ul class="submenu">
-                                <li><a href="@Url.Action("Add", "ProductGroup", new { ID=0})">Product Groups</a></li>
-                                <li><a href="@Url.Action("Add", "Rate", new { ID=0})">Rate</a></li>
-                                <li><a href="@Url.Action("Add", "Product", new { ID=0})">Products</a></li>
-                                <li><a href="@Url.Action("Add", "Party", new { ID=0})">Party</a></li>
+                                @if (((BusinessLogic.ClientUser)Session["User"]).UserTypeId == 1)
+                                {
+                                    <li><a href="@Url.Action("Add", "Client", new { ID=0})">Clients</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="@Url.Action("Add", "ProductGroup", new { ID=0})">Product Groups</a></li>
+                                    <li><a href="@Url.Action("Add", "Product", new { ID=0})">Products</a></li>
+                                    <li><a href="@Url.Action("Add", "Party", new { ID=0})">Party</a></li>
+                                }                                
                             </ul>
                         </li>
                         <li class="has-submenu">

@@ -16,17 +16,18 @@ namespace ExpertOrderManagement.Controllers
     {
         private IUserHelper _userHelper;
         private IProductGroupHelper _productGroupHelper;
+        private IClientHelper _clientHelper;
         private IProductHelper _productHelper;
         private ClientCompany _company;
         //
         // GET: /BaseController/
-        protected User currUser
+        protected ClientUser currUser
         {
             get
             {
                 if (Session["User"] != null)
                 {
-                    return (User)Session["User"];
+                    return (ClientUser)Session["User"];
                 }
                 else
                 {
@@ -47,7 +48,7 @@ namespace ExpertOrderManagement.Controllers
             {
                 if (_company == null)
                 {
-                    _company = new ClientCompany(currUser.ID);
+                    _company = new ClientCompany(currUser.Id);
                 }
                 return _company.ClientCompanyId;
             }
@@ -76,6 +77,18 @@ namespace ExpertOrderManagement.Controllers
                         .Create(TableNames.PRODUCTGROUP.ToString(), CompanyId);
                 }
                 return _productGroupHelper;
+            }
+        }
+        protected IClientHelper ClientHelper
+        {
+            get
+            {
+                if (_clientHelper == null)
+                {
+                    _clientHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, int, IClientHelper>>()
+                        .Create(TableNames.CLIENT.ToString(), CompanyId);
+                }
+                return _clientHelper;
             }
         }
 

@@ -18,21 +18,21 @@ namespace ExpertOrderManagement.Controllers
             var isRemember = Request.Cookies["ExpertOrderManagement"];
             if (isRemember != null)
             {
-                var client = new User(Convert.ToString(isRemember.Values["UName"]));
-                if (client.ID > 0)
+                var client = new ClientUser(Convert.ToString(isRemember.Values["UName"]));
+                if (client.Id > 0)
                 {
                     Session["User"] = client;
                     return RedirectToAction("Index", "Dashboard");
                 }
             }
-            return View(new User());
+            return View(new ClientUser());
         }
 
         [HttpPost]
-        public ActionResult Login(User employee)
+        public ActionResult Login(ClientUser employee)
         {
-            var client = new User(employee.UserName, employee.Password);
-            if (client.ID > 0)
+            var client = new ClientUser(employee.UserName, employee.Password);
+            if (client.Id > 0)
             {
                 if (Request.Form["IsRemember"] != null && Request.Form["IsRemember"].ToUpper() == "ON")
                 {
@@ -68,7 +68,7 @@ namespace ExpertOrderManagement.Controllers
 
                 if (existingUser != null)
                 {
-                    var body = "DEAR, <b><i>" + existingUser.Name + "</i></b><br><br>Your credentials for Mehul Industries system is as below :<br><br>User Name : <b>" + existingUser.UserName +
+                    var body = "DEAR, <b><i>" + (existingUser.FirstName + existingUser.LastName) + "</i></b><br><br>Your credentials for Mehul Industries system is as below :<br><br>User Name : <b>" + existingUser.UserName +
                        "</b><br>Password : <b>" + StringCipher.Decrypt(existingUser.Password) +
                        "</b><br><br>Please use above credentials to login into system.<br><br>Thanks & Regards,<br>Shah Infotech";
                     if (Mailer.SendMail(existingUser.EmailId, body, "Forget Password : Mehul Industries"))
@@ -103,14 +103,14 @@ namespace ExpertOrderManagement.Controllers
 
         [AuthorizeWebForm]
         [HttpPost]
-        public ActionResult UpdateProfile(User employee)
+        public ActionResult UpdateProfile(ClientUser employee)
         {
 
             ResponseMsg response = new ResponseMsg();
             employee.Password = StringCipher.Decrypt(currUser.Password);
-            employee.Type = currUser.Type;
+            employee.UserTypeId = currUser.UserTypeId;
             employee.Manager.Save();
-            Session["User"] = new User(currUser.ID);
+            Session["User"] = new ClientUser(currUser.Id);
             response.IsSuccess = true;
             return Json(response);
         }
@@ -128,7 +128,7 @@ namespace ExpertOrderManagement.Controllers
             ResponseMsg response = new ResponseMsg();
             currUser.Password = Password;
             currUser.Manager.Save();
-            Session["User"] = UserHelper.GetById(currUser.ID);
+            Session["User"] = UserHelper.GetById(currUser.Id);
             response.IsSuccess = true;
             return Json(response);
         }

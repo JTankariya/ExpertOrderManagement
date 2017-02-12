@@ -10,15 +10,15 @@ namespace BusinessLogic
 {
     public class UserManager : IUserManager
     {
-        private User _context;
-        public UserManager(User context)
+        private ClientUser _context;
+        public UserManager(ClientUser context)
         {
             _context = context;
         }
         public ResponseMsg Save()
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
-            param.Add("@ID", _context.ID);
+            param.Add("@ID", _context.Id);
             DBHelper.ExecuteNonQuery("Order.SaveClient", param, true);
             return new ResponseMsg() { IsSuccess = true };
         }

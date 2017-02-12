@@ -6,16 +6,16 @@ using System.Text;
 
 namespace BusinessLogic
 {
-    public class UserHelper : Helper<User>, IUserHelper
+    public class UserHelper : Helper<ClientUser>, IUserHelper
     {
         public UserHelper(string tName,int copmanyId)
             : base(tName, copmanyId)
         { 
         
         }
-        public User GetByEmail(string Email)
+        public ClientUser GetByEmail(string Email)
         {
-            return DBHelper.ConvertToEnumerable<User>("select * from " + base._tableName + " where Email='" + Email + "'").FirstOrDefault();
+            return DBHelper.ConvertToEnumerable<ClientUser>("select * from " + base._tableName + " where Email='" + Email + "'").FirstOrDefault();
         }
     }
 }

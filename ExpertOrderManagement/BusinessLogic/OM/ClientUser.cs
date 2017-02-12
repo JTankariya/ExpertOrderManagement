@@ -9,46 +9,64 @@ using Ninject;
 namespace BusinessLogic
 {
     [Serializable]
-    public class User
+    public class ClientUser
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string EmailId { get; set; }
+        private UserType _type;
+        public int Id { get; set; }
+        public int Clientid { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string MobileNo { get; set; }
-        public string UserName { get; set; }
         public string Password { get; set; }
-        public string Type { get; set; }
-        public string PhotoPath { get; set; }
-        public string UserType { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime AccountExpiredOn { get; set; }
+        public string DeviceId { get; set; }
+        public string AuthorisedCode { get; set; }
+        public bool IsVerified { get; set; }
+        public int UserTypeId { get; set; }
+        public string EmailId { get; set; }
+        public string UserName { get; set; }
+
+        public UserType UserType
+        {
+            get
+            {
+                if (_type == null)
+                {
+                    _type = Helpers.UserTypeHelper.GetById(UserTypeId);
+                }
+                return _type;
+            }
+        }
 
         public enum FIELDNAMES
         {
             ID = 1,
             USERNAME = 3,
             PASSWORD = 4,
-            USERTYPE=5
+            USERTYPEID = 5
         }
 
-        public User()
+        public ClientUser()
         {
 
         }
 
-        public User(string UserName)
+        public ClientUser(string UserName)
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@UserName", UserName);
             DataTable dt = DBHelper.GetDataTable("Order.GetUser", param, true);
             if (dt != null && dt.Rows.Count > 0)
             {
-                this.ID = Convert.ToInt32(Convert.ToString(dt.Rows[0][FIELDNAMES.ID.ToString()]));
+                this.Id = Convert.ToInt32(Convert.ToString(dt.Rows[0][FIELDNAMES.ID.ToString()]));
                 this.UserName = Convert.ToString(dt.Rows[0][FIELDNAMES.USERNAME.ToString()]);
                 this.Password = Convert.ToString(dt.Rows[0][FIELDNAMES.PASSWORD.ToString()]);
-                UserType = Convert.ToString(dt.Rows[0][FIELDNAMES.USERTYPE.ToString()]);
+                UserTypeId = Convert.ToInt32(dt.Rows[0][FIELDNAMES.USERTYPEID.ToString()]);
             }
         }
 
-        public User(string UserName, string Password)
+        public ClientUser(string UserName, string Password)
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@UserName", UserName);
@@ -56,24 +74,24 @@ namespace BusinessLogic
             DataTable dt = DBHelper.GetDataTable("Order.GetUser", param, true);
             if (dt != null && dt.Rows.Count > 0)
             {
-                this.ID = Convert.ToInt32(Convert.ToString(dt.Rows[0][FIELDNAMES.ID.ToString()]));
+                this.Id = Convert.ToInt32(Convert.ToString(dt.Rows[0][FIELDNAMES.ID.ToString()]));
                 this.UserName = Convert.ToString(dt.Rows[0][FIELDNAMES.USERNAME.ToString()]);
                 this.Password = Convert.ToString(dt.Rows[0][FIELDNAMES.PASSWORD.ToString()]);
-                UserType = Convert.ToString(dt.Rows[0][FIELDNAMES.USERTYPE.ToString()]);
+                this.UserTypeId = Convert.ToInt32(dt.Rows[0][FIELDNAMES.USERTYPEID.ToString()]);
             }
         }
 
-        public User(int ID)
+        public ClientUser(int ID)
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("@Id", ID);
             DataTable dt = DBHelper.GetDataTable("Order.GetUser", param, true);
             if (dt != null && dt.Rows.Count > 0)
             {
-                this.ID = Convert.ToInt32(Convert.ToString(dt.Rows[0][FIELDNAMES.ID.ToString()]));
+                this.Id = Convert.ToInt32(Convert.ToString(dt.Rows[0][FIELDNAMES.ID.ToString()]));
                 this.UserName = Convert.ToString(dt.Rows[0][FIELDNAMES.USERNAME.ToString()]);
                 this.Password = Convert.ToString(dt.Rows[0][FIELDNAMES.PASSWORD.ToString()]);
-                UserType = Convert.ToString(dt.Rows[0][FIELDNAMES.USERTYPE.ToString()]);
+                UserTypeId = Convert.ToInt32(dt.Rows[0][FIELDNAMES.USERTYPEID.ToString()]);
             }
         }
 
@@ -85,7 +103,7 @@ namespace BusinessLogic
             {
                 if (_manager == null)
                 {
-                    _manager = ExpertOrderBusinessInit.kernel.Get<IManagerFactory<User, IUserManager>>().Create(this);
+                    _manager = ExpertOrderBusinessInit.kernel.Get<IManagerFactory<ClientUser, IUserManager>>().Create(this);
                 }
                 return _manager;
             }
