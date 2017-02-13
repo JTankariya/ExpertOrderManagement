@@ -25,6 +25,16 @@ namespace BusinessLogic
             return list;
         }
 
+        public IEnumerable<T> GetAll(string SPName)
+        {
+            var list = DBHelper.ConvertToEnumerable<T>(DBHelper.GetDataTable(SPName, null, true));
+            if (list.IsNullOrEmpty())
+            {
+                return null;
+            }
+            return list;
+        }
+
         public T GetById(int Id)
         {
             return DBHelper.ConvertToEnumerable<T>("select * from " + _tableName + " where Code='" + Id + "' and ClientCompanyId = " + _companyId).FirstOrDefault();
@@ -32,7 +42,7 @@ namespace BusinessLogic
 
         public T GetByRefId(string refId)
         {
-            return DBHelper.ConvertToEnumerable<T>("select * from " + _tableName + " where RefId='" + refId + "' and ClientCompanyId = " + _companyId).FirstOrDefault();
+            return DBHelper.ConvertToEnumerable<T>("select * from " + _tableName + " where RefId='" + refId + "'").FirstOrDefault();
         }
     }
 }

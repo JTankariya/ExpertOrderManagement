@@ -199,6 +199,43 @@ namespace DataBase
 
         }
 
+        public static IEnumerable<T> ConvertToEnumerable<T>(DataTable dt)
+        {
+            var columnNames = dt.Columns.Cast<DataColumn>()
+                .Select(c => c.ColumnName.ToLower())
+                .ToList();
+
+            var properties = typeof(T).GetProperties();
+
+            return dt.AsEnumerable().Select(row =>
+            {
+                var objT = Activator.CreateInstance<T>();
+
+                foreach (var pro in properties)
+                {
+                    if (columnNames.Contains(pro.Name.ToLower()))
+                    {
+                        if (row[pro.Name].ToString().ToUpper() == "TRUE")
+                        {
+                            pro.SetValue(objT, true, null);
+                        }
+                        else if (row[pro.Name].ToString().ToUpper() == "FALSE")
+                        {
+                            pro.SetValue(objT, false, null);
+                        }
+                        else
+                        {
+                            pro.SetValue(objT, row[pro.Name] == DBNull.Value ? null : row[pro.Name], null);
+                        }
+                    }
+
+                }
+
+                return objT;
+            });
+
+        }
+
         public static string CheckEscape(string variable)
         {
             return (!string.IsNullOrEmpty(variable) ? variable.Replace("'", "''") : variable);

@@ -5,6 +5,7 @@
 }
 
 @Styles.Render("~/Content/css/customsweetcss")
+<link href="@Url.Content("~/Content/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css")" rel="stylesheet">
 <div class="row">
     <div class="col-lg-offset-2 col-lg-8">
         <div class="card-box">
@@ -12,111 +13,109 @@
             <p class="text-muted font-13 m-b-30">
                 Add/Edit Client here
             </p>
-            @using (Html.BeginForm("Save", "Client", FormMethod.Post, new { @class = "form-horizontal m-t-20", @id = "frmClient" }))
+            @using (Html.BeginForm("Save", "Client", FormMethod.Post, new { @autocomplete = "off", @class = "form-horizontal m-t-20", @id = "frmClient" }))
             {
-                <form class="form-horizontal" role="form" data-parsley-validate novalidate>
-                    <div class="form-group">
-                        <label for="hori-pass1" class="col-sm-4 control-label">Company Name</label>
-                        <div class="col-sm-7">
-                            @Html.HiddenFor(x => x.RefId)
-                            @Html.HiddenFor(x => x.Id)
-                            @Html.TextBoxFor(x => x.CompanyName, new { @class = "form-control", @placeholder = "Company Name" })
+                @Html.HiddenFor(x => x.Id)
+                <div class="form-group">
+                    <label for="hori-pass1" class="col-sm-4 control-label">Company Name</label>
+                    <div class="col-sm-7">
+                        @Html.HiddenFor(x => x.RefId)
+                        @Html.TextBoxFor(x => x.CompanyName, new { @class = "form-control", @placeholder = "Company Name" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hori-pass1" class="col-sm-4 control-label">Company Address</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(x => x.CompanyAddress, new { @class = "form-control", @placeholder = "Address" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hori-pass1" class="col-sm-4 control-label">Mobile No</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(x => x.MobileNo, new { @class = "form-control", @placeholder = "Mobile No" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hori-pass1" class="col-sm-4 control-label">Email Id</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "Email" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hori-pass1" class="col-sm-4 control-label">First Name</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @placeholder = "First Name" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hori-pass1" class="col-sm-4 control-label">Last Name</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hori-pass1" class="col-sm-4 control-label">User Name</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", @placeholder = "User Name", @readonly = "readonly", @onfocus = "this.removeAttribute('readonly');" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hori-pass1" class="col-sm-4 control-label">Password</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @placeholder = "Password", @readonly = "readonly", @onfocus = "this.removeAttribute('readonly');",@type="password" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hori-pass1" class="col-sm-4 control-label">Confirm Password</label>
+                    <div class="col-sm-7">
+                        <input type="password" name="ConfirmPassword" id="txtConfirmPassword" class="form-control" placeholder="Confirm Password" readonly="readonly" onfocus="this.removeAttribute('readonly');" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hori-pass1" class="col-sm-4 control-label">No Of Users</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(x => x.NoOfAccessUsers, new { @class = "form-control", @placeholder = "No of Users" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hori-pass1" class="col-sm-4 control-label">No of Company</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(x => x.NoOfCompanyPerUser, new { @class = "form-control", @placeholder = "No of company" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hori-pass1" class="col-sm-4 control-label">Expiry Date</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(x => x.AccountExpiredOn, new { @class = "form-control datepicker", @placeholder = "Expiry Date" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div class="checkbox checkbox-primary">
+                            @Html.CheckBoxFor(x => x.QueryRights, new { name = "QueryRights" })
+                            @*<input id="checkbox-signup" type="checkbox" name="IsRemember">*@
+                            <label for="QueryRight">
+                                Rights for writing query?
+                            </label>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="hori-pass1" class="col-sm-4 control-label">Company Address</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(x => x.CompanyAddress, new { @class = "form-control", @placeholder = "Address" })
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-8">
+                        <a href="@Url.Action("Add", "Client", new { refId=""})" i id="btnAdd" type="button" class="btn btn-lg btn-default waves-effect waves-light m-l-5">
+                            <i class="ti-plus"></i>&nbsp;&nbsp;Add
+                        </a>
+                        <button id="btnSave" type="submit" class="btn btn-lg btn-primary waves-effect waves-light">
+                            <i class="ti-save"></i>&nbsp;&nbsp; Save
+                        </button>
+                        <button id="btnDelete" type="button" class="btn btn-lg btn-danger waves-effect waves-light m-l-5">
+                            <i class="ti-trash"></i>&nbsp;&nbsp;Delete
+                        </button>
+                        <button id="btnView" type="button" class="btn btn-lg btn-warning waves-effect waves-light m-l-5">
+                            <i class="ti-search"></i>&nbsp;&nbsp;View
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label for="hori-pass1" class="col-sm-4 control-label">Mobile No</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(x => x.MobileNo, new { @class = "form-control", @placeholder = "Mobile No" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="hori-pass1" class="col-sm-4 control-label">Email Id</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "Email" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="hori-pass1" class="col-sm-4 control-label">First Name</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @placeholder = "First Name" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="hori-pass1" class="col-sm-4 control-label">Last Name</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @placeholder = "Last Name" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="hori-pass1" class="col-sm-4 control-label">User Name</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", @placeholder = "User Name" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="hori-pass1" class="col-sm-4 control-label">Password</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @placeholder = "Password" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="hori-pass1" class="col-sm-4 control-label">Confirm Password</label>
-                        <div class="col-sm-7">
-                            <input type="password" id="txtConfirmPassword" class="form-control" placeholder="Confirm Password" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="hori-pass1" class="col-sm-4 control-label">No Of Users</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(x => x.NoOfAccessUsers, new { @class = "form-control", @placeholder = "No of Users" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="hori-pass1" class="col-sm-4 control-label">No of Company</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(x => x.NoOfCompanyPerUser, new { @class = "form-control", @placeholder = "No of company" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="hori-pass1" class="col-sm-4 control-label">Expiry Date</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(x => x.AccountExpiredOn, new { @class = "form-control", @placeholder = "Expiry Date" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <div class="checkbox checkbox-primary">
-                                @Html.CheckBoxFor(x => x.QueryRights, new { name = "QueryRights" })
-                                @*<input id="checkbox-signup" type="checkbox" name="IsRemember">*@
-                                <label for="QueryRight">
-                                    Rights for writing query?
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-8">
-                            <a href="@Url.Action("Add", "Client", new { ID=0})" i id="btnAdd" type="button" class="btn btn-lg btn-default waves-effect waves-light m-l-5">
-                                <i class="ti-plus"></i>&nbsp;&nbsp;Add
-                            </a>
-                            <button id="btnSave" type="submit" class="btn btn-lg btn-primary waves-effect waves-light">
-                                <i class="ti-save"></i>&nbsp;&nbsp; Save
-                            </button>
-                            <button id="btnDelete" type="button" class="btn btn-lg btn-danger waves-effect waves-light m-l-5">
-                                <i class="ti-trash"></i>&nbsp;&nbsp;Delete
-                            </button>
-                            <button id="btnView" type="button" class="btn btn-lg btn-warning waves-effect waves-light m-l-5">
-                                <i class="ti-search"></i>&nbsp;&nbsp;View
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                </div>
             }
         </div>
     </div>
@@ -131,7 +130,8 @@
     </div>
 </div>
 @Scripts.Render("~/Content/css/customsweetjs")
-
+<script src="@Url.Content("~/Content/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js")"></script>
+<script src="@Url.Content("~/Content/plugins/bootstrap-inputmask/bootstrap-inputmask.min.js")" type="text/javascript"></script>
 <script>
     function ClientAdded(response) {
         swal({
@@ -144,6 +144,11 @@
     }
 
     $(document).ready(function () {
+        $('.datepicker').datepicker({
+            autoclose: true,
+            format: 'dd/mm/yyyy',
+            forceParse: false
+        });
         $('#frmClient').validate({
             rules: {
                 CompanyName: {
@@ -175,7 +180,8 @@
                     required: true
                 },
                 ConfirmPassword: {
-                    required: true
+                    required: true,
+                    equalTo: "#Password"
                 }
             },
             messages: {
@@ -191,7 +197,8 @@
                     required: "Please enter Passowrd"
                 },
                 ConfirmPassword: {
-                    required: "Please re enter Passowrd"
+                    required: "Please re enter Passowrd",
+                    equalTo: "Confirm Password should match with password"
                 },
                 NoOfUser: {
                     required: "Please enter No Of Users"
@@ -204,6 +211,7 @@
                 }
             },
             submitHandler: function (form) {
+                $('#AccountExpiredOn').val(new Date($('#AccountExpiredOn').datepicker('getDate')).toISOString());
                 $.ajax({
                     type: "POST",
                     url: "@Url.Action("Save","Client")",
@@ -229,7 +237,7 @@
                         target: '#custom-modal'
                     });
                     $('body').on('dblclick', '#tblClient tbody tr', function () {
-                        window.location.href = '@Url.Action("Add", "Client", new { Id="REPLACE"})'.replace('REPLACE', $(this).data('empid'));
+                        window.location.href = '@Url.Action("Add", "Client", new { refId="REPLACE"})'.replace('REPLACE', $(this).data('empid'));
                     });
                 }
             });

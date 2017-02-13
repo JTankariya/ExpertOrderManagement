@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using CommonLibraries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,15 @@ using System.Web.Mvc;
 
 namespace ExpertOrderManagement.Controllers
 {
+    [AuthorizeWebForm]
     public class ClientController : BaseController
     {
-        public ActionResult Add(string Id)
+        public ActionResult Add(string refId)
         {
-            if (!string.IsNullOrEmpty(Id) && Id != "0")
+            if (!string.IsNullOrEmpty(refId))
             {
-                var client = ClientHelper.GetByRefId(Id);
+                var client = ClientHelper.GetByRefId(refId);
+                client.Password = StringCipher.Decrypt(client.Password);
                 return View(client);
             }
             else
@@ -26,6 +29,7 @@ namespace ExpertOrderManagement.Controllers
         [HttpPost]
         public JsonResult Save(Client client)
         {
+            client.Password = StringCipher.Encrypt(client.Password);
             return Json(client.Manager.Save(), JsonRequestBehavior.AllowGet);
         }
 
@@ -58,7 +62,7 @@ namespace ExpertOrderManagement.Controllers
 
         public ActionResult GetAll()
         {
-            return View(ClientHelper.GetAll());
+            return View(ClientHelper.GetAll("Order.GetAllClientMaster"));
         }
 
         public JsonResult Delete(string ID)

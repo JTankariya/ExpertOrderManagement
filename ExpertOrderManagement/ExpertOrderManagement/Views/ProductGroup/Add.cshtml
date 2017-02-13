@@ -14,65 +14,63 @@
             </p>
             @using (Html.BeginForm("Save", "ProductGroup", FormMethod.Post, new { @class = "form-horizontal m-t-20", @id = "frmProductGroup" }))
             {
-                <form class="form-horizontal" role="form" data-parsley-validate novalidate>
-                    <div class="form-group">
-                        <label for="hori-pass1" class="col-sm-4 control-label">Name</label>
-                        <div class="col-sm-7">
-                            @Html.HiddenFor(x => x.ClientCompanyId)
-                            @Html.HiddenFor(x => x.RefId)
-                            @Html.HiddenFor(x => x.OperationFlag)
-                            @Html.HiddenFor(x => x.Code)
-                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @placeholder = "Name" })
-                        </div>
+                <div class="form-group">
+                    <label for="hori-pass1" class="col-sm-4 control-label">Name</label>
+                    <div class="col-sm-7">
+                        @Html.HiddenFor(x => x.ClientCompanyId)
+                        @Html.HiddenFor(x => x.RefId)
+                        @Html.HiddenFor(x => x.OperationFlag)
+                        @Html.HiddenFor(x => x.Code)
+                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @placeholder = "Name" })
                     </div>
-                    <div class="form-group">
-                        <label for="hori-pass1" class="col-sm-4 control-label">Category 1</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(x => x.Category1, new { @class = "form-control", @placeholder = "Category 1" })
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="hori-pass1" class="col-sm-4 control-label">Category 1</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(x => x.Category1, new { @class = "form-control", @placeholder = "Category 1" })
                     </div>
-                    <div class="form-group">
-                        <label for="hori-pass1" class="col-sm-4 control-label">Category 2</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(x => x.Category2, new { @class = "form-control", @placeholder = "Category 2" })
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="hori-pass1" class="col-sm-4 control-label">Category 2</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(x => x.Category2, new { @class = "form-control", @placeholder = "Category 2" })
                     </div>
-                    <div class="form-group">
-                        <label for="hori-pass1" class="col-sm-4 control-label">Category 3</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(x => x.Category3, new { @class = "form-control", @placeholder = "Category 3" })
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="hori-pass1" class="col-sm-4 control-label">Category 3</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(x => x.Category3, new { @class = "form-control", @placeholder = "Category 3" })
                     </div>
-                    <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-4 control-label">Parent</label>
-                        <div class="col-sm-7">
-                            @if (ViewBag.ProductGroups != null)
-                            {
-                                @Html.DropDownListFor(x => x.Parent, new SelectList(ViewBag.ProductGroups, "Code", "Name"), "-- Select --", new { @class = "form-control", @placeholder = "Product Group Type" })
-                            }
-                            else
-                            {
-                                @Html.DropDownListFor(x => x.Parent, new List<SelectListItem>(), new { @class = "form-control", @placeholder = "Product Group Type" })
-                            }
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-4 control-label">Parent</label>
+                    <div class="col-sm-7">
+                        @if (ViewBag.ProductGroups != null)
+                        {
+                            @Html.DropDownListFor(x => x.Parent, new SelectList(ViewBag.ProductGroups, "Code", "Name"), "-- Select --", new { @class = "form-control", @placeholder = "Product Group Type" })
+                        }
+                        else
+                        {
+                            @Html.DropDownListFor(x => x.Parent, new List<SelectListItem>(), new { @class = "form-control", @placeholder = "Product Group Type" })
+                        }
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-8">
-                            <a href="@Url.Action("Add", "ProductGroup", new { ID=0})" i id="btnAdd" type="button" class="btn btn-lg btn-default waves-effect waves-light m-l-5">
-                                <i class="ti-plus"></i>&nbsp;&nbsp;Add
-                            </a>
-                            <button id="btnSave" type="submit" class="btn btn-lg btn-primary waves-effect waves-light">
-                                <i class="ti-save"></i>&nbsp;&nbsp; Save
-                            </button>
-                            <button id="btnDelete" type="button" class="btn btn-lg btn-danger waves-effect waves-light m-l-5">
-                                <i class="ti-trash"></i>&nbsp;&nbsp;Delete
-                            </button>
-                            <button id="btnView" type="button" class="btn btn-lg btn-warning waves-effect waves-light m-l-5">
-                                <i class="ti-search"></i>&nbsp;&nbsp;View
-                            </button>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-8">
+                        <a href="@Url.Action("Add", "ProductGroup", new { ID=0})" i id="btnAdd" type="button" class="btn btn-lg btn-default waves-effect waves-light m-l-5">
+                            <i class="ti-plus"></i>&nbsp;&nbsp;Add
+                        </a>
+                        <button id="btnSave" type="submit" class="btn btn-lg btn-primary waves-effect waves-light">
+                            <i class="ti-save"></i>&nbsp;&nbsp; Save
+                        </button>
+                        <button id="btnDelete" type="button" class="btn btn-lg btn-danger waves-effect waves-light m-l-5">
+                            <i class="ti-trash"></i>&nbsp;&nbsp;Delete
+                        </button>
+                        <button id="btnView" type="button" class="btn btn-lg btn-warning waves-effect waves-light m-l-5">
+                            <i class="ti-search"></i>&nbsp;&nbsp;View
+                        </button>
                     </div>
-                </form>
+                </div>
             }
         </div>
     </div>

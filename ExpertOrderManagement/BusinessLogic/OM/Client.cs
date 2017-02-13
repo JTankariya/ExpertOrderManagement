@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ninject;
 
 namespace BusinessLogic
 {
-    public class Client : ClientUser
+    public class Client
     {
         public int Id { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -35,5 +36,18 @@ namespace BusinessLogic
         public bool IsWithout { get; set; }
         public Guid RefId { get; set; }
 
+        private IClientManager _manager;
+
+        public IClientManager Manager
+        {
+            get
+            {
+                if (_manager == null)
+                {
+                    _manager = ExpertOrderBusinessInit.kernel.Get<IManagerFactory<Client, IClientManager>>().Create(this);
+                }
+                return _manager;
+            }
+        }
     }
 }

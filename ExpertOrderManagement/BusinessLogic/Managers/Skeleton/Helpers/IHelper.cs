@@ -8,6 +8,7 @@ namespace BusinessLogic
     public interface IHelper<T>
     {
         IEnumerable<T> GetAll();
+        IEnumerable<T> GetAll(string SPName);
         T GetById(int Id);
         T GetByRefId(string refId);
     }
