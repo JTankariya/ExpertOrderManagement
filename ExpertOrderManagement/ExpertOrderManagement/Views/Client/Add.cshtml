@@ -16,6 +16,7 @@
             @using (Html.BeginForm("Save", "Client", FormMethod.Post, new { @autocomplete = "off", @class = "form-horizontal m-t-20", @id = "frmClient" }))
             {
                 @Html.HiddenFor(x => x.Id)
+                @Html.HiddenFor(x => x.NoOfDays)
                 <div class="form-group">
                     <label for="hori-pass1" class="col-sm-4 control-label">Company Name</label>
                     <div class="col-sm-7">
@@ -62,7 +63,7 @@
                 <div class="form-group">
                     <label for="hori-pass1" class="col-sm-4 control-label">Password</label>
                     <div class="col-sm-7">
-                        @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @placeholder = "Password", @readonly = "readonly", @onfocus = "this.removeAttribute('readonly');",@type="password" })
+                        @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @placeholder = "Password", @readonly = "readonly", @onfocus = "this.removeAttribute('readonly');", @type = "password" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -92,10 +93,19 @@
                 <div class="form-group">
                     <div class="col-xs-12">
                         <div class="checkbox checkbox-primary">
-                            @Html.CheckBoxFor(x => x.QueryRights, new { name = "QueryRights" })
-                            @*<input id="checkbox-signup" type="checkbox" name="IsRemember">*@
-                            <label for="QueryRight">
+                            @Html.CheckBoxFor(x=>x.QueryRights)
+                            <label for="QueryRights">
                                 Rights for writing query?
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div class="checkbox checkbox-primary">
+                            @Html.CheckBoxFor(x => x.IsWithout)
+                            <label for="IsWithout">
+                                Has Without?
                             </label>
                         </div>
                     </div>

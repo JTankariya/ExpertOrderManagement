@@ -136,7 +136,7 @@ namespace ExpertOrderManagement.Controllers
 
         public ActionResult LogOut()
         {
-            HttpCookie cookie = new HttpCookie("MehulIndustries");
+            HttpCookie cookie = new HttpCookie("ExpertOrderManagement");
             cookie.Values.Add("UName", "");
             cookie.Values.Add("PWord", "");
             cookie.Expires = DateTime.Now.AddDays(-1);
