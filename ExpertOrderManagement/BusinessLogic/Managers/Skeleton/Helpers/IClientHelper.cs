@@ -9,5 +9,6 @@ namespace BusinessLogic
     {
         IEnumerable<Client> CheckDuplicateName(string ClientName, string RefId);
         IEnumerable<Client> CheckDuplicateUserName(string UserName, string RefId);
+        IEnumerable<ClientCompany> GetCompanies(int clientId);
     }
 }

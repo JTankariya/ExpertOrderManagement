@@ -7,10 +7,11 @@ namespace CommonLibraries
 {
     public class TableNames
     {
-        public static readonly string USER = "OrderUser";
-        public static readonly string USERTYPES = "[Order.UserType]";
-        public static readonly string CLIENT = "[Order.ClientMaster]";
-        public static readonly string PRODUCTGROUP = "OSPGroup";
-        public static readonly string PRODUCT = "OSProduct";
+        public const string USER = "[Order.ClientUserMaster]";
+        public const string USERTYPES = "[Order.UserType]";
+        public const string CLIENT = "[Order.ClientMaster]";
+        public const string CLIENTCOMPANY = "[Order.ClientCompanyMaster]";
+        public const string PRODUCTGROUP = "[Order.PGroup]";
+        public const string PRODUCT = "[Order.Product]";
     }
 }

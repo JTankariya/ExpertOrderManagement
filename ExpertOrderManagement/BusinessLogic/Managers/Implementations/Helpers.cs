@@ -54,5 +54,19 @@ namespace BusinessLogic
                 return _userTypeHelper;
             }
         }
+
+        private static IClientHelper _clientHelper;
+        public static IClientHelper ClientHelper
+        {
+            get
+            {
+                if (_clientHelper == null)
+                {
+                    _clientHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, int, IClientHelper>>()
+                        .Create(TableNames.CLIENT.ToString(), CurrentCompany.ClientCompanyId);
+                }
+                return _clientHelper;
+            }
+        }
     }
 }

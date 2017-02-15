@@ -1,4 +1,5 @@
-﻿using DataBase;
+﻿using CommonLibraries;
+using DataBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace BusinessLogic
     {
         public ClientHelper(string tName, int companyId)
             : base(tName, companyId)
-        { 
-        
+        {
+
         }
 
         public IEnumerable<Client> CheckDuplicateName(string ClientName, string RefId)
@@ -37,6 +38,11 @@ namespace BusinessLogic
                 return DBHelper.ConvertToEnumerable<Client>("select * from " + base._tableName + " where UserName='" + UserName + "' and RefId!='" + RefId + "'");
             }
 
+        }
+
+        public IEnumerable<ClientCompany> GetCompanies(int clientId)
+        {
+            return DBHelper.ConvertToEnumerable<ClientCompany>("select * from " + TableNames.CLIENTCOMPANY + " where ClientId=" + clientId);
         }
     }
 }

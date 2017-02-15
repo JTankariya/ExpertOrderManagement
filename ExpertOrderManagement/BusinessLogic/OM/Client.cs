@@ -49,5 +49,41 @@ namespace BusinessLogic
                 return _manager;
             }
         }
+
+        private IEnumerable<ClientCompany> _companies;
+
+        public IEnumerable<ClientCompany> BillableCompanies
+        {
+            get
+            {
+                if (_companies == null)
+                {
+                    _companies = Helpers.ClientHelper.GetCompanies(Id);
+                }
+                return _companies.Where(x => !x.IsWithout).OrderBy(x => x.IsDefault);
+            }
+        }
+        public IEnumerable<ClientCompany> Companies
+        {
+            get
+            {
+                if (_companies == null)
+                {
+                    _companies = Helpers.ClientHelper.GetCompanies(Id);
+                }
+                return _companies.OrderByDescending(x => x.IsDefault);
+            }
+        }
+        public ClientCompany WithoutCompany
+        {
+            get
+            {
+                if (_companies == null)
+                {
+                    _companies = Helpers.ClientHelper.GetCompanies(Id);
+                }
+                return _companies.FirstOrDefault(x => x.IsWithout);
+            }
+        }
     }
 }

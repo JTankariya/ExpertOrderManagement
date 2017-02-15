@@ -12,6 +12,7 @@ namespace BusinessLogic
     public class ClientUser
     {
         private UserType _type;
+        private Client _client;
         public int Id { get; set; }
         public int Clientid { get; set; }
         public string FirstName { get; set; }
@@ -27,6 +28,17 @@ namespace BusinessLogic
         public string EmailId { get; set; }
         public string UserName { get; set; }
 
+        public Client Client
+        {
+            get
+            {
+                if (_client == null)
+                {
+                    _client = Helpers.ClientHelper.GetById(Clientid);
+                }
+                return _client;
+            }
+        }
         public UserType UserType
         {
             get
@@ -44,7 +56,8 @@ namespace BusinessLogic
             ID = 1,
             USERNAME = 3,
             PASSWORD = 4,
-            USERTYPEID = 5
+            USERTYPEID = 5,
+            CLIENTID = 6
         }
 
         public ClientUser()
@@ -62,7 +75,8 @@ namespace BusinessLogic
                 this.Id = Convert.ToInt32(Convert.ToString(dt.Rows[0][FIELDNAMES.ID.ToString()]));
                 this.UserName = Convert.ToString(dt.Rows[0][FIELDNAMES.USERNAME.ToString()]);
                 this.Password = Convert.ToString(dt.Rows[0][FIELDNAMES.PASSWORD.ToString()]);
-                UserTypeId = Convert.ToInt32(dt.Rows[0][FIELDNAMES.USERTYPEID.ToString()]);
+                this.UserTypeId = Convert.ToInt32(dt.Rows[0][FIELDNAMES.USERTYPEID.ToString()]);
+                this.Clientid = Convert.ToInt32(dt.Rows[0][FIELDNAMES.CLIENTID.ToString()]);
             }
         }
 
@@ -78,6 +92,7 @@ namespace BusinessLogic
                 this.UserName = Convert.ToString(dt.Rows[0][FIELDNAMES.USERNAME.ToString()]);
                 this.Password = Convert.ToString(dt.Rows[0][FIELDNAMES.PASSWORD.ToString()]);
                 this.UserTypeId = Convert.ToInt32(dt.Rows[0][FIELDNAMES.USERTYPEID.ToString()]);
+                this.Clientid = Convert.ToInt32(dt.Rows[0][FIELDNAMES.CLIENTID.ToString()]);
             }
         }
 
@@ -91,7 +106,8 @@ namespace BusinessLogic
                 this.Id = Convert.ToInt32(Convert.ToString(dt.Rows[0][FIELDNAMES.ID.ToString()]));
                 this.UserName = Convert.ToString(dt.Rows[0][FIELDNAMES.USERNAME.ToString()]);
                 this.Password = Convert.ToString(dt.Rows[0][FIELDNAMES.PASSWORD.ToString()]);
-                UserTypeId = Convert.ToInt32(dt.Rows[0][FIELDNAMES.USERTYPEID.ToString()]);
+                this.UserTypeId = Convert.ToInt32(dt.Rows[0][FIELDNAMES.USERTYPEID.ToString()]);
+                this.Clientid = Convert.ToInt32(dt.Rows[0][FIELDNAMES.CLIENTID.ToString()]);
             }
         }
 
