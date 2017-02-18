@@ -50,17 +50,18 @@ namespace BusinessLogic
 
         }
 
-        public ClientCompany(int clientId)
+        public ClientCompany(int CompanyId)
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
-            param.Add("@ClientId", clientId);
+            param.Add("@ClientId", DBNull.Value);
+            param.Add("@CompanyId", CompanyId);
             DataTable dt = DBHelper.GetDataTable("Order.GetClientCompany", param, true);
             if (dt != null && dt.Rows.Count > 0)
             {
                 ClientCompanyId = Convert.ToInt32(dt.Rows[0][FIELDNAMES.CLIENTCOMPANYID.ToString()]);
                 ClientId = Convert.ToInt32(dt.Rows[0][FIELDNAMES.CLIENTID.ToString()]);
                 CompanyName = Convert.ToString(dt.Rows[0][FIELDNAMES.COMPANYNAME.ToString()]);
-                IsDefault = Convert.ToBoolean(dt.Rows[0][FIELDNAMES.ISDEFAULT.ToString()]);
+                IsDefault = string.IsNullOrEmpty(Convert.ToString(dt.Rows[0][FIELDNAMES.ISDEFAULT.ToString()])) ? false : Convert.ToBoolean(dt.Rows[0][FIELDNAMES.ISDEFAULT.ToString()]);
                 IsWithout = Convert.ToBoolean(dt.Rows[0][FIELDNAMES.ISWITHOUT.ToString()]);
             }
         }

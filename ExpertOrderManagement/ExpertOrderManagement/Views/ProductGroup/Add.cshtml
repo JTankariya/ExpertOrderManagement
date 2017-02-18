@@ -79,7 +79,7 @@
     <button type="button" class="close" onclick="Custombox.close();">
         <span>&times;</span><span class="sr-only">Close</span>
     </button>
-    <h4 class="custom-modal-title">ProductGroup</h4>
+    <h4 class="custom-modal-title">Product Group</h4>
     <div class="custom-modal-text" id="AllProductGroup" style="max-height:500px;overflow:auto;">
 
     </div>
@@ -98,6 +98,10 @@
     }
 
     $(document).ready(function () {
+        if ('@Model.ClientCompanyId' != "0") {
+            $('#ddlCompanies').val('@Model.ClientCompanyId')
+        }
+
         $('#frmProductGroup').validate({
             rules: {
                 Name: {
@@ -116,6 +120,7 @@
                 }
             },
             submitHandler: function (form) {
+                $('#ClientCompanyId').val($('#ddlCompanies').val());
                 $.ajax({
                     type: "POST",
                     url: "@Url.Action("Save","ProductGroup")",
@@ -130,6 +135,7 @@
         $('#btnView').click(function () {
             $.ajax({
                 type: "GET",
+                data: { CompanyId: $('#ddlCompanies').val() },
                 url: "@Url.Action("GetAll","ProductGroup")",
                 success: function (response) {
                     $('#AllProductGroup').html(response);

@@ -42,17 +42,21 @@ namespace ExpertOrderManagement.Controllers
             base.OnException(filterContext);
         }
 
-        protected int CompanyId
-        {
-            get
-            {
-                if (_company == null)
-                {
-                    _company = new ClientCompany(currUser.Id);
-                }
-                return _company.ClientCompanyId;
-            }
-        }
+        //protected int CompanyId
+        //{
+        //    get
+        //    {
+        //        if (_company == null)
+        //        {
+        //            _company = currUser.Client.BillableCompanies.FirstOrDefault();
+        //        }                
+        //        return _company.ClientCompanyId;
+        //    }
+        //    set
+        //    {
+        //        _company = new ClientCompany(value);
+        //    }
+        //}
 
         protected IUserHelper UserHelper
         {
@@ -61,7 +65,7 @@ namespace ExpertOrderManagement.Controllers
                 if (_userHelper == null)
                 {
                     _userHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, int, IUserHelper>>()
-                        .Create(TableNames.USER.ToString(), CompanyId);
+                        .Create(TableNames.USER.ToString(), currUser.DefaultCompany.ClientCompanyId);
                 }
                 return _userHelper;
             }
@@ -74,7 +78,7 @@ namespace ExpertOrderManagement.Controllers
                 if (_productGroupHelper == null)
                 {
                     _productGroupHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, int, IProductGroupHelper>>()
-                        .Create(TableNames.PRODUCTGROUP.ToString(), CompanyId);
+                        .Create(TableNames.PRODUCTGROUP.ToString(), currUser.DefaultCompany.ClientCompanyId);
                 }
                 return _productGroupHelper;
             }
@@ -86,7 +90,7 @@ namespace ExpertOrderManagement.Controllers
                 if (_clientHelper == null)
                 {
                     _clientHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, int, IClientHelper>>()
-                        .Create(TableNames.CLIENT.ToString(), CompanyId);
+                        .Create(TableNames.CLIENT.ToString(), 0);
                 }
                 return _clientHelper;
             }
@@ -99,7 +103,7 @@ namespace ExpertOrderManagement.Controllers
                 if (_productHelper == null)
                 {
                     _productHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, int, IProductHelper>>()
-                        .Create(TableNames.PRODUCT.ToString(), CompanyId);
+                        .Create(TableNames.PRODUCT.ToString(), currUser.DefaultCompany.ClientCompanyId);
                 }
                 return _productHelper;
             }

@@ -31,7 +31,7 @@ namespace ExpertOrderManagement.Controllers
             else
             {
                 var group = new ProductGroup();
-                group.ClientCompanyId = CompanyId;
+                group.ClientCompanyId = currUser.DefaultCompany.ClientCompanyId;
                 ViewBag.ProductGroups = groups;
                 return View(group);
             }
@@ -40,6 +40,10 @@ namespace ExpertOrderManagement.Controllers
         [HttpPost]
         public JsonResult Save(ProductGroup group)
         {
+            if (group.ClientCompanyId == 0)
+            {
+                group.ClientCompanyId = currUser.DefaultCompany.ClientCompanyId;
+            }
             return Json(group.Manager.Save(), JsonRequestBehavior.AllowGet);
         }
 

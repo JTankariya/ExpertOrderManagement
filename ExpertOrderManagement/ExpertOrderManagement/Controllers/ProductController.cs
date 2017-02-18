@@ -22,7 +22,7 @@ namespace ExpertOrderManagement.Controllers
             else
             {
                 var product = new Product();
-                product.ClientCompanyId = CompanyId;
+                product.ClientCompanyId = currUser.DefaultCompany.ClientCompanyId;
                 return View(product);
             }
 
@@ -30,6 +30,10 @@ namespace ExpertOrderManagement.Controllers
         [HttpPost]
         public JsonResult Save(Product product)
         {
+            if (product.ClientCompanyId == 0)
+            {
+                product.ClientCompanyId = currUser.DefaultCompany.ClientCompanyId;
+            }
             return Json(product.Manager.Save(), JsonRequestBehavior.AllowGet);
         }
 

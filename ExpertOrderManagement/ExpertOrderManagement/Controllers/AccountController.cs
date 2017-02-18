@@ -31,8 +31,8 @@ namespace ExpertOrderManagement.Controllers
         [HttpPost]
         public ActionResult Login(ClientUser employee)
         {
-            var client = new ClientUser(employee.UserName, employee.Password);
-            if (client.Id > 0)
+            var user = new ClientUser(employee.UserName, employee.Password);
+            if (user.Id > 0)
             {
                 if (Request.Form["IsRemember"] != null && Request.Form["IsRemember"].ToUpper() == "ON")
                 {
@@ -42,7 +42,13 @@ namespace ExpertOrderManagement.Controllers
                     cookie.Expires = DateTime.Now.AddDays(15);
                     Response.Cookies.Add(cookie);
                 }
-                Session["User"] = client;
+                Session["User"] = user;
+                var defaultCompanySetting = user.Settings.Where(x => x.SettingId == 1);
+                if ((defaultCompanySetting == null || defaultCompanySetting.Count() == 0) && user.UserTypeId == 2)
+                {
+                    user.Manager.SaveSetting(1, Convert.ToString(user.Client.BillableCompanies.FirstOrDefault().ClientCompanyId));
+                }
+
                 return RedirectToAction("Index", "Dashboard");
             }
             else

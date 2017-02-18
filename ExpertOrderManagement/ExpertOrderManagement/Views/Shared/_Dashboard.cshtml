@@ -45,33 +45,52 @@
                         <li class="has-submenu active">
                             <a href="@Url.Action("Index","Dashboard")"><i class="md md-dashboard"></i>Dashboard</a>
                         </li>
-                        <li class="has-submenu">
-                            <a href="#"><i class="md md-color-lens"></i>Masters</a>
-                            <ul class="submenu">
-                                @if (user.UserTypeId == 1)
-                                {
-                                    <li><a href="@Url.Action("Add", "Client", new { ID=0})">Clients</a></li>
-                                }
-                                else
-                                {
-                                    <li><a href="@Url.Action("Add", "ProductGroup", new { ID=0})">Product Groups</a></li>
-                                    <li><a href="@Url.Action("Add", "Product", new { ID=0})">Products</a></li>
-                                    <li><a href="@Url.Action("Add", "Party", new { ID=0})">Party</a></li>
-                                }
-                            </ul>
-                        </li>
+                        @if (user.UserTypeId != 3)
+                        {
+                            <li class="has-submenu">
+                                <a href="#"><i class="md md-color-lens"></i>Masters</a>
+                                <ul class="submenu">
+                                    @if (user.UserTypeId == 1)
+                                    {
+                                        <li><a href="@Url.Action("Add", "Client", new { ID=0})">Clients</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="@Url.Action("Add", "ProductGroup", new { ID=0})">Product Groups</a></li>
+                                        <li><a href="@Url.Action("Add", "Product", new { ID=0})">Products</a></li>
+                                        <li><a href="@Url.Action("Add", "Party", new { ID=0})">Party</a></li>
+                                    }
+                                </ul>
+                            </li>
+                        }
                         <li class="has-submenu">
                             <a href="@Url.Action("Add", "Order", new { ID=0})"><i class="md md-color-lens"></i>Orders</a>
                         </li>
+
                     </ul>
                     <ul class="nav navbar-nav navbar-right pull-right">
                         @if (user.UserTypeId != 1)
                         {
-                            <li>
-                                <a href="#">
-                                    @Html.DropDownList("ddlCompanies", new SelectList(user.Client.Companies, "ClientCompanyId", "CompanyName", user.Client.Companies.FirstOrDefault().ClientCompanyId), new { @class = "form-control",@style=" margin-top: 13px;" })
-                            </a>
-                        </li>
+                            <li class="dropdown" @(user.UserTypeId==3?"style=display:none":"")>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@user.DefaultCompany.CompanyName <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    @{
+                            var companies = user.Client.Companies;
+                            foreach (var company in companies)
+                            {
+                                if (company.CompanyName != user.DefaultCompany.CompanyName)
+                                {
+                                    <li>
+                                        <a href="#">
+                                            <input data-companyid="@company.ClientCompanyId" type="radio" name="defaultCompany" id="@("rbtnDefaultCompany"+company.ClientCompanyId)" />
+                                            <label for="@("chk" + company.ClientCompanyId)">@company.CompanyName</label>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                                    }
+                                </ul>
+                            </li>
                         }
 
                         <li class="dropdown">
@@ -105,5 +124,22 @@
         <div id="loader"></div>
     </div>
     @Scripts.Render("~/bundles/corejs")
+    <script>
+        $(document).ready(function () {
+            $('[name="defaultCompany"]').on('change', function () {
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("SetDefaultCompany","Dashboard")',
+                    data: { CompanyId: $(this).data('companyid') },
+                    success: function (data) {
+                        if (data.IsSuccess) {
+                            alert("Default company for you is saved successfully.");
+                            window.location.reload(true);
+                        }
+                    }
+                })
+            });
+        });
+    </script>
 </body>
 </html>

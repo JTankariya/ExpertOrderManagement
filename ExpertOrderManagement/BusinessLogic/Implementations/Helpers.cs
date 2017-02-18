@@ -32,7 +32,7 @@ namespace BusinessLogic
             {
                 if (CurrentUser != null)
                 {
-                    return new ClientCompany(CurrentUser.Id);
+                    return new ClientCompany(CurrentUser.Client.BillableCompanies.FirstOrDefault().ClientCompanyId);
                 }
                 else
                 {
@@ -63,9 +63,23 @@ namespace BusinessLogic
                 if (_clientHelper == null)
                 {
                     _clientHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, int, IClientHelper>>()
-                        .Create(TableNames.CLIENT.ToString(), CurrentCompany.ClientCompanyId);
+                        .Create(TableNames.CLIENT.ToString(), 0);
                 }
                 return _clientHelper;
+            }
+        }
+
+        private static ISettingHelper _settingHelper;
+        public static ISettingHelper SettingHelper
+        {
+            get
+            {
+                if (_settingHelper == null)
+                {
+                    _settingHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, int, ISettingHelper>>()
+                        .Create(TableNames.SETTING.ToString(), CurrentCompany.ClientCompanyId);
+                }
+                return _settingHelper;
             }
         }
     }

@@ -28,6 +28,43 @@ namespace BusinessLogic
         public string EmailId { get; set; }
         public string UserName { get; set; }
 
+        public bool IsToRefresh
+        {
+            get;
+            set;
+        }
+
+        private IEnumerable<UserSettings> _settings;
+
+        public IEnumerable<UserSettings> Settings
+        {
+            get
+            {
+                if (_settings == null || IsToRefresh)
+                    _settings = Manager.GetSettings();
+                return _settings;
+            }
+        }
+
+        private ClientCompany _defaultCompany;
+
+        public ClientCompany DefaultCompany
+        {
+            get
+            {
+                if (_defaultCompany == null || IsToRefresh)
+                {
+                    var companySetting = Settings.FirstOrDefault(x => x.SettingId == 1);
+                    if (companySetting != null)
+                    {
+                        _defaultCompany = new ClientCompany(Convert.ToInt32(companySetting.Value));
+                    }
+                    IsToRefresh = false;
+                }
+                return _defaultCompany;
+            }
+        }
+
         public Client Client
         {
             get

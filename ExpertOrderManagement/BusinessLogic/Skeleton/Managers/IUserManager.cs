@@ -8,5 +8,8 @@ namespace BusinessLogic
 {
     public interface IUserManager : IGenericCRUD
     {
+        IEnumerable<UserSettings> GetSettings();
+
+        ResponseMsg SaveSetting(int settingId, string value);
     }
 }
