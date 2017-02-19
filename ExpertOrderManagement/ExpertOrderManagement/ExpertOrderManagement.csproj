@@ -131,6 +131,8 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\PartyController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductGroupController.cs" />
     <Compile Include="Global.asax.cs">
@@ -463,6 +465,10 @@
     <None Include="Properties\PublishProfiles\OrderManagement.pubxml" />
     <Content Include="Views\Client\Add.cshtml" />
     <Content Include="Views\Client\GetAll.cshtml" />
+    <Content Include="Views\Party\GetAll.cshtml" />
+    <Content Include="Views\Party\Add.cshtml" />
+    <Content Include="Views\Order\Add.cshtml" />
+    <Content Include="Views\Order\GetAll.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

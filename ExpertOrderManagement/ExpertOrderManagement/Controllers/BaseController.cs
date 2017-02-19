@@ -16,6 +16,9 @@ namespace ExpertOrderManagement.Controllers
     {
         private IUserHelper _userHelper;
         private IProductGroupHelper _productGroupHelper;
+        private IPartyHelper _partyHelper;
+        private IPartyGroupHelper _partyGroupHelper;
+        private IOrderHelper _orderHelper;
         private IClientHelper _clientHelper;
         private IProductHelper _productHelper;
         private ClientCompany _company;
@@ -81,6 +84,43 @@ namespace ExpertOrderManagement.Controllers
                         .Create(TableNames.PRODUCTGROUP.ToString(), currUser.DefaultCompany.ClientCompanyId);
                 }
                 return _productGroupHelper;
+            }
+        }
+
+        protected IPartyHelper PartyHelper
+        {
+            get
+            {
+                if (_partyHelper == null)
+                {
+                    _partyHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, int, IPartyHelper>>()
+                        .Create(TableNames.PARTY.ToString(), currUser.DefaultCompany.ClientCompanyId);
+                }
+                return _partyHelper;
+            }
+        }
+        protected IPartyGroupHelper PartyGroupHelper
+        {
+            get
+            {
+                if (_partyGroupHelper == null)
+                {
+                    _partyGroupHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, int, IPartyGroupHelper>>()
+                        .Create(TableNames.PARTYGROUP.ToString(), currUser.DefaultCompany.ClientCompanyId);
+                }
+                return _partyGroupHelper;
+            }
+        }
+        protected IOrderHelper OrderHelper
+        {
+            get
+            {
+                if (_orderHelper == null)
+                {
+                    _orderHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, int, IOrderHelper>>()
+                        .Create(TableNames.ORDER.ToString(), currUser.DefaultCompany.ClientCompanyId);
+                }
+                return _orderHelper;
             }
         }
         protected IClientHelper ClientHelper

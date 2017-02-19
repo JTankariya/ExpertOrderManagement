@@ -55,5 +55,11 @@ namespace ExpertOrderManagement.Controllers
         {
             return View(ProductHelper.GetAll());
         }
+
+        public JsonResult GetDetail(string Code)
+        {
+            var product = ProductHelper.GetByCode(Code);
+            return Json(new ResponseMsg() { IsSuccess = true, ResponseValue = product }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

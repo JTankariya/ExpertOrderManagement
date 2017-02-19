@@ -69,6 +69,34 @@ namespace BusinessLogic
             }
         }
 
+        private static IPartyGroupHelper _partyGroupHelper;
+        public static IPartyGroupHelper PartyGroupHelper
+        {
+            get
+            {
+                if (_partyGroupHelper == null)
+                {
+                    _partyGroupHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, int, IPartyGroupHelper>>()
+                        .Create(TableNames.PARTYGROUP.ToString(), CurrentUser.DefaultCompany.ClientCompanyId);
+                }
+                return _partyGroupHelper;
+            }
+        }
+
+        private static IPartyHelper _partyHelper;
+        public static IPartyHelper PartyHelper
+        {
+            get
+            {
+                if (_partyHelper == null)
+                {
+                    _partyHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, int, IPartyHelper>>()
+                        .Create(TableNames.PARTY.ToString(), CurrentUser.DefaultCompany.ClientCompanyId);
+                }
+                return _partyHelper;
+            }
+        }
+
         private static ISettingHelper _settingHelper;
         public static ISettingHelper SettingHelper
         {

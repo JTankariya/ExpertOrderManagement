@@ -39,7 +39,7 @@
                                         }
                                         else
                                         {
-                                            @Html.DropDownListFor(x => x.Group, new List<SelectListItem>(), new { @class = "form-control"})
+                                            @Html.DropDownListFor(x => x.Group, new List<SelectListItem>(), new { @class = "form-control" })
                                         }
                                     </div>
                                 </div>
@@ -91,60 +91,6 @@
                             </div>
                         </div>
                     </div>
-                    @*<div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="hori-pass1" class="col-sm-4 control-label">Service Item</label>
-                                <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Service, new { @class = "form-control", @placeholder = "Service Item" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="hori-pass1" class="col-sm-4 control-label">Unit 2</label>
-                                <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Unit2, new { @class = "form-control", @placeholder = "Unit 2" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="hori-pass1" class="col-sm-4 control-label">Unit 3</label>
-                                <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Unit3, new { @class = "form-control", @placeholder = "Unit 3" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="hori-pass1" class="col-sm-4 control-label">Unit 4</label>
-                                <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Unit4, new { @class = "form-control", @placeholder = "Unit 4" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="hori-pass1" class="col-sm-4 control-label">Unit 5</label>
-                                <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Unit5, new { @class = "form-control", @placeholder = "Unit 5" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="hori-pass1" class="col-sm-4 control-label">Unit 6</label>
-                                <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Unit6, new { @class = "form-control", @placeholder = "Unit 6" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -163,66 +109,121 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="hori-pass1" class="col-sm-4 control-label">Max Qty</label>
-                                <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.MaxLevel, new { @class = "form-control", @placeholder = "Max Qty" })
+                    @*<div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Service Item</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Service, new { @class = "form-control", @placeholder = "Service Item" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Unit 2</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Unit2, new { @class = "form-control", @placeholder = "Unit 2" })
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="hori-pass1" class="col-sm-4 control-label">Min Qty</label>
-                                <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.MinLevel, new { @class = "form-control", @placeholder = "Min Qty" })
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Unit 3</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Unit3, new { @class = "form-control", @placeholder = "Unit 3" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Unit 4</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Unit4, new { @class = "form-control", @placeholder = "Unit 4" })
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="hori-pass1" class="col-sm-4 control-label">Reorder Qty</label>
-                                <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.ReOrder, new { @class = "form-control", @placeholder = "Reorder Qty" })
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Unit 5</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Unit5, new { @class = "form-control", @placeholder = "Unit 5" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Unit 6</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Unit6, new { @class = "form-control", @placeholder = "Unit 6" })
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="hori-pass1" class="col-sm-4 control-label">Packing Qty</label>
-                                <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.PackingQty, new { @class = "form-control", @placeholder = "Packing Qty" })
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Max Qty</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.MaxLevel, new { @class = "form-control", @placeholder = "Max Qty" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Min Qty</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.MinLevel, new { @class = "form-control", @placeholder = "Min Qty" })
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="hori-pass1" class="col-sm-4 control-label">Category 1</label>
-                                <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Category1, new { @class = "form-control", @placeholder = "Category 1" })
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Reorder Qty</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.ReOrder, new { @class = "form-control", @placeholder = "Reorder Qty" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Packing Qty</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.PackingQty, new { @class = "form-control", @placeholder = "Packing Qty" })
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="hori-pass1" class="col-sm-4 control-label">Category 2</label>
-                                <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Category2, new { @class = "form-control", @placeholder = "Category 2" })
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Category 1</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Category1, new { @class = "form-control", @placeholder = "Category 1" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Category 2</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Category2, new { @class = "form-control", @placeholder = "Category 2" })
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="hori-pass1" class="col-sm-4 control-label">MRP</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(x => x.Valuation, new { @class = "form-control", @placeholder = "MRP" })
-                        </div>
-                    </div>*@
+                        <div class="form-group">
+                            <label for="hori-pass1" class="col-sm-4 control-label">MRP</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(x => x.Valuation, new { @class = "form-control", @placeholder = "MRP" })
+                            </div>
+                        </div>*@
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8">
                             <a href="@Url.Action("Add", "Product", new { ID=0})" i id="btnAdd" type="button" class="btn btn-lg btn-default waves-effect waves-light m-l-5">

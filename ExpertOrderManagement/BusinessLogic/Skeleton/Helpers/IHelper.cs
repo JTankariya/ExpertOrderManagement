@@ -11,5 +11,6 @@ namespace BusinessLogic
         IEnumerable<T> GetAll(string SPName);
         T GetById(int Id);
         T GetByRefId(string refId);
+        T GetByCode(string Code);
     }
 }
