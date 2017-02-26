@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-@Styles.Render("~/Content/css/customsweetcss")
+@Styles.Render("~/Content/css/customsweetswitcheryselect2css")
 <div class="row">
     <div class="col-lg-offset-1 col-lg-10">
         <div class="card-box">
@@ -29,67 +29,77 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-4 control-label">Group</label>
-                                    <div class="col-sm-7">
-                                        @if (ViewBag.GroupList != null)
-                                        {
-                                            @Html.DropDownListFor(x => x.Group, new SelectList(ViewBag.GroupList, "Code", "Name"), "-- Select --", new { @class = "form-control" })
-                                        }
-                                        else
-                                        {
-                                            @Html.DropDownListFor(x => x.Group, new List<SelectListItem>(), new { @class = "form-control" })
-                                        }
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Op. Balance</label>
                                 <div class="col-sm-7">
-                                    @Html.TextAreaFor(x => x.OpBal, new { @class = "form-control", @placeholder = "Op. Balance", @rows = "3" })
+                                    @Html.TextBoxFor(x => x.OpBal, new { @class = "form-control", @placeholder = "Op. Balance", @rows = "3" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="hori-pass1" class="col-sm-4 control-label" id="lblIsDebit">Credit</label>
+                                <div class="col-sm-7">
+                                    @Html.HiddenFor(x => x.Bal_DC, new { @class = "form-control", @placeholder = "Credit(C) / Debit(D)", @maxlength = 1 })
+                                    <input type="checkbox" data-plugin="switchery" data-color="#515ffb" id="chkIsDebit" />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="hori-pass1" class="col-sm-4 control-label">Unit</label>
-                                <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Bal_DC, new { @class = "form-control", @placeholder = "Credit(C) / Debit(D)", @maxlength = 1 })
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-4 control-label">Group</label>
+                                        <div class="col-sm-7">
+                                            @if (ViewBag.GroupList != null)
+                                            {
+                                                @Html.DropDownListFor(x => x.Group, new SelectList(ViewBag.GroupList, "Code", "Name"), "-- Select --", new { @class = "form-control" })
+                                            }
+                                            else
+                                            {
+                                                @Html.DropDownListFor(x => x.Group, new List<SelectListItem>(), new { @class = "form-control" })
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="hori-pass1" class="col-sm-4 control-label">TDS?</label>
+                                        <div class="col-sm-7">
+                                            @Html.HiddenFor(x => x.ISTds, new { @class = "form-control", @maxlength = "1" })
+                                            <input type="checkbox" data-plugin="switchery" data-color="#515ffb" id="chkIsTDS" />
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>    
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="hori-pass1" class="col-sm-4 control-label">Remarks</label>
                                 <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Remarks, new { @class = "form-control", @placeholder = "Remarks" })
+                                    @Html.TextAreaFor(x => x.Remarks, new { @class = "form-control", @placeholder = "Remarks", @rows = "3" })
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="hori-pass1" class="col-sm-4 control-label">TDS</label>
-                                <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.ISTds, new { @class = "form-control", @maxlength="1" })
-                                </div>
-                            </div>
-                        </div>
+                                              
+                        
+                    </div>
+                    <div class="row">
+                       
                         @*<div class="col-md-6">
-                            <div class="form-group">
-                                <label for="hori-pass1" class="col-sm-4 control-label">Edger</label>
-                                <div class="col-sm-7">
-                                    @Html.TextBoxFor(x => x.Edger, new { @class = "form-control", @placeholder = "Opening Value" })
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Edger</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Edger, new { @class = "form-control", @placeholder = "Opening Value" })
+                                    </div>
                                 </div>
-                            </div>
-                        </div>*@
+                            </div>*@
                     </div>
                     @*<div class="row">
                             <div class="col-md-6">
@@ -253,7 +263,7 @@
 
     </div>
 </div>
-@Scripts.Render("~/Content/css/customsweetjs")
+@Scripts.Render("~/Content/css/customsweetswitcheryselect2js")
 
 <script>
     function PartyAdded(response) {
@@ -267,6 +277,14 @@
     }
 
     $(document).ready(function () {
+        $('#chkIsDebit').on('change', function () {
+            if ($(this).is(':checked')) {
+                $('#lblIsDebit').html("Debit");
+            }
+            else {
+                $('#lblIsDebit').html("Credit");
+            }
+        })
         $('#frmParty').validate({
             rules: {
                 Name: {
@@ -276,15 +294,23 @@
                         data: { Code: $('#Code').val() },
                         type: "POST"
                     }
+                },
+                Group: {
+                    required: true
                 }
             },
             messages: {
                 Name: {
                     required: "Please enter Name",
                     remote: "Party Name is already entered, Please enter another party name"
+                },
+                Group: {
+                    required: "Please select Group"
                 }
             },
             submitHandler: function (form) {
+                $('#Bal_DC').val($('#chkIsDebit').is(':checked') ? "D" : "C");
+                $('#ISTds').val($('#chkIsTDS').is(':checked') ? "Y" : "N");
                 $.ajax({
                     type: "POST",
                     url: "@Url.Action("Save","Party")",

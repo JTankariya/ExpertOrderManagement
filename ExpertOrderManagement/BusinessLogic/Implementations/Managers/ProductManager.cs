@@ -62,7 +62,7 @@ namespace BusinessLogic
             param.Add("@I_VatCode", _context.I_Vatcode);
             param.Add("@O_VatCode", _context.O_Vatcode);
             param.Add("@Blocked", _context.Blocked);
-            param.Add("@Tag", _context.OperationFlag);
+            param.Add("@Tag", _context.Tag);
             param.Add("@OperationFlag", _context.OperationFlag);
             param.Add("@RefId", _context.RefId);
             DBHelper.ExecuteNonQuery("Order.SaveProduct", param, true);
