@@ -74,5 +74,20 @@ namespace BusinessLogic
         {
             throw new NotImplementedException();
         }
+
+        public List<Batch> GetBatches()
+        {
+            Dictionary<string, object> param = new Dictionary<string, object>();
+            param.Add("@Code", _context.Code);
+            var dtBatch = DBHelper.GetDataTable("Order.GetProductBatches", param, true);
+            if (dtBatch != null && dtBatch.Rows.Count > 0)
+            {
+                return DBHelper.ConvertToEnumerable<Batch>(dtBatch).ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

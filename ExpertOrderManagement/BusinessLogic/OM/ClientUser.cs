@@ -27,6 +27,7 @@ namespace BusinessLogic
         public int UserTypeId { get; set; }
         public string EmailId { get; set; }
         public string UserName { get; set; }
+        public string PartyCode { get; set; }
 
         public bool IsToRefresh
         {
@@ -43,6 +44,46 @@ namespace BusinessLogic
                 if (_settings == null || IsToRefresh)
                     _settings = Manager.GetSettings();
                 return _settings;
+            }
+        }
+        private List<ClientCompany> _companies;
+
+        public List<ClientCompany> Companies
+        {
+            get
+            {
+                if (_companies == null)
+                {
+                    _companies = Helpers.ClientHelper.GetCompanies(Clientid).ToList();
+                }
+                return _companies;
+            }
+        }
+
+        private List<ClientCompany> _billableCompanies;
+
+        public List<ClientCompany> BillableCompanies
+        {
+            get
+            {
+                if (_billableCompanies == null)
+                {
+                    _billableCompanies = Helpers.ClientHelper.GetBillableCompanies(Clientid).ToList();
+                }
+                return _billableCompanies;
+            }
+        }
+        private List<ClientCompany> _withoutCompanies;
+
+        public List<ClientCompany> WithoutCompanies
+        {
+            get
+            {
+                if (_withoutCompanies == null)
+                {
+                    _withoutCompanies = Helpers.ClientHelper.GetWithoutCompanies(Clientid).ToList();
+                }
+                return _withoutCompanies;
             }
         }
 
@@ -94,7 +135,8 @@ namespace BusinessLogic
             USERNAME = 3,
             PASSWORD = 4,
             USERTYPEID = 5,
-            CLIENTID = 6
+            CLIENTID = 6,
+            PARTYCODE = 7
         }
 
         public ClientUser()
@@ -114,6 +156,7 @@ namespace BusinessLogic
                 this.Password = Convert.ToString(dt.Rows[0][FIELDNAMES.PASSWORD.ToString()]);
                 this.UserTypeId = Convert.ToInt32(dt.Rows[0][FIELDNAMES.USERTYPEID.ToString()]);
                 this.Clientid = Convert.ToInt32(dt.Rows[0][FIELDNAMES.CLIENTID.ToString()]);
+                this.PartyCode = dt.Rows[0][FIELDNAMES.PARTYCODE.ToString()].ToString();
             }
         }
 
@@ -130,6 +173,7 @@ namespace BusinessLogic
                 this.Password = Convert.ToString(dt.Rows[0][FIELDNAMES.PASSWORD.ToString()]);
                 this.UserTypeId = Convert.ToInt32(dt.Rows[0][FIELDNAMES.USERTYPEID.ToString()]);
                 this.Clientid = Convert.ToInt32(dt.Rows[0][FIELDNAMES.CLIENTID.ToString()]);
+                this.PartyCode = dt.Rows[0][FIELDNAMES.PARTYCODE.ToString()].ToString();
             }
         }
 
@@ -145,6 +189,7 @@ namespace BusinessLogic
                 this.Password = Convert.ToString(dt.Rows[0][FIELDNAMES.PASSWORD.ToString()]);
                 this.UserTypeId = Convert.ToInt32(dt.Rows[0][FIELDNAMES.USERTYPEID.ToString()]);
                 this.Clientid = Convert.ToInt32(dt.Rows[0][FIELDNAMES.CLIENTID.ToString()]);
+                this.PartyCode = dt.Rows[0][FIELDNAMES.PARTYCODE.ToString()].ToString();
             }
         }
 

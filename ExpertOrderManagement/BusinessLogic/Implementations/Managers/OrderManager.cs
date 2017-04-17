@@ -70,10 +70,10 @@ namespace BusinessLogic
                 foreach (var detail in _context.Details)
                 {
                     rm.Rows.Add();
-                    rm.Rows[rm.Rows.Count - 1]["ClientCompanyId"] = detail.ClientCompanyId;
+                    rm.Rows[rm.Rows.Count - 1]["ClientCompanyId"] = _context.ClientCompanyId;
                     rm.Rows[rm.Rows.Count - 1]["Division"] = detail.Division;
-                    rm.Rows[rm.Rows.Count - 1]["Ord_No"] = detail.Ord_No;
-                    rm.Rows[rm.Rows.Count - 1]["Ord_Dt"] = detail.Ord_Dt;
+                    rm.Rows[rm.Rows.Count - 1]["Ord_No"] = _context.Ord_no;
+                    rm.Rows[rm.Rows.Count - 1]["Ord_Dt"] = _context.Ord_Dt;
                     rm.Rows[rm.Rows.Count - 1]["Code"] = detail.Code;
                     rm.Rows[rm.Rows.Count - 1]["Qty"] = detail.Qty;
                     rm.Rows[rm.Rows.Count - 1]["Bal"] = detail.Bal;
@@ -84,9 +84,9 @@ namespace BusinessLogic
                     rm.Rows[rm.Rows.Count - 1]["It_Tax"] = detail.It_Tax;
                     rm.Rows[rm.Rows.Count - 1]["It_Oc"] = detail.It_Oc;
                     rm.Rows[rm.Rows.Count - 1]["Stk_Qty"] = detail.Stk_Qty;
-                    rm.Rows[rm.Rows.Count - 1]["Dly_Dt"] = detail.Dly_Dt;
+                    rm.Rows[rm.Rows.Count - 1]["Dly_Dt"] = DBNull.Value;
                     rm.Rows[rm.Rows.Count - 1]["CV_Code"] = detail.CV_Code;
-                    rm.Rows[rm.Rows.Count - 1]["Type"] = detail.Type;
+                    rm.Rows[rm.Rows.Count - 1]["Type"] = _context.Type;
                     rm.Rows[rm.Rows.Count - 1]["BatchNo"] = detail.BatchNo;
                     rm.Rows[rm.Rows.Count - 1]["Narr1"] = detail.Narr1;
                     rm.Rows[rm.Rows.Count - 1]["Narr2"] = detail.Narr2;
@@ -94,10 +94,10 @@ namespace BusinessLogic
                     rm.Rows[rm.Rows.Count - 1]["Trackno"] = detail.Trackno;
                     rm.Rows[rm.Rows.Count - 1]["RTUnit"] = detail.RTUnit;
                     rm.Rows[rm.Rows.Count - 1]["Tag"] = detail.Tag;
-                    rm.Rows[rm.Rows.Count - 1]["RefId"] = detail.RefId;
+                    rm.Rows[rm.Rows.Count - 1]["RefId"] = Guid.NewGuid().ToString();
                     rm.Rows[rm.Rows.Count - 1]["OperationFlag"] = detail.OperationFlag;
                 }
-                param.Add("@RawMaterials", rm);
+                param.Add("@Details", rm);
             }
             DBHelper.ExecuteNonQuery("Order.SaveOrder", param, true);
             return new ResponseMsg() { IsSuccess = true };

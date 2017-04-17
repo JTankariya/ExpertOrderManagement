@@ -7,54 +7,96 @@
         Model.Ord_Dt = DateTime.Now;
     }
 }
-@Styles.Render("~/Content/css/customsweetcss")
+@Styles.Render("~/Content/css/customsweetswitcheryselect2css")
 
-
+@{
+    var user = ((BusinessLogic.ClientUser)Session["User"]);
+}
+<input type="hidden" id="txtIsCustomer" value="@user.UserTypeId" />
 <div class="row">
     <div class="col-lg-offset-1 col-lg-10">
         <div class="card-box">
-            <h4 class="m-t-0 header-title"><b>Order Details</b></h4>
-            <p class="text-muted font-13 m-b-30">
-                Add/Edit Orders here
-            </p>
-            @using (Html.BeginForm("Add", "Order", FormMethod.Post, new { @class = "form-horizontal m-t-20", @id = "frmOrder" }))
+
+            @if (user.UserTypeId == 3 && user.Client.IsWithout)
             {
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="hori-pass1" class="col-sm-4 control-label">Order No</label>
-                            <div class="col-sm-7">
-                                @Html.HiddenFor(x => x.ClientCompanyId)
-                                @Html.HiddenFor(x => x.RefId)
-                                @Html.HiddenFor(x => x.OperationFlag)
-                                @Html.TextBoxFor(x => x.Ord_no, new { @class = "form-control", @placeholder = "Order No" })
+                    <div class="col-md-10">
+                        <h4 class="m-t-0 header-title">
+                            <b>Order Details</b>
+                        </h4>
+                        <p class="text-muted font-13">
+                            Add/Edit Orders here
+                        </p>
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <div class="row">
+                            <div class="col-md-4 text-right">
+                                <b>B</b>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <input type="checkbox" id="ddlIsWithout" data-plugin="switchery" data-color="#515ffb" @(!user.DefaultCompany.IsWithout ? "checked" : "")>
+                            </div>
+                            <div class="col-md-4 text-left">
+                                <b>W</b>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+            else
+            {
+                <h4>
+                    <b>Order Details</b>
+                </h4>
+                <p class="text-muted font-13 m-b-30">
+                    Add/Edit Orders here
+                </p>
+            }
+
+            @using (Html.BeginForm("Add", "Order", FormMethod.Post, new { @class = "form-horizontal m-t-20", @id = "frmOrder" }))
+            {
+                @Html.HiddenFor(x => x.ClientCompanyId)
+                @Html.HiddenFor(x => x.RefId)
+                @Html.HiddenFor(x => x.OperationFlag)
+                if (user.UserTypeId != 3)
+                {
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="hori-pass1" class="col-sm-4 control-label">Order No</label>
+                                <div class="col-sm-7">
+
+                                    @Html.TextBoxFor(x => x.Ord_no, new { @class = "form-control", @placeholder = "Order No" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="hori-pass1" class="col-sm-4 control-label">Date</label>
+                                <div class="col-sm-7">
+                                    @Html.TextBoxFor(x => x.Ord_Dt, "{0:dd/MM/yyyy}", new { @class = "datepicker form-control", @data_mask = "__/__/____", @placeholder = "Order Date" })
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="hori-pass1" class="col-sm-4 control-label">Date</label>
-                            <div class="col-sm-7">
-                                @Html.TextBoxFor(x => x.Ord_Dt, "{0:dd/MM/yyyy}", new { @class = "datepicker form-control", @data_mask = "__/__/____", @placeholder = "Order Date" })
-                            </div>
+
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Party</label>
+                        <div class="col-sm-7">
+
+                            @if (ViewBag.Parties != null)
+                            {
+                                @Html.DropDownListFor(x => x.Code, new SelectList(ViewBag.Parties, "Code", "Name"), "-- Select Party --", new { @class = "form-control" })
+                            }
+                            else
+                            {
+                                @Html.DropDownListFor(x => x.Code, new List<SelectListItem>(), new { @class = "form-control" })
+                            }
+
                         </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-4 control-label">Party</label>
-                    <div class="col-sm-7">
-                        @if (ViewBag.Parties != null)
-                        {
-                            @Html.DropDownListFor(x => x.Code, new SelectList(ViewBag.Parties, "Code", "Name"), "-- Select Party --", new { @class = "form-control" })
-                        }
-                        else
-                        {
-                            @Html.DropDownListFor(x => x.Code, new List<SelectListItem>(), new { @class = "form-control" })
-                        }
-                    </div>
-                </div>
-
+                }
                 <div class="row">
                     <div class="col-md-12">
                         <table id="tblOrderDetails" class="table table-striped table-bordered">
@@ -108,7 +150,14 @@
                                             }
                                         </td>
                                         <td class="col-md-2">
-                                            <input type="text" class="numeric form-control" />
+                                            @if (ViewBag.Batches != null)
+                                            {
+                                                @Html.DropDownList("ddlBatches", new SelectList(ViewBag.Batches, "Code", "Name"), "-- Select Batch --", new { @class = "form-control" })
+                                            }
+                                            else
+                                            {
+                                                @Html.DropDownList("ddlBatches", new List<SelectListItem>(), new { @class = "form-control" })
+                                            }
                                         </td>
                                         <td class="col-md-1">
                                             <input type="text" class="numeric form-control" />
@@ -138,7 +187,7 @@
                                                 </button>
                                             </td>
                                             <td class="col-md-2">
-                                                <input type="hidden" data-refid value="@detail.RefId"/>
+                                                <input type="hidden" data-refid value="@detail.RefId" />
                                                 <input type="hidden" data-operationflag value="@detail.OperationFlag" />
                                                 @if (ViewBag.Products != null)
                                                 {
@@ -309,18 +358,18 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-8">
-                        @*<a href="@Url.Action("Add", "Order", new { Id = 0 })" i id="btnAdd" type="button" class="btn btn-lg btn-default waves-effect waves-light m-l-5">
-                            <i class="ti-plus"></i>&nbsp;&nbsp;Add
-                        </a>*@
+                        <a href="@Url.Action("Add", "Order", new { Id = 0 })" i id="btnAdd" type="button" class="btn btn-lg btn-default waves-effect waves-light m-l-5">
+                            <i class="ti-plus"></i>&nbsp;&nbsp;Add New
+                        </a>
                         <button id="btnSave" type="submit" class="btn btn-lg btn-primary waves-effect waves-light">
                             <i class="ti-save"></i>&nbsp;&nbsp; Save
                         </button>
                         @*<button id="btnDelete" type="button" class="btn btn-lg btn-danger waves-effect waves-light m-l-5">
-                            <i class="ti-trash"></i>&nbsp;&nbsp;Delete
-                        </button>
-                        <button id="btnView" type="button" class="btn btn-lg btn-warning waves-effect waves-light m-l-5">
-                            <i class="ti-search"></i>&nbsp;&nbsp;View
-                        </button>*@
+                                <i class="ti-trash"></i>&nbsp;&nbsp;Delete
+                            </button>
+                            <button id="btnView" type="button" class="btn btn-lg btn-warning waves-effect waves-light m-l-5">
+                                <i class="ti-search"></i>&nbsp;&nbsp;View
+                            </button>*@
                     </div>
                 </div>
 
@@ -338,7 +387,7 @@
 
     </div>
 </div>
-@Scripts.Render("~/Content/css/customsweetjs")
+@Scripts.Render("~/Content/css/customsweetswitcheryselect2js")
 <script src="@Url.Content("~/Content/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js")"></script>
 <script src="@Url.Content("~/Content/plugins/bootstrap-inputmask/bootstrap-inputmask.min.js")" type="text/javascript"></script>
 <script>
@@ -353,6 +402,37 @@
     }
     $(document).ready(function () {
         blankOrderDetailRow = $('#tblOrderDetails>tbody>tr:last')[0].outerHTML;
+        $('body').on('change', '#ddlIsWithout', function () {
+            swal({
+                title: "Changing this flag will reload all products and other information for order, would you like to continue?",
+                text: "You will be able to revert this action later!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, change it!",
+                cancelButtonText: "No, cancel plz!",
+                closeOnConfirm: true,
+                closeOnCancel: true
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        type: "GET",
+                        url: '@Url.Action("SetDefaultCompany","Dashboard")',
+                        data: { CompanyId: $('#ddlIsWithout').is(':checked') ? 1 : 0 },
+                        success: function (data) {
+                            if (data.IsSuccess) {
+                                window.location.reload(true);
+                            }
+                        }
+                    })
+                }
+                else {
+                    $('#ddlIsWithout').unbind('change');
+                    $('.switchery').click();
+                    $('#ddlIsWithout').bind('change');
+                }
+            });
+        });
         $('body').on('click', '[data-deldetail]', function () {
             if ($(this).parent().parent().index() != $('#tblOrderDetails>tbody>tr:last').index()) {
                 currDetailRow = $(this).parent().parent();
@@ -380,25 +460,63 @@
         $('body').on('change', '#tblOrderDetails tr td:nth-child(6) input,#tblOrderDetails tr td:nth-child(4) input', function () {
             CalculateTotal();
         });
-        var currDDL = "";
+        $('body').on('change', '#tblOrderDetails tr td:nth-child(3) select', function () {
+            currentProduct = $(this).parent().parent().find('td:eq(1) select');
+            currentBatch = this;
+            if (CheckDuplicate()) {
+                swal({
+                    title: "Stop",
+                    text: "Same Product and Batch is already selected above, Please select another batch or Product.",
+                    type: "error"
+                }, function () {
+                });
+            }
+        });
         $('body').on('change', '#tblOrderDetails tr td:nth-child(2) select', function () {
-            if (CheckDuplicate() == true) {
+            currentProduct = this;
+            currentBatch = $(this).parent().parent().find('td:eq(2) select');
+            if (CheckDuplicate()) {
+                swal({
+                    title: "Stop",
+                    text: "Same Product and Batch is already selected above, Please select another batch or Product.",
+                    type: "error"
+                }, function () {
+                });
                 return false;
             }
             if ($('#tblOrderDetails>tbody>tr:last').index() == $(this).parent().parent().index() && $(this).val().length > 0) {
                 $('#tblOrderDetails>tbody').append(blankOrderDetailRow);
             }
             if ($(this).val().length > 0) {
-                currDDL = this;
+
                 $.ajax({
                     type: "GET",
                     url: '@Url.Action("GetDetail","Product")',
                     data: { Code: $(this).val() },
                     success: function (data) {
                         if (data.IsSuccess) {
-                            $(currDDL).parent().siblings('td:eq(3)').find('input').val(data.ResponseValue.Unit1);
-                            $(currDDL).parent().siblings('td:eq(4)').find('input').val(data.ResponseValue.Sl_Rate);
+                            $(currentProduct).parent().siblings('td:eq(3)').find('input').val(data.ResponseValue.Unit1);
+                            $(currentProduct).parent().siblings('td:eq(4)').find('input').val(data.ResponseValue.Sl_Rate);
                             CalculateTotal();
+                        }
+                    }
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetBatches","Product")',
+                    data: { Code: $(this).val() },
+                    success: function (data) {
+                        if (data.IsSuccess) {
+                            var html = "";
+                            if (data.ResponseValue != null) {
+                                $.each(data.ResponseValue, function (index, item) {
+                                    html += '<option value="' + item.Code + '">' + item.BatchNo + '</option>';
+                                });
+                            }
+
+                            html += '<option value="" selected>-- All --</option>';
+                            $(currentProduct).parent().parent().find('td:eq(2) select').html(html);
                         }
                     }
                 });
@@ -412,12 +530,11 @@
         $('#frmOrder').validate({
             rules: {
                 Ord_no: {
-                    required: true
-                    @*remote: {
-                        url: '@Url.Action("CheckDuplicateNo", "Inward")',
-                        data: { ID: $('#ID').val() },
+                    required: true,
+                    remote: {
+                        url: '@Url.Action("CheckDuplicateOrderNo", "Order")',
                         type: "POST"
-                    }*@
+                    }
                 },
                 Ord_Date: {
                     required: true
@@ -450,11 +567,17 @@
                     return false;
                 }
                 var order = {};
+                order.Adjusted = $('#ddlIsWithout').is(':checked');
                 order.RefId = $('#RefId').val();
                 order.ClientCompanyId = $('#ClientCompanyId').val();
                 order.OperationFlag = $('#OperationFlag').val();
                 order.Ord_no = $('#Ord_no').val();
-                order.Ord_Dt = new Date($('#Ord_Dt').datepicker("getDate")).toISOString();
+                if ($('#txtIsCustomer').val() != "3") {
+                    order.Ord_Dt = new Date($('#Ord_Dt').datepicker("getDate")).toISOString();
+                }
+                else {
+                    order.Ord_Dt = new Date().toISOString();
+                }
                 order.Code = $('#Code').val();
                 order.Pay_Terms = $('#Pay_Terms').val();
                 order.Del_Ins = $('#Del_Ins').val();
@@ -470,11 +593,11 @@
                     detail.RefId = $(this).find('>td:eq(1) [data-refid]').val();
                     detail.OperationFlag = $(this).find('>td:eq(1) [data-operationflag]').val();
                     detail.Code = $(this).find('>td:eq(1) select').val();
-                    detail.BatchNo = $(this).find('>td:eq(2) input').val();
+                    detail.BatchNo = $(this).find('>td:eq(2) select').val();
                     detail.Qty = $(this).find('>td:eq(3) input').val();
                     detail.Unit = $(this).find('>td:eq(4) input').val();
                     detail.Rate = $(this).find('>td:eq(5) input').val();
-                    detail.Value = $(this).find('>td:eq(6) input').val();                    
+                    detail.Value = $(this).find('>td:eq(6) input').val();
                     detail.IsDeleted = !$(this).is(':visible');
                     order.Details.push(detail);
                 });
@@ -580,16 +703,23 @@
     var grandTotal = 0;
     var blankInwardDetailRow = "", currProductDDL = "";
     var currDetailRow = "";
-    function CheckDuplicate(ctrl) {
-        var products = $('#tblOrderDetails>tbody>tr td:nth-child(1) select').filter(function (index, element) { return $(element).val() == $(ctrl).val() });
+    var currentProduct = "";
+    var currentBatch = "";
+    function CheckDuplicate() {
+        var products = $('#tblOrderDetails>tbody>tr td:nth-child(2) select').filter(function (index, element) { return $(element).val() == $(currentProduct).val() });
+        var isFound = false;
         $.each(products, function (index, element) {
-            if ($(element).parent().parent().find('>td:nth-child(1) select').filter(function (sindex, selement) { return $(selement).val() == $(currentShade).val() }).length > 0 &&
-                $(element).parent().parent().index() != $(ctrl).parent().parent().index()) {
-                $(ctrl).val("");
-                return true;
+            if ($(element).parent().parent().find('>td:nth-child(3) select').val() == ($(currentBatch).val() == null ? "" : $(currentBatch).val()) &&
+                $(element).parent().parent().index() != $(currentBatch).parent().parent().index()) {
+                $(currentBatch).val("");
+                if ($(currentBatch).val() == null) {
+                    $(currentProduct).val("");
+                }
+                isFound = true;
+                return false;
             }
         });
-        return false;
+        return isFound;
     }
     function CalculateTotal() {
         grandTotal = 0;

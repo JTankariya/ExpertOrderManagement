@@ -44,5 +44,13 @@ namespace BusinessLogic
         {
             return DBHelper.ConvertToEnumerable<ClientCompany>("select * from " + TableNames.CLIENTCOMPANY + " where ClientId=" + clientId);
         }
+        public IEnumerable<ClientCompany> GetBillableCompanies(int clientId)
+        {
+            return DBHelper.ConvertToEnumerable<ClientCompany>("select * from " + TableNames.CLIENTCOMPANY + " where ClientId=" + clientId + " and IsWithout=0");
+        }
+        public IEnumerable<ClientCompany> GetWithoutCompanies(int clientId)
+        {
+            return DBHelper.ConvertToEnumerable<ClientCompany>("select * from " + TableNames.CLIENTCOMPANY + " where ClientId=" + clientId + " and IsWithout=1");
+        }
     }
 }

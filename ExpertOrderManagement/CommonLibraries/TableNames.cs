@@ -13,6 +13,7 @@ namespace CommonLibraries
         public const string USERTYPES = "[Order.UserType]";
         public const string CLIENT = "[Order.ClientMaster]";
         public const string PARTY = "[Order.ACT]";
+        public const string RATE2 = "[Order.Rate2]";
         public const string ORDER = "[Order.Order]";
         public const string PARTYGROUP = "[Order.Group]";
         public const string CLIENTCOMPANY = "[Order.ClientCompanyMaster]";

@@ -22,6 +22,7 @@ namespace ExpertOrderManagement.Controllers
             else
             {
                 var client = new Client();
+                client.AccountExpiredOn = DateTime.Now.AddYears(1);
                 return View(client);
             }
 

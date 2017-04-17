@@ -7,5 +7,6 @@ namespace BusinessLogic
 {
     public interface IProductManager : IGenericCRUD
     {
+        List<Batch> GetBatches();
     }
 }

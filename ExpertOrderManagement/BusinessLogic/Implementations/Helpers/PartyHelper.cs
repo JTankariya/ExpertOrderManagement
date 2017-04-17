@@ -30,7 +30,7 @@ namespace BusinessLogic
 
         public List<Party> GetSundryDebtors()
         {
-            var query = "select * from " + base._tableName + " where [Group] = " + Constants.DEFAULT_SUNDRY_DEBTORS_CODE;
+            var query = "select * from " + base._tableName + " where [Group] = " + Constants.DEFAULT_SUNDRY_DEBTORS_CODE + " and ClientCompanyId=" + base._companyId;
             return DBHelper.ConvertToList<Party>(query);
         }
     }

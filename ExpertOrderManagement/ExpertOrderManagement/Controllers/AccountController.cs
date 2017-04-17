@@ -44,7 +44,7 @@ namespace ExpertOrderManagement.Controllers
                 }
                 Session["User"] = user;
                 var defaultCompanySetting = user.Settings.Where(x => x.SettingId == 1);
-                if ((defaultCompanySetting == null || defaultCompanySetting.Count() == 0) && user.UserTypeId == 2)
+                if ((defaultCompanySetting == null || defaultCompanySetting.Count() == 0) && (user.UserTypeId == 2 || user.UserTypeId == 3))
                 {
                     user.Manager.SaveSetting(1, Convert.ToString(user.Client.BillableCompanies.FirstOrDefault().ClientCompanyId));
                 }

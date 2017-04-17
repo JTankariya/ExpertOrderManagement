@@ -7,7 +7,7 @@
 @Styles.Render("~/Content/css/customsweetcss")
 <link href="@Url.Content("~/Content/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css")" rel="stylesheet">
 <div class="row">
-    <div class="col-lg-offset-2 col-lg-8">
+    <div class="col-lg-offset-1 col-lg-10">
         <div class="card-box">
             <h4 class="m-t-0 header-title"><b>Client Master</b></h4>
             <p class="text-muted font-13 m-b-30">
@@ -17,96 +17,103 @@
             {
                 @Html.HiddenFor(x => x.Id)
                 @Html.HiddenFor(x => x.NoOfDays)
-                <div class="form-group">
-                    <label for="hori-pass1" class="col-sm-4 control-label">Company Name</label>
-                    <div class="col-sm-7">
-                        @Html.HiddenFor(x => x.RefId)
-                        @Html.TextBoxFor(x => x.CompanyName, new { @class = "form-control", @placeholder = "Company Name" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="hori-pass1" class="col-sm-4 control-label">Company Address</label>
-                    <div class="col-sm-7">
-                        @Html.TextBoxFor(x => x.CompanyAddress, new { @class = "form-control", @placeholder = "Address" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="hori-pass1" class="col-sm-4 control-label">Mobile No</label>
-                    <div class="col-sm-7">
-                        @Html.TextBoxFor(x => x.MobileNo, new { @class = "form-control", @placeholder = "Mobile No" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="hori-pass1" class="col-sm-4 control-label">Email Id</label>
-                    <div class="col-sm-7">
-                        @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "Email" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="hori-pass1" class="col-sm-4 control-label">First Name</label>
-                    <div class="col-sm-7">
-                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @placeholder = "First Name" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="hori-pass1" class="col-sm-4 control-label">Last Name</label>
-                    <div class="col-sm-7">
-                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @placeholder = "Last Name" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="hori-pass1" class="col-sm-4 control-label">User Name</label>
-                    <div class="col-sm-7">
-                        @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", @placeholder = "User Name", @readonly = "readonly", @onfocus = "this.removeAttribute('readonly');" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="hori-pass1" class="col-sm-4 control-label">Password</label>
-                    <div class="col-sm-7">
-                        @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @placeholder = "Password", @readonly = "readonly", @onfocus = "this.removeAttribute('readonly');", @type = "password" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="hori-pass1" class="col-sm-4 control-label">Confirm Password</label>
-                    <div class="col-sm-7">
-                        <input type="password" name="ConfirmPassword" id="txtConfirmPassword" class="form-control" placeholder="Confirm Password" readonly="readonly" onfocus="this.removeAttribute('readonly');" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="hori-pass1" class="col-sm-4 control-label">No Of Users</label>
-                    <div class="col-sm-7">
-                        @Html.TextBoxFor(x => x.NoOfAccessUsers, new { @class = "form-control", @placeholder = "No of Users" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="hori-pass1" class="col-sm-4 control-label">No of Company</label>
-                    <div class="col-sm-7">
-                        @Html.TextBoxFor(x => x.NoOfCompanyPerUser, new { @class = "form-control", @placeholder = "No of company" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="hori-pass1" class="col-sm-4 control-label">Expiry Date</label>
-                    <div class="col-sm-7">
-                        @Html.TextBoxFor(x => x.AccountExpiredOn, new { @class = "form-control datepicker", @placeholder = "Expiry Date" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <div class="checkbox checkbox-primary">
-                            @Html.CheckBoxFor(x=>x.QueryRights)
-                            <label for="QueryRights">
-                                Rights for writing query?
-                            </label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="hori-pass1" class="col-sm-4 control-label">Company Name</label>
+                            <div class="col-sm-8">
+                                @Html.HiddenFor(x => x.RefId)
+                                @Html.TextBoxFor(x => x.CompanyName, new { @class = "form-control", @placeholder = "Company Name" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hori-pass1" class="col-sm-4 control-label">Company Address</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.CompanyAddress, new { @class = "form-control", @placeholder = "Address" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hori-pass1" class="col-sm-4 control-label">Mobile No</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.MobileNo, new { @class = "form-control", @placeholder = "Mobile No" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hori-pass1" class="col-sm-4 control-label">Email Id</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "Email" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hori-pass1" class="col-sm-4 control-label">First Name</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @placeholder = "First Name" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hori-pass1" class="col-sm-4 control-label">Last Name</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8 text-center">
+                                <div class="checkbox checkbox-primary">
+                                    @Html.CheckBoxFor(x => x.QueryRights)
+                                    <label for="QueryRights">
+                                        Rights for writing query?
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <div class="checkbox checkbox-primary">
-                            @Html.CheckBoxFor(x => x.IsWithout)
-                            <label for="IsWithout">
-                                Has Without?
-                            </label>
+                    <div class="col-md-6">
+                        
+                        <div class="form-group">
+                            <label for="hori-pass1" class="col-sm-4 control-label">User Name</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", @placeholder = "User Name", @readonly = "readonly", @onfocus = "this.removeAttribute('readonly');" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hori-pass1" class="col-sm-4 control-label">Password</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @placeholder = "Password", @readonly = "readonly", @onfocus = "this.removeAttribute('readonly');", @type = "password" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hori-pass1" class="col-sm-4 control-label">Confirm Password</label>
+                            <div class="col-sm-8">
+                                <input type="password" name="ConfirmPassword" id="txtConfirmPassword" class="form-control" placeholder="Confirm Password" readonly="readonly" onfocus="this.removeAttribute('readonly');" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hori-pass1" class="col-sm-4 control-label">No Of Users</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.NoOfAccessUsers, new { @class = "form-control", @placeholder = "No of Users" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hori-pass1" class="col-sm-4 control-label">No of Company</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.NoOfCompanyPerUser, new { @class = "form-control", @placeholder = "No of company" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hori-pass1" class="col-sm-4 control-label">Expiry Date</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.AccountExpiredOn, new { @class = "form-control datepicker", @placeholder = "Expiry Date" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8 text-center">
+                                <div class="checkbox checkbox-primary">
+                                    @Html.CheckBoxFor(x => x.IsWithout)
+                                    <label for="IsWithout">
+                                        Has Without?
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

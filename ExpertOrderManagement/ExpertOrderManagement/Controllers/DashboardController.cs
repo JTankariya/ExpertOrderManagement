@@ -1,4 +1,5 @@
-﻿using CommonLibraries;
+﻿using BusinessLogic;
+using CommonLibraries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,23 @@ namespace ExpertOrderManagement.Controllers
 
         public ActionResult SetDefaultCompany(int CompanyId)
         {
-            var result = currUser.Manager.SaveSetting(1, Convert.ToString(CompanyId));
-            return Json(result, JsonRequestBehavior.AllowGet);
+            ResponseMsg response = new ResponseMsg();
+            if (currUser.UserTypeId == 3)
+            {
+                if (CompanyId == 0)
+                {
+                    response = currUser.Manager.SaveSetting(1, Convert.ToString(currUser.Client.WithoutCompany.ClientCompanyId));
+                }
+                else
+                {
+                    response = currUser.Manager.SaveSetting(1, Convert.ToString(currUser.Client.BillableCompanies.FirstOrDefault().ClientCompanyId));
+                }
+            }
+            else
+            {
+                response = currUser.Manager.SaveSetting(1, Convert.ToString(CompanyId));
+            }
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
     }

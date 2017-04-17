@@ -61,5 +61,15 @@ namespace ExpertOrderManagement.Controllers
             var product = ProductHelper.GetByCode(Code);
             return Json(new ResponseMsg() { IsSuccess = true, ResponseValue = product }, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetBatches(string Code)
+        {
+            var product = ProductHelper.GetByCode(Code);
+            var batches = product.Manager.GetBatches();
+            ResponseMsg response = new ResponseMsg();
+            response.IsSuccess = true;
+            response.ResponseValue = batches;
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
     }
 }

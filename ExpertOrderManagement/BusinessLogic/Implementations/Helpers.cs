@@ -55,6 +55,20 @@ namespace BusinessLogic
             }
         }
 
+        private static IRate2Helper _rate2Helper;
+        public static IRate2Helper Rate2Helper
+        {
+            get
+            {
+                if (_rate2Helper == null)
+                {
+                    _rate2Helper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, int, IRate2Helper>>()
+                        .Create(TableNames.RATE2.ToString(), CurrentCompany.ClientCompanyId);
+                }
+                return _rate2Helper;
+            }
+        }
+
         private static IClientHelper _clientHelper;
         public static IClientHelper ClientHelper
         {
@@ -108,6 +122,19 @@ namespace BusinessLogic
                         .Create(TableNames.SETTING.ToString(), CurrentCompany.ClientCompanyId);
                 }
                 return _settingHelper;
+            }
+        }
+        private static IOrderHelper _orderHelper;
+        public static IOrderHelper OrderHelper
+        {
+            get
+            {
+                if (_orderHelper == null)
+                {
+                    _orderHelper = ExpertOrderBusinessInit.kernel.Get<IHelperFactory<string, int, IOrderHelper>>()
+                        .Create(TableNames.ORDER.ToString(), CurrentCompany.ClientCompanyId);
+                }
+                return _orderHelper;
             }
         }
     }
