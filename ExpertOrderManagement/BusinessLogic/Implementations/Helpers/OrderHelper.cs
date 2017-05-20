@@ -34,13 +34,7 @@ namespace BusinessLogic
 
         public string GetMaxOrderNo(int clientCompanyId)
         {
-            var orderNo = 1;
-            var dt = DBHelper.GetDataTable("select ISNULL(MAX(CONVERT(int,ISNULL( Ord_No,0))),0) as OrderNo from " + base._tableName + " where ClientCompanyId = " + clientCompanyId);
-            if (dt != null || dt.Rows.Count > 0)
-            {
-                orderNo = Convert.ToInt32(dt.Rows[0]["OrderNo"].ToString()) + 1;
-            }
-            return orderNo.ToString();
+            return clientCompanyId.ToString("000") + DateTime.Now.ToString("yy") + DateTime.Now.ToString("MM") + DateTime.Now.ToString("dd") + DateTime.Now.ToString("hh") + DateTime.Now.ToString("mm");
         }
     }
 }

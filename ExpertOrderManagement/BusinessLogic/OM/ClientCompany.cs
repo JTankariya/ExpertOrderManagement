@@ -62,7 +62,7 @@ namespace BusinessLogic
                 ClientId = Convert.ToInt32(dt.Rows[0][FIELDNAMES.CLIENTID.ToString()]);
                 CompanyName = Convert.ToString(dt.Rows[0][FIELDNAMES.COMPANYNAME.ToString()]);
                 IsDefault = string.IsNullOrEmpty(Convert.ToString(dt.Rows[0][FIELDNAMES.ISDEFAULT.ToString()])) ? false : Convert.ToBoolean(dt.Rows[0][FIELDNAMES.ISDEFAULT.ToString()]);
-                IsWithout = Convert.ToBoolean(dt.Rows[0][FIELDNAMES.ISWITHOUT.ToString()]);
+                IsWithout = Convert.ToBoolean(string.IsNullOrEmpty(Convert.ToString(dt.Rows[0][FIELDNAMES.ISWITHOUT.ToString()])) ? false : dt.Rows[0][FIELDNAMES.ISWITHOUT.ToString()]);
             }
         }
     }
