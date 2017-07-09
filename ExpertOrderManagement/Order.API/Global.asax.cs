@@ -20,5 +20,17 @@ namespace Order.API
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             ExpertOrderBusinessInit.Initialize();
         }
+
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+            if (!Request.RawUrl.Contains("account/login"))
+            {
+                var test = Request.Headers;
+                if (test == null || test.Get("UserName") == null || test.Get("Password") == null || string.IsNullOrEmpty(test.Get("UserName")) || string.IsNullOrEmpty(test.Get("Password")))
+                {
+                    throw new Exception("Please enter your credentials");
+                }
+            }            
+        }
     }
 }

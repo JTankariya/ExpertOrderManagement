@@ -251,15 +251,15 @@
     <Content Include="Scripts\jquery-1.9.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CommonLibraries\CommonLibraries.csproj">
+    <ProjectReference Include="..\CommonLibraries\CommonLibraries.csproj">
       <Project>{b4022dc5-28ff-4fe3-9da8-8d5a562220b1}</Project>
       <Name>CommonLibraries</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Distributor.BusinessLogic\Distributor.BusinessLogic.csproj">
+    <ProjectReference Include="..\Distributor.BusinessLogic\Distributor.BusinessLogic.csproj">
       <Project>{f2b059d6-9e27-4580-8486-f19dbaaa8eba}</Project>
       <Name>Distributor.BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Distributor.DAL\Distributor.DAL.csproj">
+    <ProjectReference Include="..\Distributor.DAL\Distributor.DAL.csproj">
       <Project>{c01724fc-7996-4bcf-8de2-b71944612fdc}</Project>
       <Name>Distributor.DAL</Name>
     </ProjectReference>
