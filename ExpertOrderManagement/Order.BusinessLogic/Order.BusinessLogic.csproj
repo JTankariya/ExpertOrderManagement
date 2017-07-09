@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{73A5C2C1-265C-4AD6-8116-A0EE87986629}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessLogic</RootNamespace>
+    <AssemblyName>BusinessLogic</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ninject, Version=2.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject-2.2.1.3-release-net-4.0-mediumTrust\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\ExpertOrderBusinessInit.cs" />
+    <Compile Include="ExceptionLogic.cs" />
+    <Compile Include="ExceptionParameters.cs" />
+    <Compile Include="GenericExtensions.cs" />
+    <Compile Include="Implementations\Helpers\HelperFactory.cs" />
+    <Compile Include="Implementations\Helpers\ClientHelper.cs" />
+    <Compile Include="Implementations\Helpers\Helper.cs" />
+    <Compile Include="Implementations\Helpers.cs" />
+    <Compile Include="Implementations\Helpers\OrderHelper.cs" />
+    <Compile Include="Implementations\Helpers\PartyGroupHelper.cs" />
+    <Compile Include="Implementations\Helpers\PartyHelper.cs" />
+    <Compile Include="Implementations\Helpers\Rate2Helper.cs" />
+    <Compile Include="Implementations\Helpers\SettingHelper.cs" />
+    <Compile Include="Implementations\Managers\ClientManager.cs" />
+    <Compile Include="Implementations\Managers\OrderManager.cs" />
+    <Compile Include="Implementations\Managers\PartyGroupManager.cs" />
+    <Compile Include="Implementations\Managers\PartyManager.cs" />
+    <Compile Include="Implementations\Managers\SettingManager.cs" />
+    <Compile Include="LoggedInUser.cs" />
+    <Compile Include="OM\Batch.cs" />
+    <Compile Include="OM\Order.cs" />
+    <Compile Include="OM\OrderDetail.cs" />
+    <Compile Include="OM\Party.cs" />
+    <Compile Include="OM\PartyGroup.cs" />
+    <Compile Include="OM\Rate.cs" />
+    <Compile Include="OM\Rate2.cs" />
+    <Compile Include="OM\Setting.cs" />
+    <Compile Include="OM\UserSettings.cs" />
+    <Compile Include="Skeleton\Helpers\IClientHelper.cs" />
+    <Compile Include="Skeleton\Helpers\IHelperFactory.cs" />
+    <Compile Include="Skeleton\Helpers\IOrderHelper.cs" />
+    <Compile Include="Skeleton\Helpers\IPartyGroupHelper.cs" />
+    <Compile Include="Skeleton\Helpers\IPartyHelper.cs" />
+    <Compile Include="Skeleton\Helpers\IRate2Helper.cs" />
+    <Compile Include="Skeleton\Helpers\ISettingHelper.cs" />
+    <Compile Include="Skeleton\Helpers\IUserTypeHelper.cs" />
+    <Compile Include="Implementations\Managers\ManagerFactory.cs" />
+    <Compile Include="Implementations\Helpers\ProductGroupHelper.cs" />
+    <Compile Include="Implementations\Managers\ProductGroupManager.cs" />
+    <Compile Include="Implementations\Helpers\ProductHelper.cs" />
+    <Compile Include="Implementations\Managers\ProductManager.cs" />
+    <Compile Include="Implementations\Helpers\UserHelper.cs" />
+    <Compile Include="Implementations\Managers\UserManager.cs" />
+    <Compile Include="Implementations\Managers\UserTypeHelper.cs" />
+    <Compile Include="Skeleton\Managers\IClientManager.cs" />
+    <Compile Include="Skeleton\Managers\IGenericCRUD.cs" />
+    <Compile Include="Skeleton\Managers\IManagerFactory.cs" />
+    <Compile Include="Skeleton\Helpers\IHelper.cs" />
+    <Compile Include="Skeleton\Helpers\IProductGroupHelper.cs" />
+    <Compile Include="Skeleton\Managers\IOrderManager.cs" />
+    <Compile Include="Skeleton\Managers\IPartyGroupManager.cs" />
+    <Compile Include="Skeleton\Managers\IPartyManager.cs" />
+    <Compile Include="Skeleton\Managers\IProductGroupManager.cs" />
+    <Compile Include="Skeleton\Helpers\IProductHelper.cs" />
+    <Compile Include="Skeleton\Managers\IProductManager.cs" />
+    <Compile Include="Skeleton\Helpers\IUserHelper.cs" />
+    <Compile Include="Skeleton\Managers\ISettingManager.cs" />
+    <Compile Include="Skeleton\Managers\IUserManager.cs" />
+    <Compile Include="OM\Client.cs" />
+    <Compile Include="OM\ClientCompany.cs" />
+    <Compile Include="OM\Product.cs" />
+    <Compile Include="OM\ClientUser.cs" />
+    <Compile Include="OM\ProductGroup.cs" />
+    <Compile Include="OM\ResponseMsg.cs" />
+    <Compile Include="OM\UserType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringCipher.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonLibraries\CommonLibraries.csproj">
+      <Project>{b4022dc5-28ff-4fe3-9da8-8d5a562220b1}</Project>
+      <Name>CommonLibraries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Order.DAL\Order.DAL.csproj">
+      <Project>{713e1495-ef5b-4836-aecf-83765b833a87}</Project>
+      <Name>Order.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -3,45 +3,47 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpertOrderManagement", "ExpertOrderManagement\ExpertOrderManagement.csproj", "{239B9976-0855-459F-8C79-A740D92A314E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Web", "Order.Web\Order.Web.csproj", "{239B9976-0855-459F-8C79-A740D92A314E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{73A5C2C1-265C-4AD6-8116-A0EE87986629} = {73A5C2C1-265C-4AD6-8116-A0EE87986629}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{73A5C2C1-265C-4AD6-8116-A0EE87986629}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.BusinessLogic", "Order.BusinessLogic\Order.BusinessLogic.csproj", "{73A5C2C1-265C-4AD6-8116-A0EE87986629}"
 	ProjectSection(ProjectDependencies) = postProject
 		{713E1495-EF5B-4836-AECF-83765B833A87} = {713E1495-EF5B-4836-AECF-83765B833A87}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "DataBase\DataBase.csproj", "{713E1495-EF5B-4836-AECF-83765B833A87}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.DAL", "Order.DAL\Order.DAL.csproj", "{713E1495-EF5B-4836-AECF-83765B833A87}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonLibraries", "CommonLibraries\CommonLibraries.csproj", "{B4022DC5-28FF-4FE3-9DA8-8D5A562220B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderAdminPanel", "OrderAdminPanel\OrderAdminPanel.csproj", "{6BDDB15D-6A79-4646-8F51-45B1D1DA297F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderAdmin.Web", "OrderAdmin.Web\OrderAdmin.Web.csproj", "{6BDDB15D-6A79-4646-8F51-45B1D1DA297F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{30B32A64-2FAD-4A59-AACE-8CCCCB01EE9A} = {30B32A64-2FAD-4A59-AACE-8CCCCB01EE9A}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin.BusinessLogic", "Admin.BusinessLogic\Admin.BusinessLogic.csproj", "{30B32A64-2FAD-4A59-AACE-8CCCCB01EE9A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderAdmin.BusinessLogic", "Admin.BusinessLogic\OrderAdmin.BusinessLogic.csproj", "{30B32A64-2FAD-4A59-AACE-8CCCCB01EE9A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E041429C-3240-499D-BE99-461E615C8A70} = {E041429C-3240-499D-BE99-461E615C8A70}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin.DAL", "Admin.DAL\Admin.DAL.csproj", "{E041429C-3240-499D-BE99-461E615C8A70}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderAdmin.DAL", "OrderAdmin.DAL\OrderAdmin.DAL.csproj", "{E041429C-3240-499D-BE99-461E615C8A70}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OrderAdminPanel", "OrderAdminPanel", "{B3C1605E-823F-41B2-B3E0-14A19E30F7FE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OrderManagement", "OrderManagement", "{BE8ED852-37BB-4B72-914C-7CCB7A65E4D5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MobileDistributorPanel", "MobileDistributorPanel", "{54B114B4-341D-46B3-90C4-373A561C17B5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DistributorPanel", "DistributorPanel", "{54B114B4-341D-46B3-90C4-373A561C17B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distributor.BusinessLogic", "Distributor.BusinessLogic\Distributor.BusinessLogic.csproj", "{F2B059D6-9E27-4580-8486-F19DBAAA8EBA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distributor.DAL", "Distributor.DAL\Distributor.DAL.csproj", "{C01724FC-7996-4BCF-8DE2-B71944612FDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpertDistributorApp", "ExpertDistributorApp\ExpertDistributorApp\ExpertDistributorApp.csproj", "{164C688D-8346-451D-85A4-F6277A7E3E44}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distributor.Web", "Distributor.Web\Distributor.Web.csproj", "{164C688D-8346-451D-85A4-F6277A7E3E44}"
 EndProject
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "Order.MobileApp", "Order.MobileApp\Order.MobileApp.jsproj", "{C939F912-AA9A-434A-945F-F0F8760D6037}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.API", "Order.API\Order.API.csproj", "{A5C026CA-2ACF-4288-9452-544A76E79B39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -521,6 +523,42 @@ Global
 		{C939F912-AA9A-434A-945F-F0F8760D6037}.Release|Windows-x86.ActiveCfg = Release|Windows-x86
 		{C939F912-AA9A-434A-945F-F0F8760D6037}.Release|Windows-x86.Build.0 = Release|Windows-x86
 		{C939F912-AA9A-434A-945F-F0F8760D6037}.Release|Windows-x86.Deploy.0 = Release|Windows-x86
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Debug|Android.ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Debug|iOS.ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Debug|Windows Phone (Universal).ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Debug|Windows Phone 8.ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Debug|Windows-AnyCPU.ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Debug|Windows-ARM.ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Debug|Windows-x64.ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Debug|Windows-x86.ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Distribution|Android.ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Distribution|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Distribution|Any CPU.Build.0 = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Distribution|iOS.ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Distribution|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Distribution|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Distribution|Windows Phone (Universal).ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Distribution|Windows Phone 8.ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Distribution|Windows-AnyCPU.ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Distribution|Windows-ARM.ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Distribution|Windows-x64.ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Distribution|Windows-x86.ActiveCfg = Debug|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Release|Android.ActiveCfg = Release|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Release|iOS.ActiveCfg = Release|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Release|Windows Phone (Universal).ActiveCfg = Release|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Release|Windows Phone 8.ActiveCfg = Release|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Release|Windows-AnyCPU.ActiveCfg = Release|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Release|Windows-ARM.ActiveCfg = Release|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Release|Windows-x64.ActiveCfg = Release|Any CPU
+		{A5C026CA-2ACF-4288-9452-544A76E79B39}.Release|Windows-x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -536,5 +574,6 @@ Global
 		{C01724FC-7996-4BCF-8DE2-B71944612FDC} = {54B114B4-341D-46B3-90C4-373A561C17B5}
 		{164C688D-8346-451D-85A4-F6277A7E3E44} = {54B114B4-341D-46B3-90C4-373A561C17B5}
 		{C939F912-AA9A-434A-945F-F0F8760D6037} = {BE8ED852-37BB-4B72-914C-7CCB7A65E4D5}
+		{A5C026CA-2ACF-4288-9452-544A76E79B39} = {BE8ED852-37BB-4B72-914C-7CCB7A65E4D5}
 	EndGlobalSection
 EndGlobal

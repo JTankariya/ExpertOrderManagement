@@ -1,0 +1,33 @@
+﻿@model IEnumerable<BusinessLogic.Party>
+@Styles.Render("~/Content/css/datatablecss")
+
+<table id="tblParty" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Group</th>
+            <th>Op. Balance</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var group in Model)
+            {
+                <tr data-empid="@group.RefId">
+                    <td>@group.Name</td>
+                    <td>@group.PartyGroup.Name</td>
+                    <td>@group.OpBal</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@Scripts.Render("~/Content/js/datatablejs")
+
+<script>
+    $(document).ready(function () {
+        $('#tblParty').DataTable();
+    });
+</script>

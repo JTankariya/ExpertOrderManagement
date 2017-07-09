@@ -1,0 +1,793 @@
+﻿@model Distributor.BusinessLogic.ClientMenuMaster
+@{
+    ViewBag.Title = "GetMenuMaster";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<div class="row-fluid">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="tabcontrol2" id="tab-control">
+            <ul class="tabs">
+                <li><a href="#form">Menu Details</a></li>
+                <li><a href="#dashboarddetails">Dashboard Details</a></li>
+                <li><a href="#submenudetails">Submenu Details</a></li>
+            </ul>
+            <div class="frames">
+                <div class="frame" id="form">
+                    @using (Html.BeginForm("AddDistributor", "Dashboard", FormMethod.Post, new { @id = "frmMenuMaster", @class = "form-horizontal" }))
+                    {
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">SrNo :</label>
+                            <div class="col-md-9">
+                                @Html.HiddenFor(x => x.MenuId, new { @class = "form-control" })
+                                @Html.TextBoxFor(x => x.SrNo, new { @class = "form-control", @type = "number" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Menu Name :</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(x => x.MenuName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Query :</label>
+                            <div class="col-md-9">
+                                @Html.TextAreaFor(x => x.Query, new { @class = "form-control", @rows = "3" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Zoom Query :</label>
+                            <div class="col-md-9">
+                                @Html.TextAreaFor(x => x.ZoomQuery, new { @class = "form-control", @rows = "3" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 text-center">
+                                <label class="input-control radio small-check">
+                                    @if (Model.HasChildData)
+                                    {
+                                        @Html.RadioButtonFor(x => x.otherOptions, "", new { @checked = "checked", @name = "otherOptions", @data_for = "HasChildData" })
+                                    }
+                                    else
+                                    {
+                                        @Html.RadioButtonFor(x => x.otherOptions, "", new { @name = "otherOptions", @data_for = "HasChildData" })
+                                    }
+                                    <span class="check"></span>
+                                    <span class="caption">Has Child Data?</span>
+                                </label>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <label class="input-control radio small-check">
+                                    @if (Model.IsDashboard)
+                                    {
+                                        @Html.RadioButtonFor(x => x.otherOptions, "", new { @id = "rbtnIsDashboard", @checked = "checked", @name = "otherOptions", @data_for = "IsDashboard" })
+                                    }
+                                    else
+                                    {
+                                        @Html.RadioButtonFor(x => x.otherOptions, "", new { @id = "rbtnIsDashboard", @name = "otherOptions", @data_for = "IsDashboard" })
+                                    }
+                                    <span class="check"></span>
+                                    <span class="caption">Is Dashboard?</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 text-center">
+                                <label class="input-control radio small-check">
+                                    @if (Model.HasChildMenu)
+                                    {
+                                        @Html.RadioButtonFor(x => x.otherOptions, "", new { @checked = "checked", @name = "otherOptions", @data_for = "HasChildMenu" })
+                                    }
+                                    else
+                                    {
+                                        @Html.RadioButtonFor(x => x.otherOptions, "", new { @name = "otherOptions", @data_for = "HasChildMenu" })
+                                    }
+                                    <span class="check"></span>
+                                    <span class="caption">Has Sub Menu?</span>
+                                </label>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <label class="input-control radio small-check">
+                                    @if (Model.HasGraph)
+                                    {
+                                        @Html.RadioButtonFor(x => x.otherOptions, "", new { @checked = "checked", @name = "otherOptions", @data_for = "HasGraph" })
+                                    }
+                                    else
+                                    {
+                                        @Html.RadioButtonFor(x => x.otherOptions, "", new { @name = "otherOptions", @data_for = "HasGraph" })
+                                    }
+                                    <span class="check"></span>
+                                    <span class="caption">Has Graph?</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 text-center">
+                                <label class="input-control radio small-check">
+                                    @if (!Model.HasGraph && !Model.IsDashboard && !Model.HasChildData && !Model.HasChildMenu)
+                                    {
+                                        <input type="radio" checked name="otherOptions" />
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" name="otherOptions" />
+                                    }
+                                    <span class="check"></span>
+                                    <span class="caption">None of Above?</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <button type="button" id="btnAdd" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Add</button>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <button type="submit" id="btnSubmit" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Save</button>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <button type="button" id="btnDelete" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Delete</button>
+
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <button type="button" id="btnView" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;View</button>
+                            </div>
+                        </div>
+                        <div>
+                            @Html.ValidationSummary()
+                        </div>
+                    }
+                </div>
+                <div class="frame" id="submenudetails">
+                    <form id="frmSubMenu" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Sub Menu Name :</label>
+                            <div class="col-md-9">
+                                <input type="hidden" id="txtChildMenuID" />
+                                <input type="text" class="form-control" id="txtSubMenuName" name="SubMenuName" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Query :</label>
+                            <div class="col-md-9">
+                                <textarea rows="3" id="txtSubMenuQuery" class="form-control" name="QueryName"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Zoom Query :</label>
+                            <div class="col-md-9">
+                                <textarea rows="3" id="txtSubMenuZoomQuery" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <div class="checkbox">
+                                    <label class="input-control radio small-check">
+                                        <input type="radio" name="RightsForWritingQuery" id="rbtnSubMenuHasChildData">
+                                        <span class="check"></span>
+                                        <span class="caption">Has Sub Menu?</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="checkbox">
+                                    <label class="input-control radio small-check">
+                                        <input type="radio" name="RightsForWritingQuery" id="rbtnSubMenuHasGraph">
+                                        <span class="check"></span>
+                                        <span class="caption">Has Graph?</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="checkbox">
+                                    <label class="input-control radio small-check">
+                                        <input type="radio" checked name="RightsForWritingQuery" id="rbtnSubMenuNone">
+                                        <span class="check"></span>
+                                        <span class="caption">None</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <button type="button" id="btnSubMenuAddNew" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Add New Submenu</button>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <button type="submit" id="btnSubMenuAdd" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Add Submenu</button>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="    max-height: 500px;    overflow: auto;">
+                                <table class="table striped hovered cell-hovered border bordered" id="tblSubMenu">
+                                    <thead>
+                                        <tr>
+                                            <td>Sr No</td>
+                                            <td>Sub Menu Name</td>
+                                            <td>Query</td>
+                                            <td>Zoom Query</td>
+                                            <td>Has Child Data?</td>
+                                            <td>Has Graph?</td>
+                                            <td>Delete</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (ViewBag.ChildMenuList != null)
+                                        {
+                                            int i = 1;
+                                            foreach (Distributor.BusinessLogic.ChildMenuMaster childmenu in ViewBag.ChildMenuList)
+                                            {
+                                                <tr data-menuid="@childmenu.MenuID" data-childmenuid="@childmenu.ChildMenuID">
+                                                    <td>
+                                                        @i
+                                                    </td>
+                                                    <td>
+                                                        @childmenu.ChildMenuName
+                                                    </td>
+                                                    <td>
+                                                        @childmenu.Query
+                                                    </td>
+                                                    <td>
+                                                        @childmenu.ZoomQuery
+                                                    </td>
+                                                    <td>
+                                                        @childmenu.HasChildData
+                                                    </td>
+                                                    <td>
+                                                        @childmenu.HasGraph
+                                                    </td>
+                                                    <td>
+                                                        <button data-deletesubmenu type="button" class="btn btn-primary face">Delete</button>
+                                                    </td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="frame" id="dashboarddetails">
+                    <form id="frmDashboard" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Dashboard Name :</label>
+                            <div class="col-md-9">
+                                <input type="hidden" id="txtDashboardID" />
+                                <input type="text" class="form-control" id="txtDashboardName" name="DashboardName" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Type :</label>
+                            <div class="col-md-9 input-control select">
+                                <select id="ddlType" name="DashboardType" class="form-control">
+                                    <option value="">-- Select Type --</option>
+                                    <option value="BALANCE">BALANCE</option>
+                                    <option value="TRANSACTION">TRANSACTION</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Query :</label>
+                            <div class="col-md-9">
+                                <textarea rows="3" id="txtDashboardQuery" name="DashboardQuery" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Zoom Menu Name :</label>
+                            <div class="col-md-9">
+                                <div class="input-control select">
+                                    @if (ViewBag.MenuList != null)
+                                    { 
+                                    @Html.DropDownList("ddlZoomMenuName", new SelectList(ViewBag.MenuList, "MenuId", "MenuName"), "-- Select Menu Name --", new { @class = "form-control" })
+                                    }
+                                    else
+                                    { 
+                                        @Html.DropDownList("ddlZoomMenuName",new List<SelectListItem>(), "-- Select Menu Name --", new { @class = "form-control" })
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <button type="button" id="btnDashboardAddNew" class="btn btn-primary face">
+                                    <span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Add New Dashboard
+                                </button>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <button type="submit" id="btnDashboardNew" class="btn btn-primary face">
+                                    <span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Add Dashboard
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="    max-height: 500px;    overflow: auto;">
+                                <table class="table striped hovered cell-hovered border bordered" id="tblDashboard">
+                                    <thead>
+                                        <tr>
+                                            <td>Sr No</td>
+                                            <td>Type</td>
+                                            <td>Dashboard</td>
+                                            <td>Query</td>
+                                            <td>Zoom Query</td>
+                                            <td>Delete</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (ViewBag.DashboardList != null)
+                                        {
+                                            int i = 1;
+                                            foreach (Distributor.BusinessLogic.DashboardMaster dashboard in ViewBag.DashboardList)
+                                            {
+                                                <tr data-menuid="@dashboard.MenuID" data-dashboardid="@dashboard.DashboardID">
+                                                    <td>@i</td>
+                                                    <td>@dashboard.Type</td>
+                                                    <td>@dashboard.DashboardName</td>
+                                                    <td>@dashboard.Query</td>
+                                                    <td>@dashboard.ZoomMenuId</td>
+                                                    <td><button data-deletedashboard type="button" class="btn btn-primary face">Delete</button></td>
+                                                </tr>
+                                                i++;
+                                            }
+
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div data-role="dialog" data-overlay="true" data-overlay-color=".dialog-overlay" data-close-button="true" data-width="500px" id="dialog">
+    <h1>Confirm Delete</h1>
+    <p>
+        Are you sure want to delete this record?
+    </p>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <a href="@Url.Action("DeleteMenuMaster", "Dashboard", new { ID = Model.MenuId})" cl class="btn btn-danger face"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Yes</a>
+        </div>
+        <div class="col-md-6 text-center">
+            <button type="button" id="btnSubmit" onclick="toggleMetroDialog('#dialog')" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;No</button>
+        </div>
+    </div>
+</div>
+
+<div data-role="dialog" data-overlay="true" data-overlay-color=".dialog-overlay" data-close-button="true" data-width="500px" id="InnerDialog">
+    <h1>Confirm Delete</h1>
+    <p>
+        Are you sure want to delete this record?
+    </p>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <button type="button" id="btnInnerYes" onclick="toggleMetroDialog('#InnerDialog')" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Yes</button>
+        </div>
+        <div class="col-md-6 text-center">
+            <button type="button" id="btnInnerNo" onclick="toggleMetroDialog('#InnerDialog')" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;No</button>
+        </div>
+    </div>
+</div>
+
+<div data-role="dialog" data-overlay="true" data-overlay-color=".dialog-overlay" data-close-button="true" data-width="80%" id="viewDialog">
+    <h1>Select Menu</h1>
+    <div class="row">
+        <div class="col-md-12" id="viewData" style="max-height:500px;overflow:auto;    width: 96%;
+    margin-left: 2%;">
+
+        </div>
+    </div>
+</div>
+<script>
+    var subMenus = [];
+    var dashboardMenus = [];
+    var section = "";
+    var rowIndex = "";
+    var updateRowIndex = "";
+    $(document).ready(function () {
+        $('[href="#dashboarddetails"]').parent().hide();
+        $('[href="#submenudetails"]').parent().hide();
+        subMenus = '@(ViewBag.ChildMenuList!=null? Html.Raw(Json.Encode(ViewBag.ChildMenuList)):"")';
+        if (subMenus != "") {
+            subMenus = function () { return @Html.Raw(Json.Encode(ViewBag.ChildMenuList)); }();
+            $('[href="#submenudetails"]').parent().show();
+        }
+        else {
+            subMenus = [];
+        }
+
+        dashboardMenus = '@(ViewBag.DashboardList != null ? Html.Raw(Json.Encode(ViewBag.DashboardList)):"")';
+        if (dashboardMenus != "") {
+            dashboardMenus = function () { return @Html.Raw(Json.Encode(ViewBag.DashboardList)); }()
+            $('[href="#dashboarddetails"]').parent().show();
+        }
+        else {
+            dashboardMenus = [];
+        }
+        $('#btnSubMenuAddNew').hide();
+        $('#btnDashboardAddNew').hide();
+        $('#btnSubMenuAddNew').on('click', function () {
+            $('#txtChildMenuID').val("0");
+            $('#txtSubMenuName').val("");
+            $('#txtSubMenuQuery').val("");
+            $('#txtSubMenuZoomQuery').val("");
+            $('#rbtnSubMenuNone').attr('checked', 'checked');
+            $(this).hide();
+            $('#btnSubMenuAdd').html("Add Submenu");
+        });
+        $('[data-ChildMenuId]').unbind('dblclick').bind('dblclick', function () {
+            $('#txtChildMenuID').val($(this).data('ChildMenuId'));
+            $('#txtSubMenuName').val($(this).find('td:eq(1)').text().trim());
+            $('#txtSubMenuQuery').val($(this).find('td:eq(2)').text().trim());
+            $('#txtSubMenuZoomQuery').val($(this).find('td:eq(3)').text().trim());
+            $('#rbtnSubMenuHasGraph').removeAttr('checked');
+            $('#rbtnSubMenuNone').removeAttr('checked');
+            $('#rbtnSubMenuHasChildData').removeAttr('checked');
+            if ($(this).find('td:eq(4)').text() == "true") {
+                $('#rbtnSubMenuHasGraph').prop('checked', true).button("refresh");
+            }
+            else if ($(this).find('td:eq(5)').text() == "true") {
+                $('#rbtnSubMenuHasChildData').prop('checked', true).button("refresh");
+            }
+            else {
+                $('#rbtnSubMenuNone').prop('checked', true).button("refresh");
+            }
+            $('#btnSubMenuAdd').html("Update Submenu");
+            $('#btnSubMenuAddNew').show();
+            updateRowIndex = $(this).index();
+        });
+        $('[data-dashboardId]').unbind('dblclick').bind('dblclick', function () {
+            $('#txtDashboardID').val($(this).data('dashboardId'));
+            $('#txtDashboardName').val($(this).find('td:eq(2)').text());
+            $('#ddlType').val($(this).find('td:eq(1)').text());
+            $('#txtDashboardQuery').val($(this).find('td:eq(3)').text());
+            $('#ddlZoomMenuName').val($(this).find('td:eq(4)').data('zoom-id'));
+            $("#btnDashboardNew").html("Update Dashboard");
+            $('#btnDashboardAddNew').show();
+            updateRowIndex = $(this).index();
+        });
+        $('[data-deleteDashboard]').unbind('click').bind('click', function () {
+            section = "dashboard";
+            rowIndex = $(this).parent().parent().index();
+            toggleMetroDialog('#InnerDialog');
+        });
+        $('[data-deleteSubMenu]').unbind('click').bind('click', function () {
+            $('#btnSubMenuAddNew').hide().click();
+            section = "submenu";
+            rowIndex = $(this).parent().parent().index();
+            toggleMetroDialog('#InnerDialog');
+        });
+        $('#frmDashboard').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                DashboardName: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Dashboard Name'
+                        }
+                    }
+                },
+                DashboardType: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please Select Type'
+                        }
+                    }
+                },
+                DashboardQuery: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Dashboard Query'
+                        }
+                    }
+                },
+                ddlZoomMenuName: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please Select Zoom Menu'
+                        }
+                    }
+                }
+            }
+        });
+
+        $('#btnDashboardAddNew').on('click', function () {
+            $('#txtDashboardID').val("0");
+            $('#txtDashboardName').val("");
+            $('#ddlType').val("");
+            $('#txtDashboardQuery').val("");
+            $('#ddlZoomMenuName').val("");
+            $(this).hide();
+            $('#btnDashboardAdd').html("Add Dashboard");
+            $('#frmDashboard').bootstrapValidator('resetForm', true);
+        });
+        $('#frmDashboard').on('success.form.bv', function (e) {
+            e.preventDefault();
+            var duplicate = $('#tblDashboard tbody td:nth-child(2)').filter(function (index, element) { return $(element).text() == $('#ddlType').val() && $(element).parent().parent().find('td:eq(2)').text() == $('#txtDashboardName').val() });
+            if (duplicate.length > 0) {
+                $.Notify({ keepOpen: false, type: 'alert', caption: 'Alert', content: "Dashboard with the same and type is already present in list." });
+            }
+            else {
+                if (updateRowIndex !== "" && updateRowIndex > -1) {
+                    dashboardMenus[updateRowIndex].DashboardID = $('#txtDashboardID').val();
+                    dashboardMenus[updateRowIndex].Type = $('#ddlType').val();
+                    dashboardMenus[updateRowIndex].DashboardName = $('#txtDashboardName').val();
+                    dashboardMenus[updateRowIndex].Query = $('#txtDashboardQuery').val();
+                    dashboardMenus[updateRowIndex].ZoomMenuId = $('#ddlZoomMenuName').val();
+                    var currRow = $('#tblDashboard tbody tr:eq(' + updateRowIndex + ')');
+                    currRow.find('td:eq(1)').text($('#ddlType').val());
+                    currRow.find('td:eq(2)').text($('#txtDashboardName').val());
+                    currRow.find('td:eq(3)').text($('#txtDashboardQuery').val());
+                    currRow.find('td:eq(4)').text($('#ddlZoomMenuName option:selected').text());
+                    updateRowIndex = "";
+                }
+                else {
+                    dashboardMenus.push({
+                        DashboardID: $('#txtDashboardID').val(),
+                        MenuID: $('#MenuId').val(),
+                        Type: $('#ddlType').val(),
+                        DashboardName: $('#txtDashboardName').val(),
+                        Query: $('#txtDashboardQuery').val(),
+                        ZoomMenuId: $('#ddlZoomMenuName').val()
+                    });
+                    var strHtml = '<tr data-MenuId="' + $('#MenuId').val() + '" data-dashboardId="' + $('#txtDashboardID').val() +
+                        '"><td>' + dashboardMenus.length + '</td><td>' + $('#ddlType').val() + '</td><td>' +
+                        $('#txtDashboardName').val() + '</td><td>' + $('#txtDashboardQuery').val() + '</td><td data-zoom-id="' + $('#ddlZoomMenuName').val() + '">' +
+                        $('#ddlZoomMenuName option:selected').text()
+                        + '</td><td><button data-deleteDashboard type="button" class="btn btn-primary face">Delete</button></td></tr>';
+                    $('#tblDashboard tbody').append(strHtml);
+                    $('#btnDashboardNew').show().click();
+                    $(e.target).bootstrapValidator('resetForm', true);
+                }
+
+            }
+
+        });
+        $('#btnInnerYes').on('click', function () {
+            if (section == "dashboard") {
+                dashboardMenus.splice(rowIndex, 1);
+                $('#tblDashboard tbody tr:eq(' + rowIndex + ')').remove();
+                $("#btnDashboardNew").html("Add Dashboard");
+            }
+            else if (section == "submenu") {
+                subMenus.splice(rowIndex, 1);
+                $('#tblSubMenu tbody tr:eq(' + rowIndex + ')').remove();
+                $("#btnSubMenuNew").html("Add Sub Menu");
+            }
+        });
+        $('#frmMenuMaster').on('success.form.bv', function (e) {
+            e.preventDefault();
+            if ($('[data-for="HasChildMenu"]').is(':checked') && subMenus.length == 0) {
+                $.Notify({ keepOpen: false, type: 'alert', caption: 'Alert', content: "Please enter atleast one sub menu." });
+            }
+            else if ($('[data-for="IsDashboard"]').is(':checked') && dashboardMenus.length == 0) {
+                $.Notify({ keepOpen: false, type: 'alert', caption: 'Alert', content: "Please enter atleast one Dashboard." });
+            }
+            else {
+                var menuData = {
+                    MenuId: $('#MenuId').val(),
+                    SrNo: $('#SrNo').val(),
+                    MenuName: $('#MenuName').val(),
+                    ZoomQuery: $('#ZoomQuery').val(),
+                    Query: $('#Query').val(),
+                    HasChildData: $('[data-for="HasChildData"]').is(':checked'),
+                    IsDashboard: $('[data-for="IsDashboard"]').is(':checked'),
+                    HasGraph: $('[data-for="HasGraph"]').is(':checked'),
+                    HasChildMenu: $('[data-for="HasChildMenu"]').is(':checked')
+                }
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ menuData: menuData, subMenus: subMenus, dashboardMenus: dashboardMenus }),
+                    url: '@Url.Action("SaveMenu", "Dashboard")',
+                    success: function (result) {
+                        if (result.IsSuccess) {
+                            $.Notify({ keepOpen: false, type: 'success', caption: 'Information', content: "Menu Saved Successfully." });
+                            setTimeout(function () { window.location.reload(true); }, 3000);
+                        }
+                        else {
+                            if (typeof (result.ResponseMsg) == "Array") {
+                                $('#validations').empty();
+                                if (result.ResponseMsg.length > 0) {
+                                    var strValidations = '<ul style="color:red">';
+                                    $.each(result.ResponseMsg, function (index, element) {
+                                        strValidations += "<li>" + element.Error + "</li>";
+                                    });
+                                    strValidations += "</ul>";
+                                    $('#validations').append(strValidations);
+                                }
+                            }
+                            else if (typeof (result.ResponseMsg) == "string") {
+                                $.Notify({ keepOpen: false, type: 'alert', caption: 'Information', content: result.ResponseMsg });
+                            }
+                            else {
+
+                            }
+                        }
+                    }
+                });
+            }
+        });
+        $('#frmSubMenu').on('success.form.bv', function (e) {
+            e.preventDefault();
+            var duplicate = $('#tblSubMenu tbody td:nth-child(2)').filter(function (index, element) { return $(element).text() == $('#txtSubMenuName').val() });
+            if (duplicate.length > 0) {
+                $.Notify({ keepOpen: false, type: 'alert', caption: 'Alert', content: "Sub menu is already present in list with given name." });
+            }
+            else {
+                if (updateRowIndex !== "" && updateRowIndex > -1) {
+                    subMenus[updateRowIndex].ChildMenuName = $('#txtSubMenuName').val(),
+                    subMenus[updateRowIndex].Query = $('#txtSubMenuQuery').val(),
+                    subMenus[updateRowIndex].ZoomQuery = $('#txtSubMenuZoomQuery').val(),
+                    subMenus[updateRowIndex].HasGraph = $('#rbtnSubMenuHasGraph').is(':checked'),
+                    subMenus[updateRowIndex].HasChildData = $('#rbtnSubMenuHasChildData').is(':checked')
+                    var currRow = $('#tblSubMenu tbody tr:eq(' + updateRowIndex + ')');
+                    currRow.find('td:eq(1)').text($('#txtSubMenuName').val());
+                    currRow.find('td:eq(2)').text($('#txtSubMenuQuery').val());
+                    currRow.find('td:eq(3)').text($('#txtSubMenuZoomQuery').val());
+                    currRow.find('td:eq(4)').text($('#rbtnSubMenuHasGraph').is(':checked'));
+                    currRow.find('td:eq(5)').text($('#rbtnSubMenuHasChildData').is(':checked'));
+                    updateRowIndex = "";
+                }
+                else {
+                    subMenus.push({
+                        ChildMenuID: $('#txtChildMenuID').val(),
+                        ChildMenuName: $('#txtSubMenuName').val(),
+                        MenuID: $('#MenuId').val(),
+                        Query: $('#txtSubMenuQuery').val(),
+                        ZoomQuery: $('#txtSubMenuZoomQuery').val(),
+                        HasGraph: $('#rbtnSubMenuHasGraph').is(':checked'),
+                        HasChildData: $('#rbtnSubMenuHasChildData').is(':checked')
+                    });
+
+                    strHtml = '<tr data-MenuId="' + $('#MenuId').val() + '" data-ChildMenuId="' + $('#txtChildMenuID').val() + '"><td>' + subMenus.length + '</td><td>' + $('#txtSubMenuName').val() + '</td><td>' + $('#txtSubMenuQuery').val() + '</td><td>' +
+                        $('#txtSubMenuZoomQuery').val() + '</td><td>' + $('#rbtnSubMenuHasGraph').is(':checked') + '</td><td>' +
+                       $('#rbtnSubMenuHasChildData').is(':checked') + '</td><td><button data-deleteSubMenu type="button" class="btn btn-primary face">Delete</button></td></tr>';
+                    $('#tblSubMenu tbody').append(strHtml);
+                }
+                $('#btnSubMenuAddNew').hide().click();
+                $(e.target).bootstrapValidator('resetForm', true);
+            }
+        });
+
+
+        $("#tab-control").tabcontrol();
+        $('input[name="otherOptions"]').on('change', function () {
+            $('[href="#dashboarddetails"]').parent().hide();
+            $('[href="#submenudetails"]').parent().hide();
+            if ($(this).data('for').toUpperCase() == "ISDASHBOARD") {
+                $('[href="#dashboarddetails"]').parent().show();
+                $('[href="#submenudetails"]').parent().hide();
+            }
+            if ($(this).data('for').toUpperCase() == "HASCHILDMENU") {
+                $('[href="#dashboarddetails"]').parent().hide();
+                $('[href="#submenudetails"]').parent().show();
+            }
+            if ($(this).data('for').length == 0) {
+                $('[href="#dashboarddetails"]').parent().hide();
+                $('[href="#submenudetails"]').parent().hide();
+            }
+        });
+        $('#btnAdd').on('click', function () {
+            window.location.href = '@Url.Action("GetMenuMaster", "Dashboard", new { ID = "0" })';
+        });
+        $('#btnDelete').on('click', function () {
+            if ($('#MenuId').val() == "0") {
+                $.Notify({ keepOpen: false, type: 'alert', caption: 'Alert', content: "Please select any record first." });
+            }
+            else {
+                $.ajax({
+                    url: '@Url.Action("CheckMenuReference", "Dashboard")',
+                    data: { ID: $('#MenuId').val() },
+                    success: function (result) {
+                        if (result == true) {
+                            $.Notify({ keepOpen: false, type: 'alert', caption: 'Alert', content: "Can not delete this menu as it is in use." });
+                        }
+                        else {
+                            toggleMetroDialog('#dialog');
+                        }
+                    }
+                });
+            }
+        });
+        $('#btnView').on('click', function () {
+            $.ajax({
+                url: '@Url.Action("GetMenuList", "Dashboard")',
+                success: function (result) {
+                    if (result) {
+                        $('#viewData').empty();
+                        $('#viewData').append(result);
+                        toggleMetroDialog('#viewDialog');
+                        $('#viewData tr').unbind('click').bind('click', function () {
+                            window.location.href = '@Url.Action("GetMenuMaster", "Dashboard", new { ID = "menuID" })'.replace('menuID', $(this).data('menuid'));
+                        });
+                    }
+                }
+            });
+        });
+        $('#frmSubMenu').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                SubMenuName: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Sub Menu Name'
+                        }
+                    }
+                },
+                QueryName: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Query'
+                        }
+                    }
+                }
+            }
+        });
+
+        $('#frmMenuMaster').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                SrNo: {
+                    verbose: false,
+                    validators: {
+                        notEmpty: {
+                            message:"Please enter SrNo"
+                        },
+                        remote: {
+                            url: '@Url.Action("CheckMenuSrNo","Dashboard")',
+                            data: { SrNo: $('#SrNo').val(), MenuID: $('#MenuId').val() },
+                            type: 'POST',
+                            delay: 2000,
+                            message: 'Srno is already assigned to other menu, Please enter another srno.'
+                        }
+                    }
+                },
+                MenuName: {
+                    validators: {
+                        notEmpty: {
+                            message: "Please enter Menu Name"
+                        }
+                    }
+                },
+                Query: {
+                    validators: {
+                        callback: {
+                            message: 'Please Enter Query',
+                            callback: function (value, validator, $field) {
+                                if (!$('[data-for="IsDashboard"]').is(':checked') && !$('[data-for="HasChildMenu"]').is(':checked') && value == "")
+                                    return false;
+                                else
+                                    return true;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+    });
+</script>

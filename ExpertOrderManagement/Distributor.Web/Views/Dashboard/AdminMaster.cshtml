@@ -1,0 +1,225 @@
+﻿@model Distributor.BusinessLogic.AdminMaster
+@{
+    ViewBag.Title = "AdminMaster";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<div class="row-fluid">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Enter Admin Info</h3>
+            </div>
+
+            <div class="panel-body">
+                @using (Html.BeginForm("AdminMaster", "Dashboard", FormMethod.Post, new { @id = "frmAdminMaster", @class = "form-horizontal" }))
+                {
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">First Name :</label>
+                        <div class="col-md-9">
+                            @Html.HiddenFor(x => x.ID, new { @class = "form-control" })
+                            @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Last Name :</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Email Id :</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(x => x.EmailId, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Mobile :</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(x => x.MobileNo, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">User Name :</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Password :</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @type = "password", @id = "txtOldPassword" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Reenter Password :</label>
+                        <div class="col-md-9">
+                            <input type="password" name="ReenterPassword" class="form-control" />
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-3 text-center">
+                            <button type="button" id="btnAdd" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Add</button>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <button type="submit" id="btnSubmit" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Save</button>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <button type="button" id="btnDelete" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Delete</button>
+
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <button type="button" id="btnView" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;View</button>
+                        </div>
+                    </div>
+                    <div>
+                        @Html.ValidationSummary()
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div data-role="dialog" data-overlay="true" data-overlay-color=".dialog-overlay" data-close-button="true" data-width="500px" id="dialog">
+    <h1>Confirm Delete</h1>
+    <p>
+        Are you sure want to delete this record?
+    </p>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <a href="@Url.Action("DeleteAdminMaster", "Dashboard", new { ID = Model.ID})" class="btn btn-danger face"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Yes</a>
+        </div>
+        <div class="col-md-6 text-center">
+            <button type="button" id="btnSubmit" onclick="toggleMetroDialog('#dialog')" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;No</button>
+        </div>
+    </div>
+</div>
+
+
+<div data-role="dialog" data-overlay="true" data-overlay-color=".dialog-overlay" data-close-button="true" data-width="80%" id="viewDialog">
+    <h1>Select Admin</h1>
+    <div class="row">
+        <div class="col-md-12" id="viewData">
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('#frmAdminMaster').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                UserName: {
+                    verbose: false,
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter User Name'
+                        },
+                        remote: {
+                            url: '@Url.Action("CheckUserName","Account")',
+                            data: { EmailId: $('#UserName').val(), ExcludeId: $('#ID').val() },
+                            type: 'POST',
+                            delay: 2000,
+                            message: 'Username is already registered with this system, Please enter another Username.'
+                        }
+                    }
+                },
+                Password: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Password'
+                        },
+                        identical: {
+                            field: 'ReenterPassword',
+                            message: 'The password and reenter password are not the same'
+                        }
+                    }
+                },
+                ReenterPassword: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Reenter Password'
+                        },
+                        identical: {
+                            field: 'Password',
+                            message: 'The password and reenter password are not the same'
+                        }
+                    }
+                },
+                Mobile: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Mobile Number'
+                        }
+                    }
+                },
+                FirstName: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter First Name'
+                        }
+                    }
+                },
+                LastName: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Last Name'
+                        }
+                    }
+                },
+                EmailId: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Email Id'
+                        },
+                        emailAddress: {
+                            message: 'Please enter proper Email Address'
+                        },
+                        remote: {
+                            url: '@Url.Action("CheckEmailId","Account")',
+                            data: { EmailId: $('#EmailId').val(), ExcludeId: $('#ID').val() },
+                            type: 'POST',
+                            delay: 2000,
+                            message: 'EmailId is already registered with this system, Please enter another email.'
+                        }
+                    }
+                }
+            }
+        });
+
+        $('#btnAdd').on('click', function () {
+            window.location.href = '@Url.Action("AdminMaster", "Dashboard", new { ID="0"})';
+        });
+        $('#btnDelete').on('click', function () {
+            if ($('#ID').val() == "0") {
+                $.Notify({ keepOpen: false, type: 'alert', caption: 'Alert', content: "Please select any record first." });
+            }
+            else {
+                toggleMetroDialog('#dialog');
+            }
+        });
+        $('#btnView').on('click', function () {
+            $.ajax({
+                url: '@Url.Action("GetAdminList","Dashboard")',
+                success: function (result) {
+                    if (result) {
+                        $('#viewData').empty();
+                        $('#viewData').append(result);
+                        toggleMetroDialog('#viewDialog');
+                        $('#viewData tr').unbind('click').bind('click', function () {
+                            window.location.href = '@Url.Action("AdminMaster", "Dashboard", new { ID="adminID"})'.replace('adminID', $(this).data('adminid'));
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>

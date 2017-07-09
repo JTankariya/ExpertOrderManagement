@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Admin.BusinessLogic.ClientMaster>
+@{
+    ViewBag.Title = "RemoveClient";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@if (Model != null)
+{
+    <div class="row">
+
+        <div class="col-md-12">
+            <input type="text" id="txtSearch" placeholder="Search Anything here" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-12">
+            <table class="table striped hovered cell-hovered border bordered" id="tblClient">
+                <thead>
+                    <tr>
+                        <td>
+                            Delete
+                        </td>
+                        <td>
+                            Client Name
+                        </td>
+                        <td>
+                            Company Name
+                        </td>
+                        <td>
+                            Company Address
+                        </td>
+                        <td>
+                            Email Id
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var company in Model)
+                    {
+                        <tr>
+                            <td>
+                                <button type="button" data-clientid="@company.ClientID" name="btnDelete" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Delete</button>
+                            </td>
+                            <td>
+                                @(company.FirstName + " " + company.LastName)
+                            </td>
+                            <td>
+                                @company.CompanyName
+                            </td>
+                            <td>
+                                @company.CompanyAddress
+                            </td>
+                            <td>
+                                @company.EmailId
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+<div data-role="dialog" data-overlay="true" data-overlay-color=".dialog-overlay" data-close-button="true" data-width="500px" id="dialog">
+    <h1>Confirm Delete</h1>
+    <p>
+        Are you sure want to delete this client (All its reference and menu items will be removed from system)?
+    </p>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <a id="aDelete" href="@Url.Action("Delete", "Client", new { ID = (Model!=null? Model.FirstOrDefault().ClientID:0)})" c class="btn btn-danger face"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Yes</a>
+        </div>
+        <div class="col-md-6 text-center">
+            <button type="button" id="btnSubmit" onclick="toggleMetroDialog('#dialog')" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;No</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('button[name="btnDelete"]').on('click', function () {
+            $('#aDelete').attr('href', '@Url.Action("DeleteEntireClient", "Client", new { ClientId="CID"})'.replace("CID", $(this).data('clientid')));
+            toggleMetroDialog('#dialog');
+        });
+        $('#txtSearch').on('keypress keydown keyup', function () {
+            if ($(this).val().trim() == "") {
+                $('#tblClient tbody tr').fadeIn();
+            }
+            else {
+                $.each($('#tblClient tbody tr'), function (index, element) {
+                    var foundTd = $(element).find('td').filter(function (tdIndex, tdElement) {
+                        return $(tdElement).text().toUpperCase().indexOf($('#txtSearch').val().trim().toUpperCase()) != -1
+                    });
+                    if (foundTd.length > 0) {
+                        $(element).fadeIn();
+                    }
+                    else {
+                        $(element).fadeOut();
+                    }
+                });
+            }
+        });
+    });
+</script>

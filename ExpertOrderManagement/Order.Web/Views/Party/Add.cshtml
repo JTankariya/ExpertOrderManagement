@@ -1,0 +1,386 @@
+﻿@model BusinessLogic.Party
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+@Styles.Render("~/Content/css/customsweetswitcheryselect2css")
+<div class="row">
+    <div class="col-lg-offset-1 col-lg-10">
+        <div class="card-box">
+            <h4 class="m-t-0 header-title"><b>Party Master</b></h4>
+            <p class="text-muted font-13 m-b-30">
+                Add/Edit Party here
+            </p>
+            @using (Html.BeginForm("Save", "Party", FormMethod.Post, new { @class = "form-horizontal m-t-20", @id = "frmParty" }))
+            {
+                <form class="form-horizontal" role="form" data-parsley-validate novalidate>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Name</label>
+                                    <div class="col-sm-7">
+                                        @Html.HiddenFor(x => x.ClientCompanyId)
+                                        @Html.HiddenFor(x => x.RefId)
+                                        @Html.HiddenFor(x => x.OperationFlag)
+                                        @Html.HiddenFor(x => x.Code)
+                                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @placeholder = "Name" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="hori-pass1" class="col-sm-4 control-label">Op. Balance</label>
+                                <div class="col-sm-7">
+                                    @Html.TextBoxFor(x => x.OpBal, new { @class = "form-control", @placeholder = "Op. Balance", @rows = "3" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="hori-pass1" class="col-sm-4 control-label" id="lblIsDebit">Credit</label>
+                                <div class="col-sm-7">
+                                    @Html.HiddenFor(x => x.Bal_DC, new { @class = "form-control", @placeholder = "Credit(C) / Debit(D)", @maxlength = 1 })
+                                    <input type="checkbox" data-plugin="switchery" data-color="#515ffb" id="chkIsDebit" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-4 control-label">Group</label>
+                                        <div class="col-sm-7">
+                                            @if (ViewBag.GroupList != null)
+                                            {
+                                                @Html.DropDownListFor(x => x.Group, new SelectList(ViewBag.GroupList, "Code", "Name"), "-- Select --", new { @class = "form-control" })
+                                            }
+                                            else
+                                            {
+                                                @Html.DropDownListFor(x => x.Group, new List<SelectListItem>(), new { @class = "form-control" })
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="hori-pass1" class="col-sm-4 control-label">TDS?</label>
+                                        <div class="col-sm-7">
+                                            @Html.HiddenFor(x => x.ISTds, new { @class = "form-control", @maxlength = "1" })
+                                            <input type="checkbox" data-plugin="switchery" data-color="#515ffb" id="chkIsTDS" />
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>    
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="hori-pass1" class="col-sm-4 control-label">Remarks</label>
+                                <div class="col-sm-7">
+                                    @Html.TextAreaFor(x => x.Remarks, new { @class = "form-control", @placeholder = "Remarks", @rows = "3" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                                              
+                        
+                    </div>
+                    <div class="row">
+                       
+                        @*<div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Edger</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Edger, new { @class = "form-control", @placeholder = "Opening Value" })
+                                    </div>
+                                </div>
+                            </div>*@
+                    </div>
+                    @*<div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Service Item</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Service, new { @class = "form-control", @placeholder = "Service Item" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Unit 2</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Unit2, new { @class = "form-control", @placeholder = "Unit 2" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Unit 3</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Unit3, new { @class = "form-control", @placeholder = "Unit 3" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Unit 4</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Unit4, new { @class = "form-control", @placeholder = "Unit 4" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Unit 5</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Unit5, new { @class = "form-control", @placeholder = "Unit 5" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Unit 6</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Unit6, new { @class = "form-control", @placeholder = "Unit 6" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Sales Rate</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Sl_Rate, new { @class = "form-control", @placeholder = "Sales Rate" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Purchase Rate</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Pu_Rate, new { @class = "form-control", @placeholder = "Purchase Rate" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Max Qty</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.MaxLevel, new { @class = "form-control", @placeholder = "Max Qty" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Min Qty</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.MinLevel, new { @class = "form-control", @placeholder = "Min Qty" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Reorder Qty</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.ReOrder, new { @class = "form-control", @placeholder = "Reorder Qty" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Packing Qty</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.PackingQty, new { @class = "form-control", @placeholder = "Packing Qty" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Category 1</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Category1, new { @class = "form-control", @placeholder = "Category 1" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hori-pass1" class="col-sm-4 control-label">Category 2</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(x => x.Category2, new { @class = "form-control", @placeholder = "Category 2" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hori-pass1" class="col-sm-4 control-label">MRP</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(x => x.Valuation, new { @class = "form-control", @placeholder = "MRP" })
+                            </div>
+                        </div>*@
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <a href="@Url.Action("Add", "Party", new { ID=0})" i id="btnAdd" type="button" class="btn btn-lg btn-default waves-effect waves-light m-l-5">
+                                <i class="ti-plus"></i>&nbsp;&nbsp;Add
+                            </a>
+                            <button id="btnSave" type="submit" class="btn btn-lg btn-primary waves-effect waves-light">
+                                <i class="ti-save"></i>&nbsp;&nbsp; Save
+                            </button>
+                            <button id="btnDelete" type="button" class="btn btn-lg btn-danger waves-effect waves-light m-l-5">
+                                <i class="ti-trash"></i>&nbsp;&nbsp;Delete
+                            </button>
+                            <button id="btnView" type="button" class="btn btn-lg btn-warning waves-effect waves-light m-l-5">
+                                <i class="ti-search"></i>&nbsp;&nbsp;View
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+<div id="custom-modal" class="modal-demo">
+    <button type="button" class="close" onclick="Custombox.close();">
+        <span>&times;</span><span class="sr-only">Close</span>
+    </button>
+    <h4 class="custom-modal-title">Parties</h4>
+    <div class="custom-modal-text" id="AllParties" style="max-height:500px;overflow:auto;">
+
+    </div>
+</div>
+@Scripts.Render("~/Content/css/customsweetswitcheryselect2js")
+
+<script>
+    function PartyAdded(response) {
+        swal({
+            title: "Information",
+            text: "Party is saved successfully.",
+            type: "success"
+        }, function () {
+            $('#btnAdd')[0].click();
+        });
+    }
+
+    $(document).ready(function () {
+        $('#chkIsDebit').on('change', function () {
+            if ($(this).is(':checked')) {
+                $('#lblIsDebit').html("Debit");
+            }
+            else {
+                $('#lblIsDebit').html("Credit");
+            }
+        })
+        $('#frmParty').validate({
+            rules: {
+                Name: {
+                    required: true,
+                    remote: {
+                        url: '@Url.Action("CheckDuplicateName","Party")',
+                        data: { Code: $('#Code').val() },
+                        type: "POST"
+                    }
+                },
+                Group: {
+                    required: true
+                }
+            },
+            messages: {
+                Name: {
+                    required: "Please enter Name",
+                    remote: "Party Name is already entered, Please enter another party name"
+                },
+                Group: {
+                    required: "Please select Group"
+                }
+            },
+            submitHandler: function (form) {
+                $('#Bal_DC').val($('#chkIsDebit').is(':checked') ? "D" : "C");
+                $('#ISTds').val($('#chkIsTDS').is(':checked') ? "Y" : "N");
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Save","Party")",
+                    data: $('#frmParty').serialize(),
+                    success: function (response) {
+                        PartyAdded();
+                    }
+                });
+                return false;
+            }
+        });
+        $('#btnView').click(function () {
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetAll","Party")",
+                success: function (response) {
+                    $('#AllParties').html(response);
+                    Custombox.open({
+                        animation: 'rotatedown',
+                        plugin: 'custommodal',
+                        overlayspeed: '100',
+                        overlaycolor: '#36404a',
+                        target: '#custom-modal'
+                    });
+                    $('body').on('dblclick', '#tblParty tbody tr', function () {
+                        window.location.href = '@Url.Action("Add", "Party", new { Id="REPLACE"})'.replace('REPLACE', $(this).data('empid'));
+                    });
+                }
+            });
+
+        });
+        $('#btnDelete').click(function () {
+            if ($('#RefId').val() == "00000000-0000-0000-0000-000000000000") {
+                swal("Please select any record First!", "In order to delete Party, You need to select a Party first.")
+            }
+            else {
+                swal({
+                    title: "Are you sure want to delete this Party?",
+                    text: "You will not be able to recover this record!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel plz!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("Delete","Party")",
+                            data: { ID: $('#ID').val() },
+                            success: function (response) {
+                                if (response.IsSuccess == true) {
+                                    swal("Deleted!", "Party is deleted Successfully.", "success");
+                                    setTimeout(5000, function () {
+                                        $('#btnAdd')[0].click();
+                                    });
+                                }
+                                else {
+                                    swal("Opssss!", "Something seems wrong while deleting Party.", "error");
+                                }
+                            }
+                        });
+
+                    } else {
+                        swal("Cancelled", "Party is safe :)", "error");
+                    }
+                });
+            }
+        });
+    });
+</script>

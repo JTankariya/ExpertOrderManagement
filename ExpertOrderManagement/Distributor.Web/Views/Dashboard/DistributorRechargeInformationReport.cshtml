@@ -1,0 +1,123 @@
+﻿@model IEnumerable<Distributor.BusinessLogic.User>
+@{
+    ViewBag.Title = "Distributor Recharge Information";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-5">
+        <div class="row">
+            <div class="col-md-3">From Date :</div>
+            <div class="col-md-9 datepicker input-control text">
+                <input type="text" id="dteFromDate" />
+                <button class="button"><span class="mif-calendar"></span></button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="row">
+            <div class="col-md-3">To Date :</div>
+            <div class="col-md-9 datepicker input-control text">
+                <input type="text" id="dteToDate" />
+                <button class="button"><span class="mif-calendar"></span></button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <button type="button" id="btnReport" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Report</button>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-md-12">
+        <input type="text" id="txtSearch" placeholder="Search Anything here" class="form-control" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table striped hovered cell-hovered border bordered" id="tblReport">
+            <thead>
+                <tr>
+                    <td>Date</td>
+                    <td>Distributor</td>
+                    <td>Client</td>
+                    <td>Total Company</td>
+                    <td>Total User</td>
+                    <td>Amount</td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @Html.Partial("DistributorRechargeRow", Model);
+                }
+            </tbody>
+            <tfoot>
+                @if (Model != null)
+                {
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Total</td>
+                        <td>@Model.Sum(x => x.NoOfCompanyPerUser)</td>
+                        <td>@Model.Sum(x => x.NoOfAccessUsers)</td>
+                        <td>@Model.Sum(x => Convert.ToInt32(x.Amount))</td>
+                    </tr>
+                }
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".datepicker").datepicker({
+            format: 'dd/mm/yyyy'
+        });
+
+        $('#txtSearch').on('keypress keydown keyup', function () {
+            if ($(this).val().trim() == "") {
+                $('#tblReport tbody tr').fadeIn();
+            }
+            else {
+                $.each($('#tblReport tbody tr'), function (index, element) {
+                    var foundTd = $(element).find('td').filter(function (tdIndex, tdElement) {
+                        return $(tdElement).text().toUpperCase().indexOf($('#txtSearch').val().trim().toUpperCase()) != -1
+                    });
+                    if (foundTd.length > 0) {
+                        $(element).fadeIn();
+                    }
+                    else {
+                        $(element).fadeOut();
+                    }
+                });
+                var totalCompany = 0;
+                var totalUser = 0;
+                var totalAmount = 0;
+                $.each($('#tblReport tbody tr:visible'), function (index, element) {
+                    totalCompany += parseInt($(element).find('td:eq(3)').text());
+                    totalUser += parseInt($(element).find('td:eq(4)').text());
+                    totalAmount += parseInt($(element).find('td:eq(5)').text());
+                });
+                $('#tblReport tfoot td:eq(3)').text(totalCompany);
+                $('#tblReport tfoot td:eq(4)').text(totalUser);
+                $('#tblReport tfoot td:eq(5)').text(totalAmount);
+            }
+        });
+
+        $('#btnReport').on('click', function () {
+            var fromDate = new Date($('#dteFromDate').val().split("/")[2], $('#dteFromDate').val().split("/")[1] - 1, $('#dteFromDate').val().split("/")[0]);
+            var toDate = new Date($('#dteToDate').val().split("/")[2], $('#dteToDate').val().split("/")[1] - 1, $('#dteToDate').val().split("/")[0]);
+            var strFrom = fromDate.getFullYear() + "-" + (fromDate.getMonth() + 1) + "-" + fromDate.getDate();
+            var strTo = toDate.getFullYear() + "-" + (toDate.getMonth() + 1) + "-" + toDate.getDate();
+            $.ajax({
+                type: "GET",
+                data: { FromDate: strFrom, ToDate: strTo },
+                url: '@Url.Action("DistributorRechargeInformationReport", "Dashboard")',
+                success: function (response) {
+                    $('#tblReport tbody').html(response);
+                }
+            })
+        });
+    })
+</script>

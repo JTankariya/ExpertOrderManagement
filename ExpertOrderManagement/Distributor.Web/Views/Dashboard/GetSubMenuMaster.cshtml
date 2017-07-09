@@ -1,0 +1,333 @@
+﻿@{
+    ViewBag.Title = "GetSubMenuMaster";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+
+}
+<div class="row-fluid">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Client And Menu Details</label>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" id="btnClientSelectAll" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Select All</button>
+                        <button type="button" id="btnClientUnSelectAll" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;UnSelect All</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Sub Menu Details</label>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" id="btnClientSubSelectAll" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Select All</button>
+                        <button type="button" id="btnClientSubUnSelectAll" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;UnSelect All</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" id="txtSearchClient" placeholder="Search Client List" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <input type="text" id="txtSearchDashboard" placeholder="Search Dashboard List" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" style="max-height: 300px; overflow: auto;">
+                <table class="table striped hovered cell-hovered border bordered" id="tblClient">
+                    <thead>
+                        <tr>
+                            <th class="sortable-column">Select</th>
+                            <th class="sortable-column">First Name</th>
+                            <th class="sortable-column">Last Name</th>
+                            <th class="sortable-column">Menu Name</th>
+                            <th class="sortable-column">Query</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.UserMenus != null)
+                        {
+                            foreach (Distributor.BusinessLogic.SubMenuViewModel usermenu in ViewBag.UserMenus)
+                            {
+                                <tr data-clientmenuid="@usermenu.ClientMenuID">
+                                    <td>
+                                        <input type="checkbox" name="chkUserMenus" />
+                                    </td>
+                                    <td>
+                                        @usermenu.FirstName
+                                    </td>
+                                    <td>
+                                        @usermenu.LastName
+                                    </td>
+                                    <td>
+                                        @usermenu.MenuName
+                                    </td>
+                                    <td style=" overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width:10%;">
+                                        @usermenu.Query
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6" style="max-height: 300px; overflow: auto;">
+                <table class="table striped hovered cell-hovered border bordered" id="tblSubMenu">
+                    <thead>
+                        <tr>
+                            <th class="sortable-column">Select</th>
+                            <th class="sortable-column">Sub Menu Name</th>
+                            <th class="sortable-column">Query</th>
+                            <th class="sortable-column">Zoom Query</th>
+                            <th class="sortable-column">Has Child Data?</th>
+                            <th class="sortable-column">Has Graph?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.ChildMenus != null)
+                        {
+                            foreach (Distributor.BusinessLogic.ChildMenuMaster childmenu in ViewBag.ChildMenus)
+                            {
+                                <tr data-childmenuid="@childmenu.ChildMenuID">
+                                    <td><input type="checkbox" name="chkChildMenus" /></td>
+                                    <td>
+                                        @childmenu.ChildMenuName
+                                    </td>
+                                    <td style=" overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width:10%;">
+                                        @childmenu.Query
+                                    </td>
+                                    <td style=" overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width:10%;">
+                                        @childmenu.ZoomQuery
+                                    </td>
+                                    <td>
+                                        @childmenu.HasChildData
+                                    </td>
+                                    <td>
+                                        @childmenu.HasGraph
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <input type="text" id="txtSearchMenu" placeholder="Search Menu List" class="form-control" />
+            </div>
+            <div class="col-md-4 text-center">
+                <button type="button" id="btnClientAssign" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;Assign Menu</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="max-height: 300px; overflow: auto;">
+                <table id="tblSubMenuMaster" class="table striped hovered cell-hovered border bordered">
+                    <thead>
+                        <tr>
+                            <th class="sortable-column">Delete</th>
+                            <th class="sortable-column">First Name</th>
+                            <th class="sortable-column">Last Name</th>
+                            <th class="sortable-column">Menu Name</th>
+                            <th class="sortable-column">Sub Menu Name</th>
+                            <th class="sortable-column">Query</th>
+                            <th class="sortable-column">Zoom Query</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.SubMenus != null)
+                        {
+                            int i = 1;
+                            foreach (Distributor.BusinessLogic.SubMenuViewModel submenu in ViewBag.SubMenus)
+                            {
+                                <tr data-detailclientmenuid="@submenu.ClientMenuID" data-detailchildmenuid="@submenu.ChildMenuID">
+                                    <td>
+                                        <button data-deletesubmenu type="button" class="btn btn-primary face">Delete</button>
+                                    </td>
+                                    <td>
+                                        @submenu.FirstName
+                                    </td>
+                                    <td>
+                                        @submenu.LastName
+                                    </td>
+                                    <td>
+                                        @submenu.MenuName
+                                    </td>
+                                    <td>
+                                        @submenu.ChildMenuName
+                                    </td>
+                                    <td style=" overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width:10%;">
+                                        @submenu.Query
+                                    </td>
+                                    <td style=" overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width:10%;">
+                                        @submenu.ZoomQuery
+                                    </td>
+
+                                </tr>
+                                i++;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div data-role="dialog" data-overlay="true" data-overlay-color=".dialog-overlay" data-close-button="true" data-width="500px" id="dialog">
+    <h1>Confirm Delete</h1>
+    <p>
+        Are you sure want to delete this record?
+    </p>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <button type="button" id="btnDelete" class="btn btn-danger face"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Yes</button>
+        </div>
+        <div class="col-md-6 text-center">
+            <button type="button" onclick="toggleMetroDialog('#dialog')" class="btn btn-primary face"><span class="glyphicon glyphicon-log-in"></span> &nbsp;&nbsp;No</button>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#txtSearchDashboard').on('keypress keydown keyup', function () {
+            if ($(this).val().trim() == "") {
+                $('#tblSubMenu tbody tr').fadeIn();
+            }
+            else {
+                $.each($('#tblSubMenu tbody tr'), function (index, element) {                    
+                    var foundTd = $(element).find('td').filter(function (tdIndex, tdElement) {
+                        return $(tdElement).text().toUpperCase().indexOf($('#txtSearchDashboard').val().trim().toUpperCase()) != -1
+                    });
+                    if (foundTd.length > 0) {
+                        $(element).fadeIn();
+                    }
+                    else {
+                        $(element).fadeOut();
+                    }
+                })
+            }
+        });
+        $('#txtSearchClient').on('keypress keydown keyup', function () {
+            if ($(this).val().trim() == "") {
+                $('#tblClient tbody tr').fadeIn();
+            }
+            else {
+                $.each($('#tblClient tbody tr'), function (index, element) {
+                    var foundTd = $(element).find('td').filter(function (tdIndex, tdElement) {
+                        return $(tdElement).text().toUpperCase().indexOf($('#txtSearchClient').val().trim().toUpperCase()) != -1
+                    });
+                    if (foundTd.length > 0) {
+                        $(element).fadeIn();
+                    }
+                    else {
+                        $(element).fadeOut();
+                    }
+                })
+            }
+        });
+        $('#txtSearchMenu').on('keypress keydown keyup', function () {
+            if ($(this).val().trim() == "") {
+                $('#tblSubMenuMaster tbody tr').fadeIn();
+            }
+            else {
+                $.each($('#tblSubMenuMaster tbody tr'), function (index, element) {
+                    var foundTd = $(element).find('td').filter(function (tdIndex, tdElement) {
+                        return $(tdElement).text().toUpperCase().indexOf($('#txtSearchMenu').val().trim().toUpperCase()) != -1
+                    });
+                    if (foundTd.length > 0) {
+                        $(element).fadeIn();
+                    }
+                    else {
+                        $(element).fadeOut();
+                    }
+                })
+            }
+        });
+        $('#btnClientSelectAll').on('click', function () {
+            $('[name="chkUserMenus"]').prop('checked', true);
+        });
+        $('#btnClientUnSelectAll').on('click', function () {
+            $('[name="chkUserMenus"]').prop('checked', false);
+        });
+        $('#btnClientSubSelectAll').on('click', function () {
+            $('[name="chkChildMenus"]').prop('checked', true);
+        });
+        $('#btnClientSubUnSelectAll').on('click', function () {
+            $('[name="chkChildMenus"]').prop('checked', false);
+        });
+        var deleteButton = null;
+        $('[data-deletesubmenu]').unbind('click').bind('click', function () {
+            deleteButton = this;
+            toggleMetroDialog('#dialog');
+        });
+
+        $('#btnClientAssign').on('click', function () {
+            if ($('[name="chkUserMenus"]:checked').length == 0 || $('[name="chkChildMenus"]:checked').length == 0) {
+                $.Notify({ keepOpen: false, type: 'alert', caption: 'Alert', content: "Please select atleast on client and sub menu item." });
+            }
+            else {
+                var isFound = false;
+                $.each($('[name="chkUserMenus"]:checked'), function (userMenuIndex, userMenuCheckbox) {
+
+                    $.each($('[name="chkChildMenus"]:checked'), function (childMenuIndex, childMenuCheckbox) {
+                        var userMenuRow = $(userMenuCheckbox).parent().parent();
+                        var childMenuRow = $(childMenuCheckbox).parent().parent();
+
+                        if ($('#tblSubMenuMaster tbody tr[data-detailclientmenuid="' + userMenuRow.data('clientmenuid') +
+                            '"][data-detailchildmenuid="' + childMenuRow.data('childmenuid') + '"]').length > 0) {
+                        }
+                        else {
+
+                            $.ajax({
+                                type: "POST",
+                                url: '@Url.Action("SaveSubMenuForClient", "Dashboard")',
+                                data: { DetailClientMenuId: userMenuRow.data('clientmenuid'), DetailChildMenuId: childMenuRow.data('childmenuid') },
+                                success: function (data) {
+                                    if (data == "SUCCESS") {
+                                        var strHtml = '<tr data-detailclientmenuid="' + userMenuRow.data('clientmenuid') +
+                               '" data-detailchildmenuid="' + childMenuRow.data('childmenuid') +
+                               '" style="background-color:rgba(255, 255, 0, 0.32);"><td> <button data-deletesubmenu type="button" class="btn btn-primary face">Delete</button></td><td>' + userMenuRow.find('td:eq(1)').html() + '</td><td>' + userMenuRow.find('td:eq(2)').html() + '</td><td>' +
+                               userMenuRow.find('td:eq(3)').html() + '</td><td>' + childMenuRow.find('td:eq(1)').html() + '</td><td>' +
+                               childMenuRow.find('td:eq(2)').html() + '</td><td>' + childMenuRow.find('td:eq(3)').html() + '</td></tr>';
+                                        $('#tblSubMenuMaster tbody').prepend(strHtml);
+                                        $('[data-deletesubmenu]').unbind('click').bind('click', function () {
+                                            toggleMetroDialog('#dialog');
+                                        });
+                                        isFound = true;
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+
+                $.Notify({ keepOpen: false, type: 'success', caption: 'Information', content: "Sub menu saved successfully." });
+
+            }
+        });
+
+        $('#btnDelete').on('click', function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("DeleteSubMenuOfClient", "Dashboard")',
+                data: {
+                    DetailClientMenuId: $(deleteButton).parent().parent().data('detailclientmenuid'),
+                    DetailChildMenuId: $(deleteButton).parent().parent().data('detailchildmenuid')
+                },
+                success: function (data) {
+                    if (data == "SUCCESS") {
+                        $.Notify({ keepOpen: false, type: 'success', caption: 'Information', content: "Sub menu deleted successfully." });
+                        $(deleteButton).parent().parent().remove();
+                        toggleMetroDialog('#dialog');
+                    }
+                }
+            });
+        });
+    });
+</script>

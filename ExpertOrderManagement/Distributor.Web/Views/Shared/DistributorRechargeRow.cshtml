@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Distributor.BusinessLogic.User>
+@if (Model != null)
+{
+    foreach (var row in Model)
+    {
+        <tr>
+            <td>@row.CreatedDate.ToShortDateString()</td>
+            <td>@(row.FirstName + " " + row.LastName)</td>
+            <td>@row.CompanyName</td>
+            <td>@row.NoOfCompanyPerUser</td>
+            <td>@row.NoOfAccessUsers</td>
+            <td>@row.Amount</td>
+        </tr>
+    }
+}
+
